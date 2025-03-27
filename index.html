@@ -255,8 +255,17 @@
             transition: transform 0.3s, background-color 0.3s;
         }
         
-        .project-card:hover {
-            transform: translateY(-5px);
+        .projects a:hover .project-card {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .projects a:hover h3 {
+            color: var(--purdue-gold);
+        }
+        
+        .projects a .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .project-img {
@@ -719,10 +728,12 @@
         </div>
     </div>
     
-    <div class="section" id="projects">
-        <h2>Projects</h2>
-        <div class="projects">
-            <!-- For the password project -->
+   <!-- Replace the existing projects section with this updated code -->
+<div class="section" id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+        <!-- For the password project -->
+        <a href="https://medium.com/@edchokr/bro-123456-aint-a-password-090b04ce3e47" target="_blank" style="text-decoration: none; color: inherit;">
             <div class="project-card">
                 <div class="project-img">
                     <span style="font-size: 60px;">🔐</span>
@@ -737,8 +748,10 @@
                     </div>
                 </div>
             </div>
+        </a>
 
-            <!-- For the Sus Detector project -->
+        <!-- For the Sus Detector project -->
+        <a href="https://medium.com/@edchokr/sus-detector-%EF%B8%8F-%EF%B8%8F-9fbf3bb5fc7d" target="_blank" style="text-decoration: none; color: inherit;">
             <div class="project-card">
                 <div class="project-img">
                     <span style="font-size: 60px;">🕵️</span>
@@ -753,8 +766,10 @@
                     </div>
                 </div>
             </div>
+        </a>
 
-            <!-- For the New Year Countdown project -->
+        <!-- For the New Year Countdown project -->
+        <a href="https://medium.com/@edchokr/gamst-new-year-countdown-%EF%B8%8F-b8ae901ce9f4" target="_blank" style="text-decoration: none; color: inherit;">
             <div class="project-card">
                 <div class="project-img">
                     <span style="font-size: 60px;">🎆</span>
@@ -769,8 +784,10 @@
                     </div>
                 </div>
             </div>
+        </a>
 
-            <!-- For the BrainRotRemover project -->
+        <!-- For the BrainRotRemover project -->
+        <a href="https://medium.com/@edchokr/brainrotremover-a-productivity-tool-to-combat-brain-rot-47d6445e18a2" target="_blank" style="text-decoration: none; color: inherit;">
             <div class="project-card">
                 <div class="project-img">
                     <span style="font-size: 60px;">⏱️</span>
@@ -785,8 +802,10 @@
                     </div>
                 </div>
             </div>
+        </a>
 
-            <!-- For the E-Reserve project -->
+        <!-- For the E-Reserve project -->
+        <a href="https://medium.com/@edchokr/ezreserve-d7661efe1592" target="_blank" style="text-decoration: none; color: inherit;">
             <div class="project-card">
                 <div class="project-img">
                     <span style="font-size: 60px;">🏢</span>
@@ -801,8 +820,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
+</div>
     
     <div class="section" id="education">
         <h2>Education</h2>
