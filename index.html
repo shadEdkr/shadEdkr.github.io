@@ -561,6 +561,187 @@
                 left: 0%;
             }
         }
+
+                /* Add these styles to your existing CSS */
+        .timeline-container-wrapper {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        
+        .timeline-progress-bar {
+            position: absolute;
+            width: 6px;
+            background-color: var(--purdue-gold);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        .timeline-cards {
+            position: relative;
+        }
+        
+        .timeline-card {
+            position: relative;
+            margin-bottom: 30px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .timeline-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-card:nth-child(odd) {
+            padding-right: calc(50% + 30px);
+            text-align: right;
+        }
+        
+        .timeline-card:nth-child(even) {
+            padding-left: calc(50% + 30px);
+            text-align: left;
+        }
+        
+        .timeline-card-content {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--purdue-gold);
+        }
+        
+        .timeline-card:nth-child(odd) .timeline-card-content {
+            border-left: none;
+            border-right: 5px solid var(--purdue-gold);
+        }
+        
+        .timeline-card-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--purdue-gold);
+            border-radius: 50%;
+            z-index: 2;
+            top: 20px;
+        }
+        
+        .timeline-card:nth-child(odd) .timeline-marker {
+            right: -42px;
+        }
+        
+        .timeline-card:nth-child(even) .timeline-marker {
+            left: -42px;
+        }
+        
+        .timeline-date {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--purdue-gold);
+            color: var(--purdue-black);
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            bottom: 15px;
+            font-size: 28px;
+            opacity: 0.8;
+        }
+        
+        .timeline-card:nth-child(odd) .timeline-icon {
+            left: 15px;
+        }
+        
+        .timeline-card:nth-child(even) .timeline-icon {
+            right: 15px;
+        }
+        
+        .highlight-card .timeline-card-content {
+            border-color: var(--accent-color);
+            background-color: rgba(var(--purdue-gold-rgb, 206, 184, 136), 0.1);
+        }
+        
+        .highlight-card .timeline-marker {
+            border-color: var(--accent-color);
+        }
+        
+        .timeline-year-indicator {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--purdue-gold);
+            color: var(--purdue-black);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        /* Add a CSS variable for rgb version of purdue-gold */
+        :root {
+            --purdue-gold-rgb: 206, 184, 136;
+        }
+        
+        [data-theme="dark"] {
+            --purdue-gold-rgb: 212, 175, 55;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .timeline-progress-bar {
+                left: 30px;
+            }
+            
+            .timeline-card:nth-child(odd),
+            .timeline-card:nth-child(even) {
+                padding-left: 60px;
+                padding-right: 10px;
+                text-align: left;
+            }
+            
+            .timeline-card:nth-child(odd) .timeline-card-content {
+                border-left: 5px solid var(--purdue-gold);
+                border-right: none;
+            }
+            
+            .timeline-card:nth-child(odd) .timeline-marker,
+            .timeline-card:nth-child(even) .timeline-marker {
+                left: 18px;
+            }
+            
+            .timeline-card:nth-child(odd) .timeline-icon {
+                right: 15px;
+                left: auto;
+            }
+            
+            .timeline-year-indicator {
+                left: 30px;
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -632,68 +813,106 @@
     
     <div class="section" id="timeline">
         <h2>My Cybersecurity Journey</h2>
-        <div class="timeline">
-            <div class="timeline-container left">
-                <div class="timeline-content">
-                    <h3>First Steps into Computing</h3>
-                    <div class="timeline-date">2021</div>
-                    <p>Started studying Computer Science at Murray State University, where I developed foundational knowledge in IT and programming.</p>
+        <div class="timeline-container-wrapper">
+            <div class="timeline-progress-bar"></div>
+            <div class="timeline-cards">
+                <!-- First Steps -->
+                <div class="timeline-card" data-year="2021">
+                    <div class="timeline-card-content">
+                        <div class="timeline-marker"></div>
+                        <span class="timeline-date">2021</span>
+                        <h3>First Steps into Computing</h3>
+                        <p>Started studying Computer Science at Murray State University, where I developed foundational knowledge in IT and programming.</p>
+                        <div class="timeline-icon">🖥️</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-container right">
-                <div class="timeline-content">
-                    <h3>IT Support & Student Ambassador - Murray State University</h3>
-                    <div class="timeline-date">Nov 2021 - May 2022</div>
-                    <p>Worked as a Student IT Support in the ESL department, assisting with computer lab setup, troubleshooting, and technical support. Also served as a Student Ambassador, guiding prospective students and supporting international student programs.</p>
+                
+                <!-- IT Support & Student Ambassador -->
+                <div class="timeline-card" data-year="2021-2022">
+                    <div class="timeline-card-content">
+                        <div class="timeline-marker"></div>
+                        <span class="timeline-date">Nov 2021 - May 2022</span>
+                        <h3>IT Support & Student Ambassador</h3>
+                        <p>Worked as a Student IT Support in the ESL department, assisting with computer lab setup, troubleshooting, and technical support. Also served as a Student Ambassador, guiding prospective students and supporting international student programs.</p>
+                        <div class="timeline-icon">🔧</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-container left">
-                <div class="timeline-content">
-                    <h3>Transferred to Purdue University</h3>
-                    <div class="timeline-date">2022</div>
-                    <p>Transferred to Purdue University to major in Cybersecurity. Joined the Cybersecurity Club and attended college-level security workshops.</p>
+                
+                <!-- Transferred to Purdue -->
+                <div class="timeline-card" data-year="2022">
+                    <div class="timeline-card-content">
+                        <div class="timeline-marker"></div>
+                        <span class="timeline-date">2022</span>
+                        <h3>Transferred to Purdue University</h3>
+                        <p>Transferred to Purdue University to major in Cybersecurity. Joined the Cybersecurity Club and attended college-level security workshops.</p>
+                        <div class="timeline-icon">🎓</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-container right">
-                <div class="timeline-content">
-                    <h3>Bug Bounty Hunting & Security Research</h3>
-                    <div class="timeline-date">Oct 2022</div>
-                    <p>Conducted QA testing on Web 3.0 games inspired by the Saw franchise. Identified vulnerabilities in game mechanics and reported a critical bug that earned a performance bounty.</p>
+                
+                <!-- Bug Bounty Hunting -->
+                <div class="timeline-card" data-year="2022">
+                    <div class="timeline-card-content">
+                        <div class="timeline-marker"></div>
+                        <span class="timeline-date">Oct 2022</span>
+                        <h3>Bug Bounty Hunting & Security Research</h3>
+                        <p>Conducted QA testing on Web 3.0 games inspired by the Saw franchise. Identified vulnerabilities in game mechanics and reported a critical bug that earned a performance bounty.</p>
+                        <div class="timeline-icon">🐛</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-container left">
-                <div class="timeline-content">
-                    <h3>Military IT & Network Security Experience</h3>
-                    <div class="timeline-date">Jan 2023 - July 2024</div>
-                    <p>Served as a Network Communication Systems Specialist in the Republic of Korea Army. Managed military crypto devices, troubleshot brigade facility networks with 400+ devices, and maintained firewall traffic control, Genian NAC, and data backups.</p>
+                
+                <!-- Military IT Experience -->
+                <div class="timeline-card highlight-card" data-year="2023-2024">
+                    <div class="timeline-card-content">
+                        <div class="timeline-marker"></div>
+                        <span class="timeline-date">Jan 2023 - July 2024</span>
+                        <h3>Military IT & Network Security Experience</h3>
+                        <p>Served as a Network Communication Systems Specialist in the Republic of Korea Army. Managed military crypto devices, troubleshot brigade facility networks with 400+ devices, and maintained firewall traffic control, Genian NAC, and data backups.</p>
+                        <div class="timeline-icon">🔐</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-container right">
-                <div class="timeline-content">
-                    <h3>Google Cybersecurity Certificate</h3>
-                    <div class="timeline-date">Sep 2024</div>
-                    <p>Earned the Google Cybersecurity Certificate, developing expertise in SIEM tools, malware analysis, AI-driven threat detection, and risk mitigation.</p>
+                
+                <!-- Google Cybersecurity Certificate -->
+                <div class="timeline-card" data-year="2024">
+                    <div class="timeline-card-content">
+                        <div class="timeline-marker"></div>
+                        <span class="timeline-date">Sep 2024</span>
+                        <h3>Google Cybersecurity Certificate</h3>
+                        <p>Earned the Google Cybersecurity Certificate, developing expertise in SIEM tools, malware analysis, AI-driven threat detection, and risk mitigation.</p>
+                        <div class="timeline-icon">🛡️</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-container left">
-                <div class="timeline-content">
-                    <h3>Google Project Management Certificate</h3>
-                    <div class="timeline-date">Dec 2024</div>
-                    <p>Gained experience in Agile methodologies, Scrum framework, and project lifecycle management through the Google Project Management Certificate.</p>
+                
+                <!-- Google Project Management Certificate -->
+                <div class="timeline-card" data-year="2024">
+                    <div class="timeline-card-content">
+                        <div class="timeline-marker"></div>
+                        <span class="timeline-date">Dec 2024</span>
+                        <h3>Google Project Management Certificate</h3>
+                        <p>Gained experience in Agile methodologies, Scrum framework, and project lifecycle management through the Google Project Management Certificate.</p>
+                        <div class="timeline-icon">📊</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-container right">
-                <div class="timeline-content">
-                    <h3>Google IT Support Certificate</h3>
-                    <div class="timeline-date">Jan 2025</div>
-                    <p>Earned the Google IT Support Certificate, gaining hands-on skills in troubleshooting, networking, operating systems, and system administration.</p>
+                
+                <!-- Google IT Support Certificate -->
+                <div class="timeline-card" data-year="2025">
+                    <div class="timeline-card-content">
+                        <div class="timeline-marker"></div>
+                        <span class="timeline-date">Jan 2025</span>
+                        <h3>Google IT Support Certificate</h3>
+                        <p>Earned the Google IT Support Certificate, gaining hands-on skills in troubleshooting, networking, operating systems, and system administration.</p>
+                        <div class="timeline-icon">💻</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-container left">
-                <div class="timeline-content">
-                    <h3>ResNet Tier 2 IT Support - Purdue University</h3>
-                    <div class="timeline-date">Feb 2025 - Present</div>
-                    <p>Providing advanced IT support for Purdue's residential network, troubleshooting connectivity issues, and working closely with Network Engineering for critical infrastructure repairs.</p>
+                
+                <!-- ResNet Tier 2 IT Support -->
+                <div class="timeline-card highlight-card" data-year="2025-present">
+                    <div class="timeline-card-content">
+                        <div class="timeline-marker"></div>
+                        <span class="timeline-date">Feb 2025 - Present</span>
+                        <h3>ResNet Tier 2 IT Support - Purdue University</h3>
+                        <p>Providing advanced IT support for Purdue's residential network, troubleshooting connectivity issues, and working closely with Network Engineering for critical infrastructure repairs.</p>
+                        <div class="timeline-icon">🌐</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1116,6 +1335,96 @@
         popup.style.display = 'none';
       }
     });
+
+    // Add this to your existing JavaScript at the bottom of your page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize timeline animation
+            initTimelineAnimation();
+            
+            // Initialize year indicators
+            initYearIndicators();
+        });
+        
+        function initTimelineAnimation() {
+            const timelineCards = document.querySelectorAll('.timeline-card');
+            
+            // Initial check for visible cards
+            checkTimelineCardsVisibility();
+            
+            // Check on scroll
+            window.addEventListener('scroll', function() {
+                checkTimelineCardsVisibility();
+            });
+            
+            function checkTimelineCardsVisibility() {
+                const triggerBottom = window.innerHeight * 0.8;
+                
+                timelineCards.forEach(card => {
+                    const cardTop = card.getBoundingClientRect().top;
+                    
+                    if (cardTop < triggerBottom) {
+                        card.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Add hover effect for better interactivity
+            timelineCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    timelineCards.forEach(c => c.style.opacity = '0.6');
+                    this.style.opacity = '1';
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    timelineCards.forEach(c => {
+                        c.style.opacity = '';
+                        c.style.zIndex = '';
+                    });
+                });
+            });
+        }
+        
+        function initYearIndicators() {
+            const timelineContainer = document.querySelector('.timeline-container-wrapper');
+            const timelineCards = document.querySelectorAll('.timeline-card');
+            const years = new Set();
+            
+            // Collect all years from the timeline cards
+            timelineCards.forEach(card => {
+                const yearData = card.getAttribute('data-year');
+                if (yearData && !yearData.includes('present')) {
+                    const yearParts = yearData.split('-');
+                    yearParts.forEach(year => {
+                        if (!isNaN(parseInt(year))) {
+                            years.add(parseInt(year));
+                        }
+                    });
+                }
+            });
+            
+            // Sort years and create year indicators
+            const sortedYears = Array.from(years).sort((a, b) => a - b);
+            
+            // We'll only show main year milestones to keep it clean
+            const keyYears = [sortedYears[0], sortedYears[Math.floor(sortedYears.length/2)], sortedYears[sortedYears.length-1]];
+            
+            keyYears.forEach((year, index) => {
+                const yearIndicator = document.createElement('div');
+                yearIndicator.classList.add('timeline-year-indicator');
+                yearIndicator.textContent = year;
+                yearIndicator.style.top = `${(index * 40) + 5}%`;
+                timelineContainer.appendChild(yearIndicator);
+            });
+        }
+        
+        // Add smooth scroll animation when clicking on timeline markers
+        document.querySelectorAll('.timeline-marker').forEach(marker => {
+            marker.addEventListener('click', function() {
+                const card = this.closest('.timeline-card');
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
   });
 </script>
 </body>
