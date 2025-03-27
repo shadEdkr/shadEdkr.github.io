@@ -930,5 +930,122 @@
             }
         }
     </script>
+
+<!-- Add this HTML right before the closing </body> tag -->
+<div id="welcome-popup" class="popup-container">
+  <div class="popup-content">
+    <span class="close-popup">&times;</span>
+    <h2>Hi there! 👋</h2>
+    <p>Welcome to my website!</p>
+    <p>This site was created by Yoonsung Ed Cho</p>
+    <p>Check out my GitHub: <a href="https://github.com/shadEdkr" target="_blank">github.com/shadEdkr</a></p>
+    <button class="popup-button">Got it!</button>
+  </div>
+</div>
+
+<!-- Add this CSS to your existing <style> section in the <head> -->
+<style>
+  .popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 80%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+  }
+  
+  .close-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--purdue-gold);
+  }
+  
+  .popup-button {
+    background-color: var(--purdue-gold);
+    color: var(--purdue-black);
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .popup-button:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: scale(1.05);
+  }
+</style>
+
+<!-- Add this JavaScript right before the closing </body> tag, after your existing script -->
+<script>
+  // Welcome popup functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('welcome-popup');
+    const closeButton = document.querySelector('.close-popup');
+    const popupButton = document.querySelector('.popup-button');
+    
+    // Check if this is the first visit for this session
+    let hasVisited;
+    try {
+      hasVisited = sessionStorage.getItem('hasVisited');
+    } catch (e) {
+      console.log('SessionStorage not available in this environment');
+      hasVisited = true; // Default to true if sessionStorage isn't available
+    }
+    
+    if (!hasVisited) {
+      // Show popup with a slight delay for better user experience
+      setTimeout(function() {
+        popup.style.display = 'flex';
+      }, 1000);
+      
+      try {
+        sessionStorage.setItem('hasVisited', 'true');
+      } catch (e) {
+        console.log('SessionStorage not available in this environment');
+      }
+    }
+    
+    // Close popup when clicking the X button
+    closeButton.addEventListener('click', function() {
+      popup.style.display = 'none';
+    });
+    
+    // Close popup when clicking the Got it button
+    popupButton.addEventListener('click', function() {
+      popup.style.display = 'none';
+    });
+    
+    // Close popup when clicking outside
+    window.addEventListener('click', function(event) {
+      if (event.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+  });
+</script>
 </body>
 </html>
