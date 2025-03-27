@@ -358,6 +358,29 @@
             color: white;
             transform: scale(1.05);
         }
+
+        .skill-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .skill-tag {
+            background-color: var(--purdue-gold);
+            color: var(--purdue-black);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
         
         /* Timeline Styles */
         .timeline {
@@ -553,17 +576,25 @@
     </nav>
     
     <div class="hero">
-        <div class="hero-text">
-            <h1>Yoonsung Ed Cho</h1>
-            <p>Cybersecurity Student at Purdue University</p>
-            <p>Passionate about ethical hacking, network security, and digital forensics. Currently pursuing a degree in Cybersecurity at Purdue University, one of the leading institutions in the field.</p>
+    <div class="hero-text">
+        <h1>Yoonsung Ed Cho</h1>
+        <p>Cybersecurity Student at Purdue University</p>
+        <div class="skill-highlights">
+            <span class="skill-tag">Network Security</span>
+            <span class="skill-tag">Penetration Testing</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Malware Analysis</span>
+        </div>
+        <p>Passionate cybersecurity professional seeking a Summer 2025 internship in network security, virtualization, and secure software development.</p>
+        <div class="hero-buttons">
             <a href="#contact" class="cta-button">Get In Touch</a>
             <a href="Resume.pdf" class="download-resume" download>📄 Download Resume</a>
         </div>
-        <div class="hero-image">
-            <img src="images/image.jpg" alt="Professional headshot">
-        </div>
     </div>
+    <div class="hero-image">
+        <img src="images/image.jpg" alt="Professional headshot">
+    </div>
+</div>
     
     <div class="section" id="about">
         <h2>About Me</h2>
@@ -934,14 +965,18 @@
     </script>
 
 <!-- Add this HTML right before the closing </body> tag -->
+<!-- Improved popup that mentions tech stack -->
 <div id="welcome-popup" class="popup-container">
   <div class="popup-content">
     <span class="close-popup">&times;</span>
-    <h2>Hi there! 👋</h2>
-    <p>Welcome to my website!</p>
-    <p>This site was created by Yoonsung Ed Cho</p>
-    <p>Copyright reserved ©</p>
-    <p>Check out my GitHub: <a href="https://github.com/shadEdkr" target="_blank">github.com/shadEdkr</a></p>
+    <h2>Welcome! 👋</h2>
+    <p>Thanks for visiting my cybersecurity portfolio.</p>
+    <p>Built with HTML, CSS, and JavaScript</p>
+    <p>Created by Yoonsung Ed Cho</p>
+    <p>Check out my GitHub: 
+      <a href="https://github.com/shadEdkr" target="_blank">github.com/shadEdkr</a> or 
+      <a href="https://github.com/shadEdkr/shadEdkr.github.io" target="_blank">view this site's repository</a>
+    </p>
     <button class="popup-button">Got it!</button>
   </div>
 </div>
@@ -949,31 +984,28 @@
 <!-- Add this CSS to your existing <style> section in the <head> -->
 <style>
   .popup-container {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-  }
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: auto;
+      height: auto;
+      background-color: transparent;
+      z-index: 1000;
+    }
   
-  .popup-content {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    padding: 30px;
-    border-radius: 10px;
-    max-width: 500px;
-    width: 80%;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s;
-  }
-  
+    .popup-content {
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s;
+    }
   .close-popup {
     position: absolute;
     top: 10px;
