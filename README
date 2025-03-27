@@ -1,0 +1,46 @@
+# Yoonsung Ed Cho - Cybersecurity Portfolio
+
+This repository contains the code for my professional portfolio website showcasing my cybersecurity skills, experience, and projects.
+
+## 🔐 About
+
+I'm a Cybersecurity student at Purdue University passionate about ethical hacking, network security, and digital forensics. This portfolio website serves as a comprehensive overview of my technical skills, education, and professional journey.
+
+## 🛠️ Technologies Used
+
+- HTML5
+- CSS3 (with responsive design)
+- JavaScript
+- Light/Dark Mode Toggle
+
+## 🔍 Features
+
+- Responsive design that works on all devices
+- Dark/Light mode toggle with local storage persistence
+- Interactive timeline of my cybersecurity journey
+- Showcase of technical skills and projects
+- Detailed education and certification information
+- Contact information and social media links
+
+## 📋 Sections
+
+- About Me
+- Skills Overview
+- Project Portfolio
+- Education Background
+- Professional Timeline
+- Certifications
+- Contact Information
+
+## 📬 Contact
+
+Feel free to reach out to me:
+
+- Email: cho526@purdue.edu
+- LinkedIn: [linkedin.com/in/edchokr](https://linkedin.com/in/edchokr/)
+- GitHub: [github.com/shadEdkr](https://github.com/shadEdkr)
+- Medium: [medium.com/@edchokr](https://medium.com/@edchokr)
+
+## 📄 License
+
+Copyright © 2025 Yoonsung Ed Cho. All Rights Reserved.
