@@ -342,7 +342,9 @@
         }
         
         .cta-button, .download-resume {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background-color: var(--purdue-gold);
             color: var(--purdue-black);
             padding: 12px 25px;
@@ -351,9 +353,15 @@
             font-weight: bold;
             margin: 20px 0;
             transition: background-color 0.3s, transform 0.3s;
-            width: 200px; /* Fixed, equal width for both buttons */
+            width: 220px; /* Increased fixed width */
             text-align: center;
             white-space: nowrap;
+        }
+
+        .download-resume svg, 
+        .download-resume img,
+        .download-resume span {
+        margin-right: 8px;
         }
         
         .cta-button:hover, .download-resume:hover {
@@ -576,7 +584,7 @@
         <p>Passionate cybersecurity professional seeking a Summer 2025 internship in network security, virtualization, and secure software development.</p>
         <div class="hero-buttons">
             <a href="#contact" class="cta-button">Get In Touch</a>
-            <a href="Resume.pdf" class="download-resume" download><span style="margin-right: 8px;">📄</span>Download Resume</a>
+            <a href="Resume.pdf" class="download-resume" download><span>📄</span> Download Resume</a>
         </div>
     </div>
     <div class="hero-image">
