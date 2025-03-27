@@ -341,7 +341,7 @@
             margin-top: 20px;
         }
         
-        .cta-button {
+        .cta-button, .download-resume {
             display: inline-block;
             background-color: var(--purdue-gold);
             color: var(--purdue-black);
@@ -349,17 +349,19 @@
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 20px;
+            margin: 20px 0;
             transition: background-color 0.3s, transform 0.3s;
-            white-space: nowrap; /* Prevent text wrapping */
-            min-width: 180px; /* Set a minimum width if needed */
+            width: 200px; /* Fixed, equal width for both buttons */
             text-align: center;
+            white-space: nowrap;
         }
         
-        .cta-button:hover {
+        .cta-button:hover, .download-resume:hover {
             background-color: var(--accent-color);
             color: white;
             transform: scale(1.05);
+        }
+        
         }
 
         .skill-highlights {
@@ -476,26 +478,6 @@
         }
         
         /* Download Resume Button */
-        .download-resume {
-            display: inline-block;
-            background-color: var(--purdue-gold);
-            color: var(--purdue-black);
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 20px 0;
-            transition: background-color 0.3s, transform 0.3s;
-            width: auto;
-            white-space: nowrap;
-            text-align: center;
-        }
-        
-        .download-resume:hover {
-            background-color: var(--accent-color);
-            color: white;
-            transform: scale(1.05);
-        }
         
         .download-resume i {
             margin-right: 10px;
