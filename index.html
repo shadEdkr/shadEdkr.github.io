@@ -64,7 +64,11 @@
             display: flex;
             align-items: center;
         }
-        
+
+        .timeline-card {
+        opacity: 1 !important;
+        }
+                
         .theme-switch {
             display: inline-block;
             height: 24px;
@@ -1335,15 +1339,6 @@
         popup.style.display = 'none';
       }
     });
-
-    // Add this to your existing JavaScript at the bottom of your page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize timeline animation
-            initTimelineAnimation();
-            
-            // Initialize year indicators
-            initYearIndicators();
-        });
         
         function initTimelineAnimation() {
             const timelineCards = document.querySelectorAll('.timeline-card');
@@ -1425,6 +1420,9 @@
                 card.scrollIntoView({ behavior: 'smooth', block: 'center' });
             });
         });
+
+        initTimelineAnimation();
+        initYearIndicators();
   });
 </script>
 </body>
