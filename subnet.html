@@ -5,126 +5,270 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subnet LEGO Visualizer</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
-        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #2c3e50; }
-        input { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; }
-        button { background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; display: block; margin: 20px auto; }
-        button:hover { background: #2980b9; }
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #f5f5f5; 
+            line-height: 1.6;
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 25px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
+        }
+        h1 { 
+            text-align: center; 
+            color: #2c3e50; 
+            margin-bottom: 25px;
+        }
+        h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        input { 
+            width: 100%; 
+            padding: 10px; 
+            margin-bottom: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52,152,219,0.5);
+        }
+        button { 
+            background: #3498db; 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            display: block; 
+            margin: 25px auto; 
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover { 
+            background: #2980b9; 
+        }
         
-        /* Binary visualization styling */
+        /* Binary visualization styling - IMPROVED */
         .bit-visualization { 
             display: flex; 
             flex-direction: column;
-            max-width: 100%;
-            overflow-x: hidden;
+            width: 100%;
+            overflow-x: auto;
+            padding: 15px 0;
+            margin: 0 auto;
         }
         .bit-row { 
             display: flex; 
             align-items: center; 
-            margin-bottom: 8px; 
+            margin-bottom: 15px; 
             flex-wrap: nowrap;
-            max-width: 100%;
+            width: max-content;
+            min-width: 100%;
         }
         .bit-label { 
-            min-width: 100px; 
+            min-width: 120px; 
             font-weight: bold;
             flex-shrink: 0;
+            font-size: 14px;
+            padding-right: 10px;
         }
         .bit { 
-            width: 18px; 
-            height: 18px; 
+            width: 22px; 
+            height: 22px; 
             display: inline-flex; 
             align-items: center; 
             justify-content: center; 
-            margin: 0 1px; 
-            border-radius: 3px; 
+            margin: 0 2px; 
+            border-radius: 4px; 
             color: white; 
             font-weight: bold; 
-            font-size: 10px;
+            font-size: 12px;
             user-select: none;
             flex-shrink: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .bit:hover {
+            transform: scale(1.15);
+            z-index: 5;
         }
         .octet-container { 
             display: flex; 
             align-items: center;
             background-color: rgba(0,0,0,0.03);
-            border-radius: 3px;
-            margin: 0 1px;
-            padding: 1px;
+            border-radius: 5px;
+            margin: 0 3px;
+            padding: 4px 6px;
             flex-shrink: 0;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         .octet-separator { 
-            margin: 0 1px;
+            margin: 0 4px;
             flex-shrink: 0;
+            font-weight: bold;
+            font-size: 18px;
+            color: #7f8c8d;
         }
-        .network-bit { background-color: #3498db; }
-        .host-bit { background-color: #e74c3c; }
+        .network-bit { 
+            background-color: #3498db; 
+        }
+        .host-bit { 
+            background-color: #e74c3c; 
+        }
         
         /* Other styling */
-        .info-box { background: #ecf0f1; padding: 15px; border-radius: 4px; margin-bottom: 15px; }
-        .results { display: none; margin-top: 20px; }
-        .legend { display: flex; margin-top: 10px; font-size: 12px; }
-        .legend div { margin-right: 15px; display: flex; align-items: center; }
-        .legend-box { 
-            width: 12px; 
-            height: 12px; 
-            display: inline-block; 
-            margin-right: 5px; 
-            border-radius: 2px;
+        .info-box { 
+            background: #ecf0f1; 
+            padding: 20px; 
+            border-radius: 6px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+            transition: box-shadow 0.3s;
         }
-        .error-message { color: #e74c3c; margin-top: 5px; display: none; }
-        .input-container { position: relative; margin-bottom: 20px; }
-        .invalid { border-color: #e74c3c; }
+        .info-box:hover {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .viz-container {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .results { 
+            display: none; 
+            margin-top: 25px; 
+        }
+        .legend { 
+            display: flex; 
+            margin-top: 15px; 
+            font-size: 13px;
+            flex-wrap: wrap;
+        }
+        .legend div { 
+            margin-right: 20px;
+            margin-bottom: 8px;
+            display: flex; 
+            align-items: center; 
+        }
+        .legend-box { 
+            width: 14px; 
+            height: 14px; 
+            display: inline-block; 
+            margin-right: 6px; 
+            border-radius: 3px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .error-message { 
+            color: #e74c3c; 
+            margin-top: 5px; 
+            display: none; 
+            font-size: 13px;
+        }
+        .input-container { 
+            position: relative; 
+            margin-bottom: 20px; 
+        }
+        .invalid { 
+            border-color: #e74c3c; 
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        
+        /* Network info styling */
+        #network-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 10px;
+        }
+        #network-info p {
+            margin: 8px 0;
+        }
         
         /* Social links styling */
         .social-links {
-            margin-top: 30px;
+            margin-top: 40px;
             text-align: center;
-            padding-top: 15px;
+            padding-top: 20px;
             border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         .social-links a {
             display: inline-flex;
             align-items: center;
-            margin: 0 10px;
+            margin: 0 15px;
             color: #2c3e50;
             text-decoration: none;
             font-size: 14px;
+            transition: color 0.3s;
         }
         .social-links a:hover {
             color: #3498db;
-            text-decoration: underline;
         }
-        .social-links a img {
-            width: 20px;
-            margin-right: 5px;
+        .social-links a svg {
+            margin-right: 8px;
+            transition: transform 0.3s;
+        }
+        .social-links a:hover svg {
+            transform: scale(1.1);
+        }
+        .copyright {
+            width: 100%;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
         }
         
         /* Responsive adjustments */
         @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
             .bit {
-                width: 14px;
-                height: 14px;
-                font-size: 9px;
-                margin: 0;
+                width: 18px;
+                height: 18px;
+                font-size: 10px;
+                margin: 0 1px;
             }
             .bit-label {
-                min-width: 80px;
-                font-size: 12px;
+                min-width: 90px;
+                font-size: 13px;
             }
             .octet-separator {
-                margin: 0;
+                margin: 0 2px;
+                font-size: 16px;
             }
             .octet-container {
-                margin: 0;
-                padding: 0;
+                margin: 0 1px;
+                padding: 2px 3px;
             }
             .social-links {
                 flex-direction: column;
+                align-items: center;
             }
             .social-links a {
-                margin: 5px 0;
+                margin: 8px 0;
+            }
+            #network-info {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -160,14 +304,19 @@
             
             <div class="info-box">
                 <h3>Binary Visualization</h3>
-                <div id="binary-visualization" class="bit-visualization"></div>
+                <p>The colored blocks below represent each bit in your IP address and subnet mask. Blue blocks are network bits and red blocks are host bits.</p>
+                
+                <div class="viz-container">
+                    <div id="binary-visualization" class="bit-visualization"></div>
+                </div>
+                
                 <div class="legend">
-                    <div><span class="legend-box" style="background:#3498db;"></span>Network Bits</div>
-                    <div><span class="legend-box" style="background:#e74c3c;"></span>Host Bits</div>
+                    <div><span class="legend-box" style="background:#3498db;"></span>Network Bits (Identify the network)</div>
+                    <div><span class="legend-box" style="background:#e74c3c;"></span>Host Bits (Identify devices on the network)</div>
                 </div>
             </div>
             
-            <!-- Added social links section -->
+            <!-- Social links section -->
             <div class="social-links">
                 <a href="https://github.com/shadEdkr/shadEdkr.github.io/tree/main/subnet" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -191,7 +340,7 @@
                     </svg>
                     LinkedIn
                 </a>
-                <div style="margin-top: 15px; font-size: 12px; color: #666;">
+                <div class="copyright">
                     © 2025 Yoonsung Ed Cho - Purdue University Cybersecurity Student
                 </div>
             </div>
@@ -344,10 +493,6 @@
             ipLabel.textContent = 'IP Address:';
             ipRow.appendChild(ipLabel);
             
-            // Debug output
-            console.log("IP Binary:", ipBinary);
-            console.log("Mask Binary:", maskBinary);
-            
             // Create bits by octet
             for (let octet = 0; octet < 4; octet++) {
                 const octetContainer = document.createElement('div');
@@ -370,6 +515,9 @@
                     } else {
                         bitElement.classList.add('host-bit');
                     }
+                    
+                    // Add title attribute for tooltip
+                    bitElement.title = maskBitValue === '1' ? 'Network Bit' : 'Host Bit';
                     
                     octetContainer.appendChild(bitElement);
                 }
@@ -413,8 +561,10 @@
                     
                     if (bitValue === '1') {
                         bitElement.classList.add('network-bit');
+                        bitElement.title = 'Network Bit';
                     } else {
                         bitElement.classList.add('host-bit');
+                        bitElement.title = 'Host Bit';
                     }
                     
                     octetContainer.appendChild(bitElement);
