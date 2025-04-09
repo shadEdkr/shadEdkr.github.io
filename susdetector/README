@@ -1,0 +1,80 @@
+Suspicious Unicode Character Detector 🔍
+Overview
+A specialized security tool designed to identify potentially deceptive Unicode characters in text. This browser-based utility helps users detect hidden characters, homoglyphs, and other special symbols that could be used in phishing attacks, URL spoofing, or other security threats.
+🔍 Features
+
+Hidden Character Detection - Identify zero-width and invisible Unicode characters
+Homoglyph Identification - Spot characters that visually resemble standard ASCII but are different
+Character Classification - Automatically categorize suspicious characters by type
+Visual Analysis - Color-coded results with character counts and descriptions
+Code Point Display - Show Unicode code points for each suspicious character
+Real-time Scanning - Instant feedback as text is analyzed
+Character Count Statistics - Track occurrences of each suspicious character type
+
+💻 Technical Implementation
+
+Pure HTML/CSS/JavaScript - No external libraries or dependencies required
+Regular Expression Pattern Matching - Efficient detection of non-standard characters
+Unicode Range Analysis - Targeted detection of specific problematic Unicode ranges
+Responsive Design - Clean interface that works across devices
+Client-side Processing - All analysis performed locally in the browser
+
+🚀 How to Use
+
+Enter or paste text into the input area
+Click "Scan for Hidden Characters" or press Enter
+Review the highlighted results
+Examine detailed character information for any detected issues
+
+📊 Output Information
+The tool provides the following analysis:
+
+Overall security assessment of the text
+Detailed list of suspicious characters detected
+Unicode code point for each character (U+XXXX format)
+Character type classification and description
+Count of occurrences for each suspicious character
+Visual representation with color-coding by character type
+
+🔧 Technical Details
+The detector performs the following operations:
+
+Scans input text against predetermined Unicode ranges
+Detects characters outside standard ASCII (0x00-0x7F)
+Specifically targets problematic ranges such as:
+
+Zero-width characters (U+200B through U+200D)
+Control characters (U+2060 through U+206F)
+Byte Order Mark (U+FEFF)
+Full-width characters (U+FF00 through U+FFFF)
+
+
+Creates a comprehensive report of all findings
+
+🎓 Security Value
+This tool serves as both a practical utility and a security resource:
+
+Helps identify potential phishing attempts
+Reveals hidden characters in URLs and domains
+Supports secure copy/paste operations by revealing hidden content
+Educates users about Unicode security issues
+Assists in forensic analysis of suspicious text
+
+💾 Installation
+
+Download the HTML file
+Open it in any modern web browser
+No server or installation required - works completely client-side
+
+🔜 Future Enhancements
+Potential future features may include:
+
+Batch analysis of multiple text samples
+Export functionality for analysis results
+Extended Unicode range coverage
+Severity scoring for detected issues
+Integration with URL safety checking
+
+📝 License
+© 2025 Yoonsung Ed Cho. All Rights Reserved.
+Created by Yoonsung Ed Cho as part of a cybersecurity portfolio project focused on identifying deceptive text and preventing Unicode-based attacks.
