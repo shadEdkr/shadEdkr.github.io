@@ -916,17 +916,24 @@
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             header {
-                padding: 15px 10px;
+                padding: 15px;
+                height: auto;
+                background: linear-gradient(to bottom, var(--purdue-black) 0%, rgba(0,0,0,0.95) 100%);
             }
 
             header h1 {
-                font-size: 1.8rem;
-                margin-bottom: 5px;
+                font-size: 1.6rem;
+                margin: 35px 0 8px 0;
+                background: linear-gradient(to right, var(--purdue-gold), #D4AF37);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
             header p {
                 font-size: 0.9rem;
-                margin-bottom: 10px;
+                opacity: 0.9;
+                font-style: italic;
             }
 
             .logo {
@@ -941,11 +948,9 @@
             }
 
             nav {
-                padding: 5px 0;
-                position: sticky;
-                top: 0;
-                z-index: 1000;
-                background-color: var(--purdue-gold);
+                background: rgba(33, 33, 33, 0.98);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
             }
 
             nav ul {
@@ -968,28 +973,49 @@
             }
 
             nav ul li a {
-                font-size: 0.9rem;
-                padding: 5px 10px;
-                white-space: nowrap;
+                padding: 16px 25px;
+                display: flex;
+                align-items: center;
+                font-weight: 500;
+                letter-spacing: 0.3px;
+                transition: all 0.3s ease;
+            }
+
+            nav ul li a::before {
+                content: '';
+                width: 0;
+                height: 2px;
+                background: var(--purdue-gold);
+                position: absolute;
+                left: 25px;
+                bottom: 0;
+                transition: width 0.3s ease;
+            }
+
+            nav ul li a:hover::before {
+                width: 30px;
             }
 
             .hero {
                 flex-direction: column;
-                padding: 30px 15px;
-                text-align: center;
+                padding: 20px 15px 40px;
+                background: linear-gradient(to bottom, var(--bg-color), rgba(206, 184, 136, 0.1));
+                border-radius: 0 0 30px 30px;
+                margin: 0 -15px;
             }
 
             .hero-text {
-                padding-right: 0;
-                padding-bottom: 20px;
+                padding: 0 10px;
             }
 
-            .hero h1 {
-                font-size: 2rem;
+            .hero-image {
+                margin: 20px 0;
             }
 
             .hero-image img {
-                max-width: 200px;
+                max-width: 160px;
+                border: 4px solid var(--purdue-gold);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             }
 
             .hero-buttons {
@@ -998,26 +1024,69 @@
 
             .section {
                 padding: 40px 15px;
+                margin: 0;
+                border-radius: 30px;
+                background: var(--card-bg);
+                margin: 15px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             }
 
             h2 {
-                font-size: 1.6rem;
-                margin-bottom: 20px;
+                font-size: 1.5rem;
+                text-align: center;
+                margin-bottom: 25px;
+                position: relative;
+                display: inline-block;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            h2::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(to right, transparent, var(--purdue-gold), transparent);
             }
 
             .skill-highlights {
+                flex-wrap: wrap;
+                gap: 8px;
                 justify-content: center;
+                margin: 15px 0;
             }
 
             .skill-tag {
-                font-size: 0.8rem;
-                padding: 4px 10px;
+                background: rgba(206, 184, 136, 0.15);
+                color: var(--purdue-gold);
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
             }
 
             .cta-button, 
             .download-resume {
-                width: 100%;
-                margin: 10px 0;
+                margin: 8px;
+                padding: 12px 20px;
+                border-radius: 25px;
+                font-size: 0.95rem;
+                background: linear-gradient(to right, var(--purdue-gold), #D4AF37);
+                border: none;
+                color: var(--purdue-black);
+                font-weight: 600;
+                letter-spacing: 0.3px;
+                box-shadow: 0 4px 15px rgba(206, 184, 136, 0.3);
+                transition: all 0.3s ease;
+            }
+
+            .cta-button:active, 
+            .download-resume:active {
+                transform: translateY(2px);
+                box-shadow: 0 2px 8px rgba(206, 184, 136, 0.2);
             }
 
             /* Timeline mobile adjustments */
@@ -1060,37 +1129,52 @@
 
             /* Footer mobile adjustments */
             footer {
-                padding: 20px 15px;
+                padding: 30px 15px;
+                background: linear-gradient(to top, var(--purdue-black), rgba(0,0,0,0.95));
+                border-radius: 30px 30px 0 0;
+                margin-top: 30px;
             }
 
             .social-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                margin: 25px 0;
             }
 
             .social-links a {
-                margin: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 12px;
+                background: rgba(206, 184, 136, 0.1);
+                border-radius: 12px;
+                transition: all 0.3s ease;
+            }
+
+            .social-links a:hover {
+                background: rgba(206, 184, 136, 0.2);
+                transform: translateY(-2px);
             }
         }
 
         /* Additional mobile optimization for smaller screens */
         @media (max-width: 380px) {
             header h1 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
 
-            .hero h1 {
-                font-size: 1.8rem;
+            .section {
+                margin: 10px;
+                padding: 30px 15px;
             }
 
             .hero-image img {
-                max-width: 180px;
+                max-width: 140px;
             }
 
-            nav ul li a {
-                font-size: 0.85rem;
-                padding: 4px 8px;
+            .social-links {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1098,13 +1182,15 @@
         .mobile-menu-toggle {
             display: none;
             position: fixed;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 20px;
             z-index: 1001;
-            background: none;
-            border: none;
+            background: rgba(206, 184, 136, 0.1);
+            border-radius: 50%;
+            padding: 12px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             cursor: pointer;
-            padding: 10px;
             color: var(--purdue-gold);
         }
 
