@@ -912,6 +912,187 @@
                 font-size: 16px;
             }
         }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 10px;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 5px;
+            }
+
+            header p {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+
+            .logo {
+                font-size: 1rem;
+                top: 10px;
+                left: 10px;
+            }
+
+            .theme-switch-wrapper {
+                top: 10px;
+                right: 10px;
+            }
+
+            nav {
+                padding: 5px 0;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                background-color: var(--purdue-gold);
+            }
+
+            nav ul {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding: 5px 10px;
+                gap: 15px;
+            }
+
+            nav ul::-webkit-scrollbar {
+                display: none;
+            }
+
+            nav ul li {
+                margin: 0;
+                flex-shrink: 0;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+                padding: 5px 10px;
+                white-space: nowrap;
+            }
+
+            .hero {
+                flex-direction: column;
+                padding: 30px 15px;
+                text-align: center;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                padding-bottom: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-image img {
+                max-width: 200px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .section {
+                padding: 40px 15px;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            .skill-highlights {
+                justify-content: center;
+            }
+
+            .skill-tag {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+
+            .cta-button, 
+            .download-resume {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            /* Timeline mobile adjustments */
+            .timeline-event {
+                min-width: 280px;
+                max-width: 280px;
+            }
+
+            .event-content {
+                height: 280px;
+            }
+
+            .horizontal-timeline {
+                padding: 20px 10px;
+                gap: 15px;
+            }
+
+            .nav-arrow {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            /* Projects section mobile adjustments */
+            .projects {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .project-card {
+                height: auto;
+                min-height: 450px;
+            }
+
+            /* Certifications mobile adjustments */
+            .cert-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            /* Footer mobile adjustments */
+            footer {
+                padding: 20px 15px;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .social-links a {
+                margin: 5px;
+            }
+        }
+
+        /* Additional mobile optimization for smaller screens */
+        @media (max-width: 380px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-image img {
+                max-width: 180px;
+            }
+
+            nav ul li a {
+                font-size: 0.85rem;
+                padding: 4px 8px;
+            }
+        }
     </style>
 </head>
 <body>
