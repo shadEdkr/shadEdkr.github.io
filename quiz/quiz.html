@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bro, 123456 Ain't a Password 💀</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .question {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .options {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .options label {
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        .options label:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        .options label.selected {
+            background: #007bff15;
+            border-color: #007bff;
+        }
+        .options label input {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+        input[type="password"] {
+            width: 90%;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        #result, #leaderboard {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .warning {
+            display: none;
+            color: #dc3545;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background: #dc354510;
+            animation: shake 0.5s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        #feedback-list {
+            text-align: left;
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        #feedback-list li {
+            list-style: none;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #feedback-list li::before {
+            content: attr(data-icon);
+            font-size: 1.2em;
+        }
+        #scoreList {
+            text-align: left;
+            padding-left: 20px;
+        }
+        #scoreList li {
+            list-style: none;
+            font-size: 16px;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: #007bff;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+        .score-badge {
+            background: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        .feedback-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .quiz-header {
+            margin-bottom: 30px;
+        }
+        .quiz-header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .quiz-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        .result-summary {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .result-summary h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .result-summary p {
+            color: #666;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>Bro, 123456 Ain't a Password 💀</h1>
+            <p>Test your password security knowledge and learn how to protect yourself online!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div id="quiz">
+            <div id="question-container">
+                <p class="question" id="question-text"></p>
+                <div id="options-container" class="options"></div>
+                <input type="password" id="password-input" style="display: none;" placeholder="Enter your password">
+                <p id="password-warning" class="warning">🚨 NEVER share your password! Keep it private! 🔒</p>
+            </div>
+            <button id="next-btn" onclick="nextQuestion()">Next Question <span>➡️</span></button>
+        </div>
+
+        <div id="result" style="display: none;">
+            <div class="result-summary">
+                <h2>Quiz Complete! 🎉</h2>
+                <h3 id="final-score"></h3>
+                <p id="final-advice"></p>
+            </div>
+            <h4>📝 Detailed Feedback:</h4>
+            <ol id="feedback-list"></ol>
+            <button onclick="restartQuiz()"><span>🔄</span> Try Again</button>
+        </div>
+
+        <div id="leaderboard">
+            <h3>🏆 Your Progress</h3>
+            <ol id="scoreList"></ol>
+        </div>
+    </div>
+
+    <div class="footer-links" style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+        <a href="https://github.com/shadEdkr" style="text-decoration: none; color: #333; display: flex; align-items: center; gap: 5px;">
+            <img src="../assets/github.svg" alt="GitHub" style="width: 20px; height: 20px;">
+            GitHub Repository
+        </a>
+        <a href="https://medium.com/@yoonsung.cho" style="text-decoration: none; color: #333; display: flex; align-items: center; gap: 5px;">
+            <img src="../assets/medium.svg" alt="Medium" style="width: 20px; height: 20px;">
+            Medium
+        </a>
+        <a href="https://www.linkedin.com/in/yoonsung-cho" style="text-decoration: none; color: #333; display: flex; align-items: center; gap: 5px;">
+            <img src="../assets/linkedin.svg" alt="LinkedIn" style="width: 20px; height: 20px;">
+            LinkedIn
+        </a>
+    </div>
+
+    <p style="text-align: center; margin-top: 20px; color: #666; font-size: 14px;">
+        © 2025 Yoonsung Ed Cho - Purdue University Cybersecurity Student
+    </p>
+
+    <script>
+        const questions = [
+            { 
+                question: "🔑 What is your current password?", 
+                type: "password",
+                feedback: "Remember: Never share your real passwords in online quizzes or forms!"
+            },
+            { 
+                question: "🔐 Do you use the same password for multiple accounts?",
+                options: ["Yes", "No"],
+                answer: "No",
+                feedback: "Using unique passwords for each account is crucial. Consider using a password manager to help manage multiple passwords securely."
+            },
+            { 
+                question: "📏 What is the recommended minimum length for a strong password?",
+                options: ["8 characters", "12+ characters", "4 characters"],
+                answer: "12+ characters",
+                feedback: "Longer passwords are harder to crack. Use at least 12 characters with a mix of letters, numbers, and symbols."
+            },
+            { 
+                question: "💾 Which is the safest way to store passwords?",
+                options: ["Writing them down", "Using a password manager", "Memorizing all of them"],
+                answer: "Using a password manager",
+                feedback: "Password managers encrypt and securely store your passwords, making them both safe and convenient."
+            },
+            { 
+                question: "🔒 Have you enabled Two-Factor Authentication (2FA)?",
+                options: ["Yes", "No"],
+                answer: "Yes",
+                feedback: "2FA adds an extra layer of security even if your password is compromised. Enable it whenever possible!"
+            },
+            { 
+                question: "🎣 What is phishing?",
+                options: ["A cybersecurity software", "A method hackers use to steal information", "A way to encrypt data"],
+                answer: "A method hackers use to steal information",
+                feedback: "Phishing attacks trick users into revealing sensitive information. Always verify the source of requests for personal information."
+            },
+            { 
+                question: "📶 What is the most secure way to connect to public Wi-Fi?",
+                options: ["Using a VPN", "Just connecting normally", "Entering random credentials"],
+                answer: "Using a VPN",
+                feedback: "VPNs encrypt your internet traffic, protecting your data from potential eavesdroppers on public networks."
+            },
+            { 
+                question: "🕒 How often should you update your passwords?",
+                options: ["Every 6 months", "Only when you forget it", "Never"],
+                answer: "Every 6 months",
+                feedback: "Regular password updates help maintain security. Set reminders to update critical passwords every 6 months."
+            },
+            { 
+                question: "📧 What should you do if you receive an unexpected email asking for sensitive information?",
+                options: ["Reply with your info", "Ignore it", "Verify the sender first"],
+                answer: "Verify the sender first",
+                feedback: "Always verify unexpected requests through a different communication channel, even if they appear to be from known contacts."
+            },
+            { 
+                question: "🔗 What does HTTPS mean?",
+                options: ["HyperText Transfer Protocol Secure", "Hackers Targeting Personal Security", "Hyperlink Tracking and Protection System"],
+                answer: "HyperText Transfer Protocol Secure",
+                feedback: "HTTPS ensures secure communication between your browser and websites. Always look for the padlock icon in your browser."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let feedback = [];
+
+        function updateProgress() {
+            const progress = document.getElementById('progress');
+            const percentage = (currentQuestion / questions.length) * 100;
+            progress.style.width = `${percentage}%`;
+        }
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById("question-text");
+            const optionsContainer = document.getElementById("options-container");
+            const passwordInput = document.getElementById("password-input");
+            const passwordWarning = document.getElementById("password-warning");
+            const nextBtn = document.getElementById("next-btn");
+
+            updateProgress();
+            
+            passwordInput.style.display = "none";
+            passwordWarning.style.display = "none";
+            optionsContainer.innerHTML = "";
+
+            const q = questions[currentQuestion];
+
+            if (q.type === "password") {
+                questionContainer.textContent = q.question;
+                passwordInput.style.display = "block";
+                nextBtn.innerHTML = '🚨 Submit <span>➡️</span>';
+            } else {
+                questionContainer.textContent = q.question;
+                q.options.forEach((option, index) => {
+                    const label = document.createElement("label");
+                    label.innerHTML = `
+                        <input type="radio" name="question" value="${option}">
+                        <span>${index + 1}. ${option}</span>
+                    `;
+                    label.addEventListener('click', () => {
+                        document.querySelectorAll('.options label').forEach(l => l.classList.remove('selected'));
+                        label.classList.add('selected');
+                    });
+                    optionsContainer.appendChild(label);
+                });
+                nextBtn.innerHTML = 'Next Question <span>➡️</span>';
+            }
+        }
+
+        function nextQuestion() {
+            const passwordInput = document.getElementById("password-input");
+            const passwordWarning = document.getElementById("password-warning");
+            const selectedOption = document.querySelector('input[name="question"]:checked');
+            const currentQ = questions[currentQuestion];
+
+            if (currentQ.type === "password") {
+                if (passwordInput.value.trim() !== "") {
+                    passwordWarning.style.display = "block";
+                    feedback.push({
+                        text: currentQ.feedback,
+                        icon: "🚨",
+                        correct: false
+                    });
+                }
+            } else if (selectedOption) {
+                const isCorrect = selectedOption.value === currentQ.answer;
+                feedback.push({
+                    text: currentQ.feedback,
+                    icon: isCorrect ? "✅" : "❌",
+                    correct: isCorrect
+                });
+                if (isCorrect) score++;
+            } else {
+                feedback.push({
+                    text: "No answer provided. " + currentQ.feedback,
+                    icon: "⚠️",
+                    correct: false
+                });
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById("quiz").style.display = "none";
+            document.getElementById("result").style.display = "block";
+            
+            const percentage = (score / (questions.length - 1)) * 100;
+            const finalScore = document.getElementById("final-score");
+            const finalAdvice = document.getElementById("final-advice");
+            
+            finalScore.textContent = `Your Score: ${score}/${questions.length - 1} (${percentage.toFixed(1)}%)`;
+            
+            if (percentage >= 80) {
+                finalAdvice.innerHTML = "🌟 Excellent! You're well-versed in password security!";
+            } else if (percentage >= 60) {
+                finalAdvice.innerHTML = "👍 Good job! But there's room for improvement in your security practices.";
+            } else {
+                finalAdvice.innerHTML = "📚 Time to brush up on password security! Review the feedback below.";
+            }
+
+            const feedbackList = document.getElementById("feedback-list");
+            feedbackList.innerHTML = feedback.map(f => 
+                `<li data-icon="${f.icon}" class="${f.correct ? 'correct' : 'incorrect'}">${f.text}</li>`
+            ).join("");
+
+            updateLeaderboard(score);
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            feedback = [];
+            document.getElementById("quiz").style.display = "block";
+            document.getElementById("result").style.display = "none";
+            loadQuestion();
+        }
+
+        function updateLeaderboard(newScore) {
+            let scores = JSON.parse(localStorage.getItem("quiz_scores")) || [];
+            const date = new Date().toLocaleDateString();
+            scores.push({ score: newScore, date: date });
+            scores = scores.slice(-5); // Keep only last 5 attempts
+            localStorage.setItem("quiz_scores", JSON.stringify(scores));
+            
+            const scoreList = document.getElementById("scoreList");
+            scoreList.innerHTML = scores.map((s, i) => `
+                <li>
+                    <span>Attempt ${scores.length - i}: ${s.score}/${questions.length - 1}</span>
+                    <span class="score-badge">${s.date}</span>
+                </li>
+            `).reverse().join("");
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
