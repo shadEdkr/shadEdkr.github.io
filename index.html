@@ -746,6 +746,179 @@
                 transform: none;
             }
         }
+
+        /* Horizontal Timeline Styles */
+        .horizontal-timeline-container {
+            position: relative;
+            max-width: 100%;
+            margin: 40px auto 0;
+        }
+
+        .timeline-navigation {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-arrow {
+            background-color: var(--purdue-gold);
+            color: var(--purdue-black);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 5;
+            flex-shrink: 0;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-arrow:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .prev-arrow {
+            margin-right: 10px;
+        }
+
+        .next-arrow {
+            margin-left: 10px;
+        }
+
+        .horizontal-timeline {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 30px 0;
+            position: relative;
+            width: 100%;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .horizontal-timeline::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge */
+        }
+
+        /* Timeline line */
+        .horizontal-timeline::after {
+            content: '';
+            position: absolute;
+            height: 4px;
+            background-color: var(--purdue-gold);
+            top: 50px;
+            left: 40px;
+            right: 40px;
+            z-index: 1;
+        }
+
+        .timeline-event {
+            position: relative;
+            min-width: 280px;
+            max-width: 280px;
+            margin-right: 25px;
+            padding-top: 30px;
+            z-index: 2;
+        }
+
+        .event-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--bg-color);
+            border: 3px solid var(--purdue-gold);
+            border-radius: 50%;
+            top: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            transition: all 0.3s;
+        }
+
+        .timeline-event:hover .event-dot {
+            transform: translateX(-50%) scale(1.2);
+            border-color: var(--accent-color);
+        }
+
+        .event-content {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            height: 220px; /* Fixed height for all cards */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-top: 3px solid var(--purdue-gold);
+        }
+
+        .timeline-event:hover .event-content {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .event-date {
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: var(--purdue-gold);
+            color: var(--purdue-black);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            align-self: flex-start;
+        }
+
+        .event-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            opacity: 0.7;
+        }
+
+        .event-content h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            padding-right: 25px; /* Space for icon */
+        }
+
+        .event-content p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow: auto;
+            flex-grow: 1;
+        }
+
+        /* Highlight important events */
+        .timeline-event.highlight .event-content {
+            border-top: 3px solid var(--accent-color);
+            background-color: rgba(var(--purdue-gold-rgb, 206, 184, 136), 0.1);
+        }
+
+        .timeline-event.highlight .event-dot {
+            border-color: var(--accent-color);
+        }
+
+        /* Mobile responsiveness for horizontal timeline */
+        @media (max-width: 768px) {
+            .timeline-event {
+                min-width: 250px;
+            }
+            
+            .event-content {
+                height: 240px; /* Slightly taller on mobile */
+            }
+        }
     </style>
 </head>
 <body>
@@ -810,114 +983,117 @@
         <h2>About Me</h2>
         <p>My journey in tech began at Murray State University in Kentucky, where I pursued a Computer Science major. During my studies, I discovered a deeper passion for networking and cybersecurity, leading me to transfer to Purdue University to specialize in Cybersecurity.</p>
         
-        <p>As a student, I’ve always wanted to help others with what I love most—computers and IT. Whether troubleshooting network issues, securing systems, or developing web applications, I strive to strengthen digital infrastructure and protect critical data. </p>
+        <p>As a student, I've always wanted to help others with what I love most—computers and IT. Whether troubleshooting network issues, securing systems, or developing web applications, I strive to strengthen digital infrastructure and protect critical data. </p>
         
-        <p>Now, I’m actively seeking a Summer 2025 Cybersecurity Internship to gain hands-on experience in network security, virtualization, and secure software development while collaborating with innovative teams to build a safer digital future.</p>
+        <p>Now, I'm actively seeking a Summer 2025 Cybersecurity Internship to gain hands-on experience in network security, virtualization, and secure software development while collaborating with innovative teams to build a safer digital future.</p>
     </div>
     
     <div class="section" id="timeline">
         <h2>My Cybersecurity Journey</h2>
-        <div class="timeline-container-wrapper">
-            <div class="timeline-progress-bar"></div>
-            <div class="timeline-cards">
-                <!-- First Steps -->
-                <div class="timeline-card" data-year="2021">
-                    <div class="timeline-card-content">
-                        <div class="timeline-marker"></div>
-                        <span class="timeline-date">2021</span>
-                        <h3>First Steps into Computing</h3>
-                        <p>Started studying Computer Science at Murray State University, where I developed foundational knowledge in IT and programming.</p>
-                        <div class="timeline-icon">🖥️</div>
+        <div class="horizontal-timeline-container">
+            <div class="timeline-navigation">
+                <button class="nav-arrow prev-arrow">◀</button>
+                <div class="horizontal-timeline">
+                    <!-- Timeline Item -->
+                    <div class="timeline-event">
+                        <div class="event-dot"></div>
+                        <div class="event-content">
+                            <div class="event-date">2021</div>
+                            <h3>First Steps into Computing</h3>
+                            <div class="event-icon">🖥️</div>
+                            <p>Started studying Computer Science at Murray State University, where I developed foundational knowledge in IT and programming.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item -->
+                    <div class="timeline-event">
+                        <div class="event-dot"></div>
+                        <div class="event-content">
+                            <div class="event-date">Nov 2021 - May 2022</div>
+                            <h3>IT Support & Student Ambassador</h3>
+                            <div class="event-icon">🔧</div>
+                            <p>Worked as a Student IT Support in the ESL department, assisting with computer lab setup, troubleshooting, and technical support.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item -->
+                    <div class="timeline-event">
+                        <div class="event-dot"></div>
+                        <div class="event-content">
+                            <div class="event-date">2022</div>
+                            <h3>Transferred to Purdue University</h3>
+                            <div class="event-icon">🎓</div>
+                            <p>Transferred to Purdue University to major in Cybersecurity. Joined the Cybersecurity Club and attended college-level security workshops.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item -->
+                    <div class="timeline-event">
+                        <div class="event-dot"></div>
+                        <div class="event-content">
+                            <div class="event-date">Oct 2022</div>
+                            <h3>Bug Bounty Hunting & Security Research</h3>
+                            <div class="event-icon">🐛</div>
+                            <p>Conducted QA testing on Web 3.0 games inspired by the Saw franchise. Identified vulnerabilities in game mechanics and reported a critical bug that earned a performance bounty.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item - Highlighted -->
+                    <div class="timeline-event highlight">
+                        <div class="event-dot"></div>
+                        <div class="event-content">
+                            <div class="event-date">Jan 2023 - July 2024</div>
+                            <h3>Military IT & Network Security Experience</h3>
+                            <div class="event-icon">🔐</div>
+                            <p>Served as a Network Communication Systems Specialist in the Republic of Korea Army. Managed military crypto devices, troubleshot brigade facility networks with 400+ devices.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item -->
+                    <div class="timeline-event">
+                        <div class="event-dot"></div>
+                        <div class="event-content">
+                            <div class="event-date">Sep 2024</div>
+                            <h3>Google Cybersecurity Certificate</h3>
+                            <div class="event-icon">🛡️</div>
+                            <p>Earned the Google Cybersecurity Certificate, developing expertise in SIEM tools, malware analysis, AI-driven threat detection, and risk mitigation.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item -->
+                    <div class="timeline-event">
+                        <div class="event-dot"></div>
+                        <div class="event-content">
+                            <div class="event-date">Dec 2024</div>
+                            <h3>Google Project Management Certificate</h3>
+                            <div class="event-icon">📊</div>
+                            <p>Gained experience in Agile methodologies, Scrum framework, and project lifecycle management through the Google Project Management Certificate.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item -->
+                    <div class="timeline-event">
+                        <div class="event-dot"></div>
+                        <div class="event-content">
+                            <div class="event-date">Jan 2025</div>
+                            <h3>Google IT Support Certificate</h3>
+                            <div class="event-icon">💻</div>
+                            <p>Earned the Google IT Support Certificate, gaining hands-on skills in troubleshooting, networking, operating systems, and system administration.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item - Highlighted -->
+                    <div class="timeline-event highlight">
+                        <div class="event-dot"></div>
+                        <div class="event-content">
+                            <div class="event-date">Feb 2025 - Present</div>
+                            <h3>ResNet Tier 2 IT Support - Purdue University</h3>
+                            <div class="event-icon">🌐</div>
+                            <p>Providing advanced IT support for Purdue's residential network, troubleshooting connectivity issues, and working closely with Network Engineering.</p>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- IT Support & Student Ambassador -->
-                <div class="timeline-card" data-year="2021-2022">
-                    <div class="timeline-card-content">
-                        <div class="timeline-marker"></div>
-                        <span class="timeline-date">Nov 2021 - May 2022</span>
-                        <h3>IT Support & Student Ambassador</h3>
-                        <p>Worked as a Student IT Support in the ESL department, assisting with computer lab setup, troubleshooting, and technical support. Also served as a Student Ambassador, guiding prospective students and supporting international student programs.</p>
-                        <div class="timeline-icon">🔧</div>
-                    </div>
-                </div>
-                
-                <!-- Transferred to Purdue -->
-                <div class="timeline-card" data-year="2022">
-                    <div class="timeline-card-content">
-                        <div class="timeline-marker"></div>
-                        <span class="timeline-date">2022</span>
-                        <h3>Transferred to Purdue University</h3>
-                        <p>Transferred to Purdue University to major in Cybersecurity. Joined the Cybersecurity Club and attended college-level security workshops.</p>
-                        <div class="timeline-icon">🎓</div>
-                    </div>
-                </div>
-                
-                <!-- Bug Bounty Hunting -->
-                <div class="timeline-card" data-year="2022">
-                    <div class="timeline-card-content">
-                        <div class="timeline-marker"></div>
-                        <span class="timeline-date">Oct 2022</span>
-                        <h3>Bug Bounty Hunting & Security Research</h3>
-                        <p>Conducted QA testing on Web 3.0 games inspired by the Saw franchise. Identified vulnerabilities in game mechanics and reported a critical bug that earned a performance bounty.</p>
-                        <div class="timeline-icon">🐛</div>
-                    </div>
-                </div>
-                
-                <!-- Military IT Experience -->
-                <div class="timeline-card highlight-card" data-year="2023-2024">
-                    <div class="timeline-card-content">
-                        <div class="timeline-marker"></div>
-                        <span class="timeline-date">Jan 2023 - July 2024</span>
-                        <h3>Military IT & Network Security Experience</h3>
-                        <p>Served as a Network Communication Systems Specialist in the Republic of Korea Army. Managed military crypto devices, troubleshot brigade facility networks with 400+ devices, and maintained firewall traffic control, Genian NAC, and data backups.</p>
-                        <div class="timeline-icon">🔐</div>
-                    </div>
-                </div>
-                
-                <!-- Google Cybersecurity Certificate -->
-                <div class="timeline-card" data-year="2024">
-                    <div class="timeline-card-content">
-                        <div class="timeline-marker"></div>
-                        <span class="timeline-date">Sep 2024</span>
-                        <h3>Google Cybersecurity Certificate</h3>
-                        <p>Earned the Google Cybersecurity Certificate, developing expertise in SIEM tools, malware analysis, AI-driven threat detection, and risk mitigation.</p>
-                        <div class="timeline-icon">🛡️</div>
-                    </div>
-                </div>
-                
-                <!-- Google Project Management Certificate -->
-                <div class="timeline-card" data-year="2024">
-                    <div class="timeline-card-content">
-                        <div class="timeline-marker"></div>
-                        <span class="timeline-date">Dec 2024</span>
-                        <h3>Google Project Management Certificate</h3>
-                        <p>Gained experience in Agile methodologies, Scrum framework, and project lifecycle management through the Google Project Management Certificate.</p>
-                        <div class="timeline-icon">📊</div>
-                    </div>
-                </div>
-                
-                <!-- Google IT Support Certificate -->
-                <div class="timeline-card" data-year="2025">
-                    <div class="timeline-card-content">
-                        <div class="timeline-marker"></div>
-                        <span class="timeline-date">Jan 2025</span>
-                        <h3>Google IT Support Certificate</h3>
-                        <p>Earned the Google IT Support Certificate, gaining hands-on skills in troubleshooting, networking, operating systems, and system administration.</p>
-                        <div class="timeline-icon">💻</div>
-                    </div>
-                </div>
-                
-                <!-- ResNet Tier 2 IT Support -->
-                <div class="timeline-card highlight-card" data-year="2025-present">
-                    <div class="timeline-card-content">
-                        <div class="timeline-marker"></div>
-                        <span class="timeline-date">Feb 2025 - Present</span>
-                        <h3>ResNet Tier 2 IT Support - Purdue University</h3>
-                        <p>Providing advanced IT support for Purdue's residential network, troubleshooting connectivity issues, and working closely with Network Engineering for critical infrastructure repairs.</p>
-                        <div class="timeline-icon">🌐</div>
-                    </div>
-                </div>
+                <button class="nav-arrow next-arrow">▶</button>
             </div>
         </div>
     </div>
@@ -1264,6 +1440,74 @@
                 toggleSwitch.checked = true;
             }
         }
+
+        // Horizontal Timeline Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const timeline = document.querySelector('.horizontal-timeline');
+            const prevArrow = document.querySelector('.prev-arrow');
+            const nextArrow = document.querySelector('.next-arrow');
+            const cardWidth = 305; // Card width + margin
+            
+            // Check if arrows should be visible initially
+            checkArrowVisibility();
+            
+            prevArrow.addEventListener('click', () => {
+                timeline.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+                setTimeout(checkArrowVisibility, 500);
+            });
+            
+            nextArrow.addEventListener('click', () => {
+                timeline.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                setTimeout(checkArrowVisibility, 500);
+            });
+            
+            // Update arrow visibility when scrolling
+            timeline.addEventListener('scroll', () => {
+                checkArrowVisibility();
+            });
+            
+            function checkArrowVisibility() {
+                // Show/hide prev arrow based on scroll position
+                if (timeline.scrollLeft <= 10) {
+                    prevArrow.style.opacity = '0.5';
+                    prevArrow.style.pointerEvents = 'none';
+                } else {
+                    prevArrow.style.opacity = '1';
+                    prevArrow.style.pointerEvents = 'auto';
+                }
+                
+                // Show/hide next arrow based on whether we can scroll more
+                const maxScroll = timeline.scrollWidth - timeline.clientWidth;
+                if (timeline.scrollLeft >= maxScroll - 10) {
+                    nextArrow.style.opacity = '0.5';
+                    nextArrow.style.pointerEvents = 'none';
+                } else {
+                    nextArrow.style.opacity = '1';
+                    nextArrow.style.pointerEvents = 'auto';
+                }
+            }
+            
+            // Add keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (isElementInViewport(timeline)) {
+                    if (e.key === 'ArrowLeft') {
+                        prevArrow.click();
+                    } else if (e.key === 'ArrowRight') {
+                        nextArrow.click();
+                    }
+                }
+            });
+            
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+        });
     </script>
 
 <!-- Add this HTML right before the closing </body> tag -->
