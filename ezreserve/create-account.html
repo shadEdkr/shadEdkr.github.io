@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>EzReserve Portal</h1>
+    </header>
+    <nav>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+        <a href="login.html">Login</a>
+    </nav>
+    <h2>Create Account</h2>
+    <form id="createAccountForm" onsubmit="createAccount(event)">
+        <label for="accountType">Account Type:</label>
+        <select id="accountType" required>
+            <option value="" disabled selected>Select Account Type</option>
+            <option value="Customer">Customer</option>
+            <option value="Admin">Admin</option>
+        </select>
+        <input type="text" id="username" placeholder="Enter your username" required>
+        <input type="email" id="email" placeholder="Enter your email address" required>
+        <input type="password" id="password" placeholder="Enter your password" required>
+        <input type="password" id="confirmPassword" placeholder="Retype your password" required>
+        <button type="submit">Create Account</button>
+    </form>
+    <footer>
+        <p>&copy; 2024 EzReserve</p>
+    </footer>
+
+    <script>
+        function createAccount(event) {
+            event.preventDefault();
+
+            const accountType = document.getElementById("accountType").value;
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (!accountType) {
+                alert("Please select an account type.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return;
+            }
+
+            alert("Account created successfully!");
+            document.getElementById("createAccountForm").reset();
+        }
+    </script>
+</body>
+</html>

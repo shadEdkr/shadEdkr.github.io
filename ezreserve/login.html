@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>EzReserve Portal</h1>
+    </header>
+    <nav>
+    <nav>
+    	<a href="contact.html">Contact Us</a>
+    	<a href="faq.html">FAQ</a>
+    	<a href="login.html">Login</a>
+    </nav>
+    </nav>
+    <main>
+        <section class="login-container">
+            <h2>EzReserve Login</h2>
+            <form id="loginForm">
+                <select id="loginType" required>
+                    <option value="" disabled selected>Select Login Type</option>
+                    <option value="customer">Customer</option>
+                    <option value="admin">Administrator</option>
+                </select><br>
+                <input type="text" id="username" placeholder="Username" required><br>
+                <input type="password" id="password" placeholder="Password" required><br>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <div id="error-message" class="error"></div>
+            <div class="extra-links">
+                <a href="forgot-password.html">Forgot Password?</a>
+                <a href="create-account.html">Create Account</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 EzReserve</p>
+    </footer>
+    <script>
+        // Login Logic
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            const loginType = document.getElementById('loginType').value;
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMessage = document.getElementById('error-message');
+
+            // Check credentials
+            if (loginType === 'customer' && username === 'customerUser' && password === 'customerPass') {
+		localStorage.setItem('userType', 'customer'); // Save customer type
+                errorMessage.textContent = '';
+                window.location.href = "reservation.html"; // Redirect to reservation page
+            } else if (loginType === 'admin' && username === 'adminUser' && password === 'adminPass') {
+		localStorage.setItem('userType', 'admin'); // Save admin type
+                errorMessage.textContent = '';
+                window.location.href = "manage-rooms.html"; // Redirect to manage rooms page
+            } else {
+                errorMessage.textContent = 'Invalid credentials. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html>
+

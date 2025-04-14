@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Rooms</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>EzReserve Portal</h1>
+    </header>
+    <nav>
+        <a href="login.html">Login</a>
+        <a href="manage-rooms.html">Manage Rooms</a>
+        <a href="manage-users.html">Manage Users</a>
+        <a href="login.html">Logout</a>
+    </nav>
+
+    <h2>Manage Rooms</h2>
+
+    <!-- Room Management Form -->
+    <form id="roomForm">
+        <label for="roomName">Room Name:</label>
+        <input type="text" id="roomName" placeholder="Enter Room Name" required><br><br>
+
+        <label for="roomSize">Room Size (sq ft):</label>
+        <input type="number" id="roomSize" placeholder="Enter Room Size" required><br><br>
+
+        <label for="roomLocation">Room Location:</label>
+        <input type="text" id="roomLocation" placeholder="Enter Room Location" required><br><br>
+
+        <label for="pricePerDay">Price per Day ($):</label>
+        <input type="number" id="pricePerDay" placeholder="Enter Price per Day" required><br><br>
+
+        <label for="roomType">Room Type:</label>
+        <select id="roomType" required>
+            <option value="" disabled selected>Select Room Type</option>
+            <option value="small">Small (50 seats)</option>
+            <option value="medium">Medium (100 seats)</option>
+            <option value="large">Large (150 seats)</option>
+        </select><br><br>
+
+        <button type="submit">Add Room</button>
+    </form>
+
+    <footer>
+        <p>&copy; 2024 EzReserve</p>
+    </footer>
+
+    <script>
+        document.getElementById('roomForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            const roomName = document.getElementById('roomName').value;
+            const roomSize = document.getElementById('roomSize').value;
+            const roomLocation = document.getElementById('roomLocation').value;
+            const maxPeople = document.getElementById('maxPeople').value;
+            const pricePerDay = document.getElementById('pricePerDay').value;
+            const roomType = document.getElementById('roomType').value;
+
+            // Check if all fields are filled
+            if (roomName && roomSize && roomLocation && maxPeople && pricePerDay && roomType) {
+                alert('Room added successfully!');
+
+                // Reset form after submission
+                document.getElementById('roomForm').reset();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+    </script>
+</body>
+</html>

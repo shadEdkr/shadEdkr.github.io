@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Credit Cards</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>EzReserve Portal</h1>
+    </header>
+    <nav>
+        <a href="contactcustomer.html">Contact Us</a>
+        <a href="faqcustomer.html">FAQ</a>
+        <a href="login.html">Login</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="payment.html">Payment</a>
+        <a href="promo-code.html">Promo Code</a>
+        <a href="manage-credit-cards.html">Manage Credit Cards</a>
+        <a href="account-details.html">Account Details</a>
+        <a href="login.html">Logout</a>
+    </nav>
+    <h2>Manage Credit Cards</h2>
+    <div id="cardList">
+        <p><strong>Card on File:</strong></p>
+        <div class="card">
+            <p>Card Number: **** **** **** 1234</p>
+            <p>Cardholder Name: Zackary Richards</p>
+            <p>Expiration Date: 12/29</p>
+        </div>
+    </div>
+    <button onclick="removeCard()">Remove Card</button>
+    <button onclick="editCard()">Edit Card</button>
+    
+    <h3>Add New Card</h3>
+    <form id="addCardForm" onsubmit="addCard(event)">
+        <input type="text" id="cardNumber" placeholder="Card Number" required>
+        <input type="text" id="cardholderName" placeholder="Cardholder Name" required>
+        <input type="text" id="expirationDate" placeholder="Expiration Date (MM/YY)" required>
+        <button type="submit">Add New Card</button>
+    </form>
+
+    <footer>
+        <p>&copy; 2024 EzReserve</p>
+    </footer>
+
+    <script>
+        function removeCard() {
+            const cardList = document.getElementById("cardList");
+            const cards = cardList.getElementsByClassName("card");
+
+            if (cards.length <= 1) {
+                alert("Minimum of one credit card is required");
+                return;
+            }
+
+            cardList.removeChild(cards[cards.length - 1]);
+            alert("Credit card deleted successfully");
+        }
+
+        function addCard(event) {
+            event.preventDefault();
+            const cardNumber = document.getElementById("cardNumber").value.trim();
+            const cardholderName = document.getElementById("cardholderName").value.trim();
+            const expirationDate = document.getElementById("expirationDate").value.trim();
+
+            if (cardNumber && cardholderName && expirationDate) {
+                const cardList = document.getElementById("cardList");
+                const newCard = document.createElement("div");
+                newCard.className = "card";
+                newCard.innerHTML = `
+                    <p>Card Number: **** **** **** ${cardNumber.slice(-4)}</p>
+                    <p>Cardholder Name: ${cardholderName}</p>
+                    <p>Expiration Date: ${expirationDate}</p>
+                `;
+                cardList.appendChild(newCard);
+                alert("Credit card added successfully");
+                document.getElementById("addCardForm").reset();
+            }
+        }
+
+        function editCard() {
+            const cardList = document.getElementById("cardList");
+            const cards = cardList.getElementsByClassName("card");
+
+            if (cards.length === 0) {
+                alert("No cards to edit");
+                return;
+            }
+
+            const cardNumber = prompt("Enter new card number:");
+            const cardholderName = prompt("Enter new cardholder name:");
+            const expirationDate = prompt("Enter new expiration date (MM/YY):");
+
+            if (cardNumber && cardholderName && expirationDate) {
+                const lastCard = cards[cards.length - 1];
+                lastCard.innerHTML = `
+                    <p>Card Number: **** **** **** ${cardNumber.slice(-4)}</p>
+                    <p>Cardholder Name: ${cardholderName}</p>
+                    <p>Expiration Date: ${expirationDate}</p>
+                `;
+                alert("Credit card edited successfully");
+            }
+        }
+    </script>
+</body>
+</html>
+
+

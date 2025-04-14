@@ -1,0 +1,67 @@
+EzReserve 🏢
+
+Overview
+A reservation platform tailored for the City Dome Convention Center, designed to streamline the booking process and enhance user experience. The platform integrates both front-end and back-end functionality to deliver a seamless experience for convention center bookings.
+
+🔍 Features
+Dynamic Navigation - Simplifies the booking journey for users
+User Account Management - Allows customers and administrators to manage profiles securely
+Payment Processing - Ensures smooth transactions with integrated payment gateways
+Promo Code Validation - Provides discounts and promotional benefits
+Administrative Tools - Includes booking management and no-show handling features
+
+💻 Technical Implementation
+HTML & Java - Developed for affordability while maintaining robust performance
+Structured Development Process - Followed planning, designing, prototyping, and testing phases
+Team Collaboration Tools - Used When2Meet and other coordination platforms
+Diagram-Based Design - Utilized class and entity-relationship diagrams for system architecture
+
+🚀 How to Use
+Access the login page to create or access your account
+Navigate the user-friendly interface to select available rooms
+Complete booking details and apply any promotional codes
+Process payment through the secure payment gateway
+Receive confirmation and manage bookings through your user dashboard
+
+📊 System Components
+The platform provides the following functionality:
+Secure user authentication and authorization
+Comprehensive booking management system
+Real-time availability updates
+Promotional code processing
+Administrative dashboard for venue management
+Booking history and analytics reporting
+
+🔧 Technical Details
+The system performs the following operations:
+User authentication and session management
+Dynamic room availability calculations
+Secure payment processing
+Administrative controls for booking oversight
+Data persistence across user sessions
+
+🎓 Educational Context
+This project was developed as part of CNIT 28000 at Purdue University:
+Created over five months during Fall 2024
+Culminated on December 5, 2024
+Developed at Purdue University using resources like the Krach Leadership Center
+Addressed real-world inefficiencies in existing booking systems
+
+💾 Development Process
+Planning: Milestones and sprints were outlined using Gantt charts
+Designing: Created system architecture and database relationship diagrams
+Prototyping and Implementation: Developed using HTML and Java
+Testing: Conducted rigorous testing with over 20 modifications and three system resets
+
+🔜 Future Enhancements
+Potential future features may include:
+Refined UI/UX design for improved navigation for first-time users
+Dynamic data storage for real-time updates across platform components
+Online chatbot feature to assist users with booking inquiries and troubleshooting
+CI/CD pipeline implementation for streamlined deployment and updates
+
+📝 License
+© 2024 Purdue University. All Rights Reserved.
+
+Created as part of CNIT 28000 at Purdue University, addressing inefficiencies in existing booking systems by simplifying processes, reducing errors, and minimizing environmental impact through reduced paper use.
+

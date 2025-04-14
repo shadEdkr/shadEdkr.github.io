@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>EzReserve Portal</h1>
+    </header>
+    <nav>
+    	<a href="contactcustomer.html">Contact Us</a>
+    	<a href="faqcustomer.html">FAQ</a>
+    	<a href="login.html">Login</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="payment.html">Payment</a>
+        <a href="promo-code.html">Promo Code</a>
+        <a href="manage-credit-cards.html">Manage Credit Cards</a>
+        <a href="account-details.html">Account Details</a>
+        <a href="login.html" onclick="logout()">Logout</a>
+    </nav>
+    
+    <h2>Reservation</h2>
+
+    <!-- Available Rooms Section -->
+    <div id="rooms">
+        <div class="room">
+            <h3>Room 101 - $500 per day</h3>
+            <p>A large room with 150 seats, two projectors, and a big stage.</p>
+            <button onclick="window.location.href='paymentroom101.html'">Reserve Room 101</button>
+        </div>
+
+        <div class="room">
+            <h3>Room 102 - $300 per day</h3>
+            <p>A medium-sized room with 100 seats, one projector, and a medium-sized stage.</p>
+            <button onclick="window.location.href='paymentroom102.html'">Reserve Room 102</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 EzReserve</p>
+    </footer>
+</body>
+</html>
+

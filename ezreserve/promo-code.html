@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Code</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>EzReserve Portal</h1>
+    </header>
+    <nav>
+        <a href="contactcustomer.html">Contact Us</a>
+        <a href="faqcustomer.html">FAQ</a>
+        <a href="login.html">Login</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="payment.html">Payment</a>
+        <a href="promo-code.html">Promo Code</a>
+        <a href="manage-credit-cards.html">Manage Credit Cards</a>
+        <a href="account-details.html">Account Details</a>
+        <a href="login.html">Logout</a>
+    </nav>
+    <h2>Promo Code</h2>
+    <form onsubmit="handlePromoCode(event)">
+        <input type="text" id="promoCode" placeholder="Enter Promo Code" required>
+        <button type="submit">Apply Code</button>
+    </form>
+    <footer>
+        <p>&copy; 2024 EzReserve</p>
+    </footer>
+
+    <script>
+        function handlePromoCode(event) {
+            event.preventDefault();
+            const promoCode = document.getElementById('promoCode').value.trim().toUpperCase();
+
+            if (promoCode === "SUMMER20") {
+                alert("Promo code applied! You get 20% off.");
+            } else if (promoCode === "FALL15") {
+                alert("Promo code applied! You get 15% off.");
+            } else if (promoCode === "WINTER10") {
+                alert("Promo code applied! You get 10% off.");
+            } else {
+                alert("Invalid promo code. Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>
+

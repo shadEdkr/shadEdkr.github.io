@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>EzReserve Portal</h1>
+    </header>
+    <nav>
+    	<a href="contactcustomer.html">Contact Us</a>
+    	<a href="faqcustomer.html">FAQ</a>
+    	<a href="login.html">Login</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="payment.html">Payment</a>
+        <a href="promo-code.html">Promo Code</a>
+        <a href="manage-credit-cards.html">Manage Credit Cards</a>
+        <a href="account-details.html">Account Details</a>
+        <a href="login.html">Logout</a>
+    </nav>
+    
+    <h2>Payment</h2>
+
+    <!-- Room Details Section -->
+    <div id="paymentDetails">
+        <p><strong>Room:</strong> 101</p>
+        <p><strong>Price:</strong> $500 per day</p>
+    </div>
+
+    <!-- Pay Button -->
+    <button id="payButton">Pay</button>
+
+    <footer>
+        <p>&copy; 2024 EzReserve</p>
+    </footer>
+
+    <script>
+        // Handle pay button click
+        document.getElementById('payButton').addEventListener('click', function() {
+            // Show confirmation message
+            alert('Your reservation & payment confirmation has been sent to your email.');
+
+            // Redirect to reservation page after the message
+            window.location.href = 'reservation.html';
+        });
+    </script>
+</body>
+</html>
+

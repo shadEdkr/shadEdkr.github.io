@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Rooms</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>EzReserve Portal</h1>
+    </header>
+    <nav>
+        <a href="login.html">Login</a>
+        <a href="manage-rooms.html">Manage Rooms</a>
+        <a href="manage-users.html">Manage Users</a>
+        <a href="login.html">Logout</a>
+    </nav>
+
+    <h2>Manage Users</h2>
+
+    <!-- Ban User Form -->
+    <form id="banUserForm">
+        <label for="tempUser">Username for Temporary Ban:</label>
+        <input type="text" id="tempUser" placeholder="Enter username" required><br><br>
+
+        <button type="submit" id="tempButton">Temporarily Ban User</button><br><br>
+
+        <label for="permUser">Username for Permanent Ban:</label>
+        <input type="text" id="permUser" placeholder="Enter username" required><br><br>
+
+        <button type="submit" id="permButton">Permanently Ban User</button>
+    </form>
+
+    <footer>
+        <p>&copy; 2024 EzReserve</p>
+    </footer>
+
+    <script>
+        // Attach event listeners to the buttons
+        document.getElementById('tempButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent form submission
+            banUser('temporarily'); // Call the banUser function with 'temporary'
+        });
+
+        document.getElementById('permButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent form submission
+            banUser('permanently'); // Call the banUser function with 'permanent'
+        });
+
+        // Function to handle the banning logic
+        function banUser(banType) {
+            let username = ''; // Variable to hold the username
+
+            // Check which input field should be read based on the banType
+            if (banType === 'temporarily') {
+                username = document.getElementById('tempUser').value.trim(); // Read tempUser input
+            } else if (banType === 'permanently') {
+                username = document.getElementById('permUser').value.trim(); // Read permUser input
+            }
+
+            // Display the alert with the username and ban type
+            if (username) {
+                alert(username + " has been " + banType + " banned.");
+            } else {
+                alert("Please enter a username.");
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
