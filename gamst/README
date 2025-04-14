@@ -1,0 +1,68 @@
+GAMST New Year Countdown 🎉
+
+Overview
+GAMST New Year Countdown is a creative and interactive web application designed to celebrate the new year's arrival. Dedicated to the popular streamer GAMST, the project incorporates humor, dynamic design, and real-time functionality to deliver an enjoyable and unique user experience that counts down to 2025.
+
+🔍 Features
+Dynamic Countdown Timer - Real-time display of days, hours, minutes, and seconds remaining until the new year
+Interactive Video Integration - Automatic playback of GAMST video featuring "Everything" by The Black Skirts
+Theme Customization - Switch between color themes (Black, Mint, and Pink) or return to default
+Cross-Browser Compatibility - Seamless functionality across multiple browsers
+Mobile-Responsive Design - Optimized layout for both desktop and mobile devices
+
+💻 Technical Implementation
+Pure HTML/CSS/JavaScript - No external libraries or dependencies required
+Dynamic DOM Manipulation - Real-time updates of timer elements
+Event-Driven Programming - Theme switching and video control functionality
+Responsive Design Principles - Fluid layouts and media queries for cross-device compatibility
+
+🚀 How to Use
+Open the web application in any modern browser
+Watch as the countdown timer displays time remaining until the new year
+Enjoy the GAMST video and background music that plays automatically
+Explore different themes by clicking the theme selection buttons
+Experience the celebration when the countdown reaches zero
+
+📊 Application Components
+The application includes the following elements:
+Animated countdown display with days, hours, minutes, and seconds
+Embedded video player with autoplay functionality
+Theme selection interface with color previews
+Responsive layout that adapts to different screen sizes
+Background music toggle controls
+
+🔧 Technical Details
+The application performs the following operations:
+Calculates time difference between current time and New Year
+Updates DOM elements in real-time using JavaScript interval functions
+Dynamically applies CSS changes for theme switching
+Handles media playback with synchronized audio and video elements
+Implements responsive design with CSS media queries
+
+🎓 Project Context
+This project was developed as an independent initiative:
+Created during Winter Break 2024
+Inspired by university web development coursework
+Dedicated to GAMST, whose humor and charisma have been a source of inspiration
+Combines technical skills with personal appreciation for a content creator
+
+💾 Development Process
+Planning: Outlined key features and created design sketches
+Designing: Built the user interface with HTML and CSS focusing on simplicity and responsiveness
+Implementation: Developed countdown functionality and theme-switching using JavaScript
+Testing: Conducted cross-browser testing to ensure compatibility
+Refinement: Incorporated peer feedback to enhance design and functionality
+
+🔜 Future Enhancements
+Potential future features may include:
+Expanded theme options for enhanced user engagement
+Multi-language support to broaden accessibility
+Gamification elements like achievements or rewards to encourage continued use
+Social media integration for sharing the countdown experience
+Custom message creation for personalized New Year greetings
+
+📝 About the Creator
+© 2025 EdCho. All Rights Reserved.
+Created as an independent project inspired by university coursework, combining technical web development skills with personal appreciation for GAMST, whose content has been a significant source of inspiration.
+
+"어우어우 싸발적이고~"
