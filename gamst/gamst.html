@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동기부여</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            font-size: 0.75rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* Aspect ratio: 16:9 */
+            overflow: hidden;
+            background: black;
+            border-radius: 8px;
+        }
+
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-51%, -48%);
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+        }
+
+        .countdown {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .theme-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .theme-button {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .theme-default {
+            background-color: #f4f4f9;
+        }
+
+        .theme-black {
+            background-color: #333;
+        }
+
+        .theme-mint {
+            background-color: #98FF98;
+        }
+
+        .theme-pink {
+            background-color: #FFB6C1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>2025년, 올해 한 해도 화이팅입니다!</h1>
+        <p>영상을 재생하기 위해 귀여운 인직이를 눌러주세요 :) </p>
+        <div class="video-wrapper">
+            <video controls autoplay>
+                <source src="thegoodgoodvideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="countdown">
+            2025년 남은 시간: <span id="time-remaining"></span>
+        </div>
+        <div class="theme-buttons">
+            <button class="theme-button theme-default" onclick="changeTheme('default')"></button>
+            <button class="theme-button theme-black" onclick="changeTheme('black')"></button>
+            <button class="theme-button theme-mint" onclick="changeTheme('mint')"></button>
+            <button class="theme-button theme-pink" onclick="changeTheme('pink')"></button>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            const nextYear = now.getFullYear() + 1;
+            const newYear = new Date(`${nextYear}-01-01T00:00:00`);
+            const timeDiff = newYear - now;
+
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            document.getElementById('time-remaining').textContent = 
+                `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+        }
+
+        function changeTheme(theme) {
+            const header = document.querySelector('h1');
+            const paragraph = document.querySelector('p');
+
+            if (theme === 'default') {
+                document.body.style.backgroundColor = '#f4f4f9';
+                document.body.style.color = '#333';
+                header.style.color = '#333';
+                paragraph.style.color = '#555';
+            } else if (theme === 'black') {
+                document.body.style.backgroundColor = '#333';
+                document.body.style.color = 'white';
+                header.style.color = 'black';
+                paragraph.style.color = 'black';
+            } else if (theme === 'mint') {
+                document.body.style.backgroundColor = '#98FF98';
+                document.body.style.color = 'black';
+                header.style.color = 'black';
+                paragraph.style.color = 'black';
+            } else if (theme === 'pink') {
+                document.body.style.backgroundColor = '#FFB6C1';
+                document.body.style.color = 'black';
+                header.style.color = 'black';
+                paragraph.style.color = 'black';
+            }
+        }
+
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
