@@ -1,40 +1,206 @@
-    // Update the countdown every second
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동기부여</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-<footer style="background-color: black; color: white; padding: 20px; text-align: center; margin-top: 40px;">
-    <!-- Social links section -->
-    <div class="social-links" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
-        <div style="display: flex; justify-content: center; gap: 20px;">
-            <a href="https://github.com/shadEdkr/shadEdkr.github.io/blob/main/gamst/README" target="_blank" style="text-decoration: none; color: white; display: flex; align-items: center; gap: 8px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-                GitHub Repository
-            </a>
-            <a href="https://medium.com/@edchokr" target="_blank" style="text-decoration: none; color: white; display: flex; align-items: center; gap: 8px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                    <path d="M21 15l-5-5L5 21"></path>
-                </svg>
-                Medium
-            </a>
-            <a href="https://www.linkedin.com/in/edchokr/" target="_blank" style="text-decoration: none; color: white; display: flex; align-items: center; gap: 8px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-                LinkedIn
-            </a>
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            font-size: 0.75rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* Aspect ratio: 16:9 */
+            overflow: hidden;
+            background: black;
+            border-radius: 8px;
+        }
+
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-51%, -48%);
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+        }
+
+        .countdown {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .theme-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .theme-button {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .theme-default {
+            background-color: #f4f4f9;
+        }
+
+        .theme-black {
+            background-color: #333;
+        }
+
+        .theme-mint {
+            background-color: #98FF98;
+        }
+
+        .theme-pink {
+            background-color: #FFB6C1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>2025년, 올해 한 해도 화이팅입니다!</h1>
+        <p>영상을 재생하기 위해 귀여운 인직이를 눌러주세요 :) </p>
+        <div class="video-wrapper">
+            <video controls autoplay>
+                <source src="thegoodgoodvideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
-        <div class="copyright" style="text-align: center; color: white; font-size: 14px; margin-top: 10px;">
-            © 2025 Yoonsung Ed Cho - Purdue University Cybersecurity Student
+        <div class="countdown">
+            2025년 남은 시간: <span id="time-remaining"></span>
         </div>
-        <p style="text-align: center; color: white; font-size: 14px; margin: 0;">GAMST New Year Countdown - Interactive countdown to 2025 with GAMST</p>
+        <div class="theme-buttons">
+            <button class="theme-button theme-default" onclick="changeTheme('default')"></button>
+            <button class="theme-button theme-black" onclick="changeTheme('black')"></button>
+            <button class="theme-button theme-mint" onclick="changeTheme('mint')"></button>
+            <button class="theme-button theme-pink" onclick="changeTheme('pink')"></button>
+        </div>
     </div>
-</footer>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            const nextYear = now.getFullYear() + 1;
+            const newYear = new Date(`${nextYear}-01-01T00:00:00`);
+            const timeDiff = newYear - now;
+
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            document.getElementById('time-remaining').textContent = 
+                `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+        }
+
+        function changeTheme(theme) {
+            const header = document.querySelector('h1');
+            const paragraph = document.querySelector('p');
+
+            if (theme === 'default') {
+                document.body.style.backgroundColor = '#f4f4f9';
+                document.body.style.color = '#333';
+                header.style.color = '#333';
+                paragraph.style.color = '#555';
+            } else if (theme === 'black') {
+                document.body.style.backgroundColor = '#333';
+                document.body.style.color = 'white';
+                header.style.color = 'black';
+                paragraph.style.color = 'black';
+            } else if (theme === 'mint') {
+                document.body.style.backgroundColor = '#98FF98';
+                document.body.style.color = 'black';
+                header.style.color = 'black';
+                paragraph.style.color = 'black';
+            } else if (theme === 'pink') {
+                document.body.style.backgroundColor = '#FFB6C1';
+                document.body.style.color = 'black';
+                header.style.color = 'black';
+                paragraph.style.color = 'black';
+            }
+        }
+
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+
+    <footer style="background-color: black; color: white; padding: 20px; text-align: center; margin-top: 40px;">
+        <!-- Social links section -->
+        <div class="social-links" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <a href="https://github.com/shadEdkr/shadEdkr.github.io/blob/main/gamst/README" target="_blank" style="text-decoration: none; color: white; display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    GitHub Repository
+                </a>
+                <a href="https://medium.com/@edchokr" target="_blank" style="text-decoration: none; color: white; display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <path d="M21 15l-5-5L5 21"></path>
+                    </svg>
+                    Medium
+                </a>
+                <a href="https://www.linkedin.com/in/edchokr/" target="_blank" style="text-decoration: none; color: white; display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    LinkedIn
+                </a>
+            </div>
+            <div class="copyright" style="text-align: center; color: white; font-size: 14px; margin-top: 10px;">
+                © 2025 Yoonsung Ed Cho - Purdue University Cybersecurity Student
+            </div>
+            <p style="text-align: center; color: white; font-size: 14px; margin: 0;">GAMST New Year Countdown - Interactive countdown to 2025 with GAMST</p>
+        </div>
+    </footer>
 </body>
 </html> 
