@@ -1184,176 +1184,116 @@
 
         /* Mobile Navigation Styles */
         .mobile-menu-toggle {
-            display: none;
+            display: block;
             position: fixed;
+            left: 20px; /* Changed from right to left */
             top: 20px;
-            right: 20px;
-            z-index: 1001;
-            background: rgba(206, 184, 136, 0.1);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
+            z-index: 1000;
+            background: none;
             border: none;
             cursor: pointer;
             padding: 0;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            width: 30px;
+            height: 30px;
         }
 
-        .hamburger-icon {
-            position: relative;
-            width: 22px;
-            height: 2px;
-            background: var(--purdue-gold);
-            margin: auto;
-            transition: all 0.3s ease;
-            border-radius: 2px;
+        .mobile-menu-toggle span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: var(--gold);
+            margin: 6px 0;
+            transition: 0.4s;
+            border-radius: 3px;
         }
 
-        .hamburger-icon::before,
-        .hamburger-icon::after {
-            content: '';
-            position: absolute;
-            width: 22px;
-            height: 2px;
-            background: var(--purdue-gold);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            left: 0;
-        }
-
-        .hamburger-icon::before {
-            transform: translateY(-7px);
-        }
-
-        .hamburger-icon::after {
-            transform: translateY(7px);
-        }
-
-        .mobile-menu-toggle:hover {
-            background: rgba(206, 184, 136, 0.2);
-        }
-
-        .mobile-menu-toggle:hover .hamburger-icon,
-        .mobile-menu-toggle:hover .hamburger-icon::before,
-        .mobile-menu-toggle:hover .hamburger-icon::after {
-            background: #D4AF37;
-        }
-
-        .mobile-menu-toggle.active .hamburger-icon {
-            background: transparent;
-            transform: rotate(180deg);
-        }
-
-        .mobile-menu-toggle.active .hamburger-icon::before {
-            transform: rotate(45deg);
-        }
-
-        .mobile-menu-toggle.active .hamburger-icon::after {
-            transform: rotate(-45deg);
-        }
-
-        .mobile-menu-toggle.active .hamburger-icon::before,
-        .mobile-menu-toggle.active .hamburger-icon::after {
+        nav {
+            position: fixed;
+            left: -100%; /* Changed from right to left */
             top: 0;
+            height: 100vh;
+            width: 250px;
+            background-color: var(--background-color);
+            padding: 80px 20px 20px;
+            transition: 0.3s;
+            box-shadow: none;
         }
 
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+        nav.active {
+            left: 0; /* Changed from right to left */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Changed shadow direction */
+        }
 
-            nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 250px;
-                height: 100vh;
-                background-color: var(--card-bg);
-                transition: right 0.3s ease;
-                z-index: 1000;
-                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-                padding: 60px 0 20px;
-            }
+        nav ul {
+            flex-direction: column;
+            padding: 0;
+            gap: 0;
+            overflow-y: auto;
+            height: 100%;
+        }
 
-            nav.active {
-                right: 0;
-            }
+        nav ul li {
+            width: 100%;
+            margin: 0;
+        }
 
-            nav ul {
-                flex-direction: column;
-                padding: 0;
-                gap: 0;
-                overflow-y: auto;
-                height: 100%;
-            }
+        nav ul li a {
+            display: block;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            border-bottom: 1px solid rgba(206, 184, 136, 0.1);
+        }
 
-            nav ul li {
-                width: 100%;
-                margin: 0;
-            }
+        nav ul li a:hover {
+            background-color: rgba(206, 184, 136, 0.1);
+            color: var(--purdue-gold);
+        }
 
-            nav ul li a {
-                display: block;
-                padding: 15px 25px;
-                font-size: 1.1rem;
-                color: var(--text-color);
-                border-bottom: 1px solid rgba(206, 184, 136, 0.1);
-            }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            z-index: 999;
+        }
 
-            nav ul li a:hover {
-                background-color: rgba(206, 184, 136, 0.1);
-                color: var(--purdue-gold);
-            }
+        .overlay.active {
+            display: block;
+        }
 
-            .overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.5);
-                backdrop-filter: blur(3px);
-                -webkit-backdrop-filter: blur(3px);
-                z-index: 999;
-            }
+        /* Theme switch improvements */
+        .theme-switch-wrapper {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 102;
+        }
+        
+        .theme-switch {
+            width: 42px;
+            height: 22px;
+        }
+        
+        .slider:before {
+            height: 14px;
+            width: 14px;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
 
-            .overlay.active {
-                display: block;
-            }
-
-            /* Theme switch improvements */
-            .theme-switch-wrapper {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                z-index: 102;
-            }
-            
-            .theme-switch {
-                width: 42px;
-                height: 22px;
-            }
-            
-            .slider:before {
-                height: 14px;
-                width: 14px;
-            }
-            
-            input:checked + .slider:before {
-                transform: translateX(20px);
-            }
-
-            /* Rest of your mobile styles */
-            header {
-                padding: 15px;
-                height: auto;
-                background: linear-gradient(to bottom, var(--purdue-black) 0%, rgba(0,0,0,0.95) 100%);
-            }
+        /* Rest of your mobile styles */
+        header {
+            padding: 15px;
+            height: auto;
+            background: linear-gradient(to bottom, var(--purdue-black) 0%, rgba(0,0,0,0.95) 100%);
         }
     </style>
 </head>
