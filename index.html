@@ -1184,117 +1184,126 @@
 
         /* Mobile Navigation Styles */
         .mobile-menu-toggle {
-            display: block;
+            display: none;
             position: fixed;
-            left: 20px; /* Changed from right to left */
+            left: 20px;
             top: 20px;
             z-index: 1000;
-            background: none;
-            border: none;
+            background: var(--purdue-black);
+            border: 2px solid var(--purdue-gold);
             cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
+            padding: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: var(--purdue-gold);
+            border-color: var(--purdue-black);
         }
 
         .mobile-menu-toggle span {
             display: block;
-            width: 30px;
+            width: 100%;
             height: 3px;
-            background-color: var(--gold);
-            margin: 6px 0;
+            background-color: var(--purdue-gold);
+            margin: 5px 0;
             transition: 0.4s;
             border-radius: 3px;
         }
 
-        nav {
-            position: fixed;
-            left: -100%; /* Changed from right to left */
-            top: 0;
-            height: 100vh;
-            width: 250px;
-            background-color: var(--background-color);
-            padding: 80px 20px 20px;
-            transition: 0.3s;
-            box-shadow: none;
+        .mobile-menu-toggle:hover span {
+            background-color: var(--purdue-black);
         }
 
-        nav.active {
-            left: 0; /* Changed from right to left */
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Changed shadow direction */
+        .mobile-menu-toggle.active {
+            background: var(--purdue-gold);
+            border-color: var(--purdue-black);
         }
 
-        nav ul {
-            flex-direction: column;
-            padding: 0;
-            gap: 0;
-            overflow-y: auto;
-            height: 100%;
+        .mobile-menu-toggle.active span {
+            background-color: var(--purdue-black);
         }
 
-        nav ul li {
-            width: 100%;
-            margin: 0;
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
         }
 
-        nav ul li a {
-            display: block;
-            padding: 15px 25px;
-            font-size: 1.1rem;
-            color: var(--text-color);
-            border-bottom: 1px solid rgba(206, 184, 136, 0.1);
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
         }
 
-        nav ul li a:hover {
-            background-color: rgba(206, 184, 136, 0.1);
-            color: var(--purdue-gold);
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
         }
 
-        .overlay {
+        .menu-overlay {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
             z-index: 999;
         }
 
-        .overlay.active {
-            display: block;
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                height: 100vh;
+                width: 250px;
+                background-color: var(--card-bg);
+                padding: 80px 20px 20px;
+                transition: 0.3s;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                width: 100%;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 12px;
+                width: 100%;
+                color: var(--text-color);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+            }
+
+            nav ul li a:hover {
+                background: var(--purdue-gold);
+                color: var(--purdue-black);
+                padding-left: 15px;
+            }
+
+            .menu-overlay.active {
+                display: block;
+            }
         }
 
-        /* Theme switch improvements */
-        .theme-switch-wrapper {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            z-index: 102;
-        }
-        
-        .theme-switch {
-            width: 42px;
-            height: 22px;
-        }
-        
-        .slider:before {
-            height: 14px;
-            width: 14px;
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(20px);
-        }
-
-        /* Rest of your mobile styles */
-        header {
-            padding: 15px;
-            height: auto;
-            background: linear-gradient(to bottom, var(--purdue-black) 0%, rgba(0,0,0,0.95) 100%);
-        }
+        // ... existing code ...
     </style>
 </head>
 <body>
@@ -1317,9 +1326,11 @@
     </header>
     
     <button class="mobile-menu-toggle" aria-label="Toggle menu">
-        <span class="hamburger-icon"></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </button>
-    <div class="overlay"></div>
+    <div class="menu-overlay"></div>
     
     <nav>
         <ul>
@@ -1926,6 +1937,41 @@
                     toggleMenu();
                 }
             });
+        });
+
+        // Mobile menu functionality
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        const nav = document.querySelector('nav');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+
+        menuOverlay.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            nav.classList.remove('active');
+        });
+
+        // Close menu when clicking a nav link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                nav.classList.remove('active');
+            });
+        });
+
+        // Close menu on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                mobileMenuToggle.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                nav.classList.remove('active');
+            }
         });
     </script>
 
