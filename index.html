@@ -1186,22 +1186,18 @@
         .mobile-menu-toggle {
             display: none;
             position: fixed;
-            left: 20px;
-            top: 20px;
+            left: 15px;
+            top: 15px;
             z-index: 1000;
             background: var(--purdue-black);
             border: 2px solid var(--purdue-gold);
             cursor: pointer;
-            padding: 8px;
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
+            padding: 10px;
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
             transition: all 0.3s ease;
-        }
-
-        .mobile-menu-toggle:hover {
-            background: var(--purdue-gold);
-            border-color: var(--purdue-black);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .mobile-menu-toggle span {
@@ -1210,12 +1206,9 @@
             height: 3px;
             background-color: var(--purdue-gold);
             margin: 5px 0;
-            transition: 0.4s;
+            transition: all 0.3s ease;
             border-radius: 3px;
-        }
-
-        .mobile-menu-toggle:hover span {
-            background-color: var(--purdue-black);
+            transform-origin: center;
         }
 
         .mobile-menu-toggle.active {
@@ -1223,12 +1216,8 @@
             border-color: var(--purdue-black);
         }
 
-        .mobile-menu-toggle.active span {
-            background-color: var(--purdue-black);
-        }
-
         .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
         .mobile-menu-toggle.active span:nth-child(2) {
@@ -1236,7 +1225,7 @@
         }
 
         .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
         .menu-overlay {
@@ -1261,49 +1250,174 @@
                 left: -100%;
                 top: 0;
                 height: 100vh;
-                width: 250px;
+                width: 280px;
                 background-color: var(--card-bg);
                 padding: 80px 20px 20px;
-                transition: 0.3s;
+                transition: transform 0.3s ease;
                 box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
                 z-index: 1000;
+                overflow-y: auto;
             }
 
             nav.active {
-                left: 0;
+                transform: translateX(100%);
             }
 
             nav ul {
                 flex-direction: column;
                 align-items: flex-start;
+                padding: 0;
+                margin: 0;
             }
 
             nav ul li {
-                margin: 10px 0;
+                margin: 0;
                 width: 100%;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             }
 
             nav ul li a {
                 display: block;
-                padding: 12px;
+                padding: 15px;
                 width: 100%;
                 color: var(--text-color);
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                font-weight: 500;
                 transition: all 0.3s ease;
             }
 
             nav ul li a:hover {
                 background: var(--purdue-gold);
                 color: var(--purdue-black);
-                padding-left: 15px;
+                padding-left: 20px;
             }
 
             .menu-overlay.active {
                 display: block;
             }
+
+            /* Fix for jiggly screen */
+            body {
+                overflow-x: hidden;
+                position: relative;
+                width: 100%;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .section {
+                padding: 30px 15px;
+                margin: 0;
+                width: 100%;
+                box-sizing: border-box;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .hero {
+                padding: 20px 15px;
+                margin: 0;
+                width: 100%;
+                box-sizing: border-box;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Improve touch targets */
+            .cta-button, .download-resume {
+                padding: 12px 25px;
+                margin: 10px 0;
+                min-height: 44px;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* Fix header positioning */
+            header {
+                position: relative;
+                padding: 15px;
+                z-index: 1;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Prevent content shift when menu opens */
+            body.menu-open {
+                overflow: hidden;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* Improve mobile menu performance */
+            .mobile-menu-toggle {
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+
+            /* Fix iOS scrolling issues */
+            .horizontal-timeline {
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                scroll-padding: 20px;
+            }
+
+            .timeline-event {
+                scroll-snap-align: start;
+            }
+
+            /* Improve button touch feedback */
+            .nav-arrow {
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+                padding: 10px;
+            }
+
+            /* Fix iOS zoom issues */
+            input, select, textarea {
+                font-size: 16px;
+            }
+
+            /* Improve mobile menu transitions */
+            nav {
+                will-change: transform;
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
+            }
+
+            /* Fix iOS momentum scrolling */
+            .horizontal-timeline {
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+            }
+
+            /* Improve mobile menu performance */
+            .menu-overlay {
+                will-change: opacity;
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
+            }
         }
 
-        // ... existing code ...
+        /* Additional mobile optimization for smaller screens */
+        @media (max-width: 380px) {
+            .mobile-menu-toggle {
+                width: 40px;
+                height: 40px;
+                padding: 8px;
+            }
+
+            nav {
+                width: 250px;
+            }
+
+            .section {
+                padding: 25px 12px;
+            }
+
+            .hero {
+                padding: 15px 12px;
+            }
+
+            .cta-button, .download-resume {
+                padding: 10px 20px;
+                min-height: 40px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1943,25 +2057,28 @@
         const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
         const menuOverlay = document.querySelector('.menu-overlay');
         const nav = document.querySelector('nav');
+        const body = document.body;
 
-        mobileMenuToggle.addEventListener('click', () => {
+        function toggleMenu() {
             mobileMenuToggle.classList.toggle('active');
             menuOverlay.classList.toggle('active');
             nav.classList.toggle('active');
-        });
+            body.classList.toggle('menu-open');
+        }
 
-        menuOverlay.addEventListener('click', () => {
-            mobileMenuToggle.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            nav.classList.remove('active');
-        });
+        mobileMenuToggle.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
 
         // Close menu when clicking a nav link
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenuToggle.classList.remove('active');
-                menuOverlay.classList.remove('active');
-                nav.classList.remove('active');
+                toggleMenu();
+                // Smooth scroll to section
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
 
@@ -1971,8 +2088,16 @@
                 mobileMenuToggle.classList.remove('active');
                 menuOverlay.classList.remove('active');
                 nav.classList.remove('active');
+                body.classList.remove('menu-open');
             }
         });
+
+        // Prevent body scroll when menu is open
+        document.addEventListener('touchmove', (e) => {
+            if (body.classList.contains('menu-open')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 
 <!-- Add this HTML right before the closing </body> tag -->
