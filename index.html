@@ -1295,56 +1295,6 @@
                 display: block;
             }
         }
-
-        <script>
-            // Mobile menu functionality
-            document.addEventListener('DOMContentLoaded', function() {
-                const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-                const menuOverlay = document.querySelector('.menu-overlay');
-                const nav = document.querySelector('nav');
-                const body = document.body;
-
-                function toggleMenu() {
-                    mobileMenuToggle.classList.toggle('active');
-                    menuOverlay.classList.toggle('active');
-                    nav.classList.toggle('active');
-                    body.classList.toggle('menu-open');
-                }
-
-                mobileMenuToggle.addEventListener('click', toggleMenu);
-                menuOverlay.addEventListener('click', toggleMenu);
-
-                // Close menu when clicking a nav link
-                document.querySelectorAll('nav a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        toggleMenu();
-                        // Smooth scroll to section
-                        const targetId = link.getAttribute('href');
-                        const targetSection = document.querySelector(targetId);
-                        if (targetSection) {
-                            targetSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    });
-                });
-
-                // Close menu on window resize
-                window.addEventListener('resize', () => {
-                    if (window.innerWidth > 768) {
-                        mobileMenuToggle.classList.remove('active');
-                        menuOverlay.classList.remove('active');
-                        nav.classList.remove('active');
-                        body.classList.remove('menu-open');
-                    }
-                });
-
-                // Prevent body scroll when menu is open
-                document.addEventListener('touchmove', (e) => {
-                    if (body.classList.contains('menu-open')) {
-                        e.preventDefault();
-                    }
-                }, { passive: false });
-            });
-        </script>
     </style>
 </head>
 <body>
