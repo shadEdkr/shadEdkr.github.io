@@ -1,0 +1,71 @@
+{
+    "name": "퍼듀 대학교 주변 한인 임대 찾기",
+    "short_name": "퍼듀 임대",
+    "description": "West Lafayette의 한국 학생들을 위한 최고의 임대 플랫폼",
+    "start_url": "/complete-main-html.html",
+    "display": "standalone",
+    "background_color": "#F9FAFB",
+    "theme_color": "#4F46E5",
+    "icons": [
+        {
+            "src": "/icons/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "lang": "ko",
+    "dir": "ltr",
+    "orientation": "portrait",
+    "categories": ["housing", "real estate", "education"],
+    "screenshots": [
+        {
+            "src": "/screenshots/home.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "platform": "wide",
+            "label": "홈 화면"
+        },
+        {
+            "src": "/screenshots/search.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "platform": "wide",
+            "label": "검색 화면"
+        }
+    ]
+} 

@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Error boundary for search functionality
+  const searchErrorBoundary = document.createElement('div');
+  searchErrorBoundary.className = 'error-boundary';
+  searchErrorBoundary.style.display = 'none';
+  document.querySelector('.listing-section').prepend(searchErrorBoundary);
+
+  // Debounce function for performance
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
   // Sample data for demonstration
   const sampleListings = [
     {
@@ -69,44 +88,87 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   ];
   
-  // Function to render listings
+  // Function to render listings with error handling
   function renderListings(listings) {
-    const resultsContainer = document.getElementById('results-container');
-    const resultsCount = document.querySelector('.results-count');
-    
-    // Update results count
-    if (resultsCount) {
-      resultsCount.textContent = `${listings.length}개 임대 목록`;
-    }
-    
-    // Update results container
-    if (resultsContainer) {
-      if (listings.length === 0) {
-        resultsContainer.innerHTML = '<div class="no-results">검색 결과가 없습니다. 다른 필터를 사용해 보세요.</div>';
-      } else {
-        resultsContainer.innerHTML = listings.map(listing => `
-          <div class="listing-card">
-            <div class="listing-img" style="background-image: url('${listing.imageUrl}')"></div>
-            <div class="listing-details">
-              <div class="distance-badge">${listing.distanceText}</div>
-              <div class="listing-price">$${listing.price}/월</div>
-              <div class="listing-location">
-                <span>${listing.location}</span>
-              </div>
-              <div>${listing.period}</div>
-              <div class="listing-amenities">
-                ${listing.amenities.map(amenity => `
-                  <div class="amenity">
-                    <span>${amenity}</span>
-                  </div>
-                `).join('')}
-              </div>
-              <a href="listing-detail-page.html?id=${listing.id}" class="view-details">자세히 보기</a>
-            </div>
-          </div>
-        `).join('');
+    try {
+      const resultsContainer = document.getElementById('results-container');
+      const resultsCount = document.querySelector('.results-count');
+      
+      if (!resultsContainer) {
+        throw new Error('Results container not found');
       }
+      
+      // Update results count
+      if (resultsCount) {
+        resultsCount.textContent = `${listings.length}개 임대 목록`;
+      }
+      
+      // Show loading state
+      showLoading(resultsContainer);
+      
+      // Simulate API delay
+      setTimeout(() => {
+        if (listings.length === 0) {
+          resultsContainer.innerHTML = '<div class="no-results">검색 결과가 없습니다. 다른 필터를 사용해 보세요.</div>';
+        } else {
+          resultsContainer.innerHTML = listings.map(listing => `
+            <div class="listing-card" role="article">
+              <div class="listing-img" style="background-image: url('${listing.imageUrl}')" role="img" aria-label="${listing.title}"></div>
+              <div class="listing-details">
+                <div class="distance-badge">${listing.distanceText}</div>
+                <div class="listing-price">$${listing.price}/월</div>
+                <div class="listing-location">
+                  <span>${listing.location}</span>
+                </div>
+                <div>${listing.period}</div>
+                <div class="listing-amenities" role="list">
+                  ${listing.amenities.map(amenity => `
+                    <div class="amenity" role="listitem">
+                      <span>${amenity}</span>
+                    </div>
+                  `).join('')}
+                </div>
+                <a href="listing-detail-page.html?id=${listing.id}" class="view-details" aria-label="${listing.title} 자세히 보기">자세히 보기</a>
+              </div>
+            </div>
+          `).join('');
+        }
+        
+        // Hide loading state
+        hideLoading(resultsContainer);
+        
+        // Initialize lazy loading for images
+        initLazyLoading();
+      }, 500);
+    } catch (error) {
+      console.error('Error rendering listings:', error);
+      searchErrorBoundary.style.display = 'block';
+      searchErrorBoundary.innerHTML = `
+        <h2>죄송합니다. 검색 결과를 불러오는 중 문제가 발생했습니다.</h2>
+        <p>페이지를 새로고침하거나 나중에 다시 시도해주세요.</p>
+        <button class="btn btn-primary" onclick="window.location.reload()">새로고침</button>
+      `;
     }
+  }
+  
+  // Initialize lazy loading for images
+  function initLazyLoading() {
+    const images = document.querySelectorAll('.listing-img');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.style.backgroundImage = img.getAttribute('data-src');
+          observer.unobserve(img);
+        }
+      });
+    });
+    
+    images.forEach(img => {
+      img.setAttribute('data-src', img.style.backgroundImage);
+      img.style.backgroundImage = 'none';
+      imageObserver.observe(img);
+    });
   }
   
   // Parse URL parameters to get search filters
@@ -116,93 +178,118 @@ document.addEventListener('DOMContentLoaded', function() {
   const dateFilter = urlParams.get('date');
   const amenitiesFilter = urlParams.get('amenities');
   
-  // Apply filters
-  let filteredListings = [...sampleListings];
-  
-  // Apply distance filter
-  if (distanceFilter) {
-    filteredListings = filteredListings.filter(listing => listing.distance === distanceFilter);
-  }
-  
-  // Apply price filter
-  if (priceFilter) {
-    switch(priceFilter) {
-      case '500':
-        filteredListings = filteredListings.filter(listing => listing.price <= 500);
-        break;
-      case '1000':
-        filteredListings = filteredListings.filter(listing => listing.price > 500 && listing.price <= 1000);
-        break;
-      case '1500':
-        filteredListings = filteredListings.filter(listing => listing.price > 1000 && listing.price <= 1500);
-        break;
-      case '2000':
-        filteredListings = filteredListings.filter(listing => listing.price > 1500);
-        break;
-    }
-  }
-  
-  // Apply amenities filter
-  if (amenitiesFilter) {
-    filteredListings = filteredListings.filter(listing => 
-      listing.amenities.some(amenity => 
-        amenity.toLowerCase().includes(amenitiesFilter.toLowerCase())
-      )
-    );
-  }
-  
-  // Render the initial filtered listings
-  renderListings(filteredListings);
-  
-  // Handle sort options
-  const sortSelect = document.getElementById('sort');
-  if (sortSelect) {
-    sortSelect.addEventListener('change', function() {
-      const sortOption = this.value;
-      let sortedListings = [...filteredListings];
+  // Apply filters with error handling
+  function applyFilters() {
+    try {
+      let filteredListings = [...sampleListings];
       
-      switch(sortOption) {
-        case 'price-asc':
-          sortedListings.sort((a, b) => a.price - b.price);
-          break;
-        case 'price-desc':
-          sortedListings.sort((a, b) => b.price - a.price);
-          break;
-        case 'distance':
-          // Simple sort by distance category
-          const distancePriority = { '5-15': 1, '15-30': 2, 'car': 3 };
-          sortedListings.sort((a, b) => distancePriority[a.distance] - distancePriority[b.distance]);
-          break;
-        default: // date-desc or any other
-          // In a real app, you'd sort by listing date
-          // For this demo, we'll just keep the original order
-          sortedListings = [...filteredListings];
-          break;
+      // Apply distance filter
+      if (distanceFilter) {
+        filteredListings = filteredListings.filter(listing => listing.distance === distanceFilter);
       }
       
-      // Re-render listings with new sort
-      renderListings(sortedListings);
-    });
-  }
-  
-  // Handle form submission
-  const searchForm = document.getElementById('search-form');
-  if (searchForm) {
-    searchForm.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent form submission
-      
-      // Create a new URL with form values
-      const formData = new FormData(this);
-      const searchParams = new URLSearchParams();
-      
-      for (const [key, value] of formData.entries()) {
-        if (value) { // Only add parameters with values
-          searchParams.append(key, value);
+      // Apply price filter
+      if (priceFilter) {
+        switch(priceFilter) {
+          case '500':
+            filteredListings = filteredListings.filter(listing => listing.price <= 500);
+            break;
+          case '1000':
+            filteredListings = filteredListings.filter(listing => listing.price > 500 && listing.price <= 1000);
+            break;
+          case '1500':
+            filteredListings = filteredListings.filter(listing => listing.price > 1000 && listing.price <= 1500);
+            break;
+          case '2000':
+            filteredListings = filteredListings.filter(listing => listing.price > 1500);
+            break;
         }
       }
       
-      // Redirect to search page with new params
-      window.location.href = `search-page.html?${searchParams.toString()}`;
+      // Apply amenities filter
+      if (amenitiesFilter) {
+        filteredListings = filteredListings.filter(listing => 
+          listing.amenities.some(amenity => 
+            amenity.toLowerCase().includes(amenitiesFilter.toLowerCase())
+          )
+        );
+      }
+      
+      return filteredListings;
+    } catch (error) {
+      console.error('Error applying filters:', error);
+      return [];
+    }
+  }
+  
+  // Render the initial filtered listings
+  const filteredListings = applyFilters();
+  renderListings(filteredListings);
+  
+  // Handle sort options with debounce
+  const sortSelect = document.getElementById('sort');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', debounce(function() {
+      try {
+        const sortOption = this.value;
+        let sortedListings = [...filteredListings];
+        
+        switch(sortOption) {
+          case 'price-asc':
+            sortedListings.sort((a, b) => a.price - b.price);
+            break;
+          case 'price-desc':
+            sortedListings.sort((a, b) => b.price - a.price);
+            break;
+          case 'distance':
+            const distancePriority = { '5-15': 1, '15-30': 2, 'car': 3 };
+            sortedListings.sort((a, b) => distancePriority[a.distance] - distancePriority[b.distance]);
+            break;
+          default:
+            sortedListings = [...filteredListings];
+            break;
+        }
+        
+        renderListings(sortedListings);
+      } catch (error) {
+        console.error('Error sorting listings:', error);
+        searchErrorBoundary.style.display = 'block';
+      }
+    }, 300));
+  }
+  
+  // Handle form submission with validation
+  const searchForm = document.getElementById('search-form');
+  if (searchForm) {
+    searchForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      try {
+        const formData = new FormData(this);
+        const searchParams = new URLSearchParams();
+        
+        for (const [key, value] of formData.entries()) {
+          if (value) {
+            searchParams.append(key, value);
+          }
+        }
+        
+        window.location.href = `search-page.html?${searchParams.toString()}`;
+      } catch (error) {
+        console.error('Error submitting search form:', error);
+        searchErrorBoundary.style.display = 'block';
+      }
     });
   }
+  
+  // Add keyboard navigation support
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+      document.body.classList.add('keyboard-navigation');
+    }
+  });
+  
+  document.addEventListener('mousedown', function() {
+    document.body.classList.remove('keyboard-navigation');
+  });
 });

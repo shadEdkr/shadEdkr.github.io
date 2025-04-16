@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://shadedkr.github.io/complete-main-html.html</loc>
+        <lastmod>2024-04-16</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://shadedkr.github.io/search-page.html</loc>
+        <lastmod>2024-04-16</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://shadedkr.github.io/listing-detail-page.html</loc>
+        <lastmod>2024-04-16</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://shadedkr.github.io/disclaimer-page.html</loc>
+        <lastmod>2024-04-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+</urlset> 

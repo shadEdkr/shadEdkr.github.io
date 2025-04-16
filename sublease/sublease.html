@@ -3,8 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="퍼듀 대학교 주변 한인 임대 찾기 - West Lafayette의 한국 학생들을 위한 최고의 임대 플랫폼">
+    <meta name="keywords" content="퍼듀, 임대, 서브리스, 한인, West Lafayette, Purdue University">
+    <meta name="author" content="퍼듀 한인 임대">
+    <meta name="robots" content="index, follow">
     <title>퍼듀 대학교 주변 한인 임대 찾기</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shadedkr.github.io/">
+    <meta property="og:title" content="퍼듀 대학교 주변 한인 임대 찾기">
+    <meta property="og:description" content="West Lafayette의 한국 학생들을 위한 최고의 임대 플랫폼">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://shadedkr.github.io/">
+    <meta property="twitter:title" content="퍼듀 대학교 주변 한인 임대 찾기">
+    <meta property="twitter:description" content="West Lafayette의 한국 학생들을 위한 최고의 임대 플랫폼">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "퍼듀 대학교 주변 한인 임대 찾기",
+        "url": "https://shadedkr.github.io/",
+        "description": "West Lafayette의 한국 학생들을 위한 최고의 임대 플랫폼",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://shadedkr.github.io/search-page.html?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles-css.css" as="style">
+    <link rel="preload" href="common-js.js" as="script">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles-css.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+    
     <style>
         /* Header specific styles */
         .header-container {
@@ -343,29 +398,94 @@
                 width: 100%;
             }
         }
+        
+        /* Skip to main content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #4F46E5;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Loading states */
+        .loading {
+            position: relative;
+            min-height: 200px;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            margin: -20px 0 0 -20px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4F46E5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Touch-friendly interactions */
+        @media (hover: none) {
+            .btn, .header-btn, .view-details {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .listing-card {
+                cursor: pointer;
+            }
+        }
+        
+        /* RTL support */
+        [dir="rtl"] .main-nav a::after {
+            left: auto;
+            right: 0;
+        }
+        
+        [dir="rtl"] .listing-amenities {
+            flex-direction: row-reverse;
+        }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">메인 콘텐츠로 건너뛰기</a>
+    
+    <header role="banner">
         <div class="container">
             <div class="header-container">
-                <a href="complete-main-html.html" class="site-title">퍼듀 대학교 주변 한인 임대 찾기</a>
-                <div class="main-nav">
-                    <a href="complete-main-html.html">홈</a>
+                <a href="complete-main-html.html" class="site-title" aria-label="홈페이지로 이동">퍼듀 대학교 주변 한인 임대 찾기</a>
+                <nav class="main-nav" role="navigation" aria-label="메인 메뉴">
+                    <a href="complete-main-html.html" aria-current="page">홈</a>
                     <a href="search-page.html">검색</a>
-                    <!-- Added seller-only-link class to this navigation item -->
                     <a href="post-listing-page.html" class="seller-only-link">등록하기</a>
                     <a href="disclaimer-page.html">법적 고지</a>
-                </div>
+                </nav>
                 <div class="header-actions">
-                    <a href="login-page.html" class="header-btn login-btn">판매자 로그인</a>
-                    <a href="register-page.html" class="header-btn register-btn">판매자 등록</a>
+                    <a href="login-page.html" class="header-btn login-btn" aria-label="판매자 로그인">판매자 로그인</a>
+                    <a href="register-page.html" class="header-btn register-btn" aria-label="판매자 등록">판매자 등록</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <main>
+    <main id="main-content" role="main">
         <div class="container">
             <div class="search-container">
                 <form class="search-form" id="search-form" action="search-page.html" method="get">
@@ -494,50 +614,23 @@
         </div>
     </footer>
 
-    <script src="common-js.js"></script>
+    <!-- Loading indicator template -->
+    <template id="loading-template">
+        <div class="loading" role="status" aria-label="로딩 중">
+            <span class="sr-only">로딩 중...</span>
+        </div>
+    </template>
     
-    <!-- Home Button Refresh Script -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get the home link in the main navigation
-        const homeLink = document.querySelector('.main-nav a[href="complete-main-html.html"]');
-        
-        // Add event listener to the home link
-        if (homeLink) {
-            homeLink.addEventListener('click', function(event) {
-                // Prevent default navigation behavior
-                event.preventDefault();
-                
-                // Refresh the current page
-                window.location.reload();
-            });
-        }
-        
-        // Also handle the home link in the quick links section of footer
-        const footerHomeLink = document.querySelector('.footer-links a[href="complete-main-html.html"]');
-        
-        if (footerHomeLink) {
-            footerHomeLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                window.location.reload();
-            });
-        }
-        
-        // Handle the site title link as well if clicked when already on home page
-        const siteTitleLink = document.querySelector('.site-title');
-        
-        if (siteTitleLink) {
-            siteTitleLink.addEventListener('click', function(event) {
-                // Check if we're already on the home page
-                if (window.location.pathname === '/' || 
-                    window.location.pathname === '/complete-main-html.html' || 
-                    window.location.pathname.endsWith('/complete-main-html.html')) {
-                    event.preventDefault();
-                    window.location.reload();
-                }
-            });
-        }
-    });
-    </script>
+    <!-- Error boundary template -->
+    <template id="error-template">
+        <div class="error-boundary" role="alert">
+            <h2>죄송합니다. 문제가 발생했습니다.</h2>
+            <p>페이지를 새로고침하거나 나중에 다시 시도해주세요.</p>
+            <button class="btn btn-primary" onclick="window.location.reload()">새로고침</button>
+        </div>
+    </template>
+    
+    <script src="common-js.js" defer></script>
+    <script src="search-js.js" defer></script>
 </body>
 </html>

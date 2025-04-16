@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /complete-main-html.html
+Allow: /search-page.html
+Allow: /listing-detail-page.html
+Allow: /disclaimer-page.html
+
+Disallow: /login-page.html
+Disallow: /register-page.html
+Disallow: /post-listing-page.html
+
+Sitemap: https://shadedkr.github.io/sitemap.xml 
