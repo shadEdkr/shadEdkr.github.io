@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>검색 결과 - 퍼듀 대학교 주변 한인 임대 찾기</title>
+    <title>매물 검색 - 퍼듀 대학교 주변 한인 임대 찾기</title>
     <link rel="stylesheet" href="styles-css.css">
+    <!-- Add Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
     <style>
         /* Header specific styles */
         .header-container {
@@ -89,36 +91,105 @@
         }
         
         /* Search page specific styles */
-        .search-bar {
-            background-color: white;
+        .search-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 20px;
+            margin: 20px;
+            height: calc(100vh - 100px);
+        }
+
+        .filters-panel {
+            background: white;
             padding: 20px;
             border-radius: 8px;
-            margin: 20px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            height: 100%;
         }
-        
-        .search-form {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            align-items: flex-end;
+
+        .results-panel {
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: 20px;
         }
-        
-        .search-form .form-group {
-            flex: 1;
-            min-width: 150px;
-            margin-bottom: 10px;
+
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
         }
-        
-        .btn-primary {
-            background-color: #4F46E5;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 4px;
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .listing-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .listing-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .listing-details {
+            padding: 15px;
+        }
+
+        .listing-price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #4F46E5;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: 500;
-            cursor: pointer;
-            height: 40px;
+        }
+
+        .filter-group input[type="text"],
+        .filter-group input[type="number"],
+        .filter-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #D1D5DB;
+            border-radius: 4px;
+        }
+
+        .price-range {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .amenities-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .amenity-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .results-header {
@@ -136,13 +207,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        
-        .listing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
         }
         
         .pagination {
@@ -258,22 +322,8 @@
                 justify-content: space-between;
             }
             
-            .search-form {
-                flex-direction: column;
-            }
-            
-            .search-form .form-group {
-                width: 100%;
-            }
-            
-            .btn-primary {
-                width: 100%;
-            }
-            
-            .results-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
+            .search-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -296,130 +346,78 @@
         </div>
     </header>
 
-    <main>
-        <div class="container">
-            <div class="search-bar">
-                <form class="search-form" id="search-form">
-                    <div class="form-group">
-                        <label>캠퍼스까지 거리</label>
-                        <select name="distance">
-                            <option value="">모든 거리</option>
-                            <option value="5-15">5-15분 도보</option>
-                            <option value="15-30">15-30분 도보</option>
-                            <option value="car">차량 필요</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>가격</label>
-                        <select name="price">
-                            <option value="">모든 가격대</option>
-                            <option value="500">$500 이하</option>
-                            <option value="1000">$500-$1000</option>
-                            <option value="1500">$1000-$1500</option>
-                            <option value="2000">$1500 이상</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>날짜</label>
-                        <input type="date" name="date">
-                    </div>
-                    <div class="form-group">
-                        <label>편의시설</label>
-                        <select name="amenities">
-                            <option value="">모든 편의시설</option>
-                            <option value="헬스장">헬스장</option>
-                            <option value="주차장">주차장</option>
-                            <option value="세탁시설">세탁시설</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">필터 적용</button>
-                </form>
-            </div>
+    <main class="search-container">
+        <aside class="filters-panel">
+            <form id="search-form">
+                <div class="filter-group">
+                    <label for="location">위치</label>
+                    <input type="text" id="location" placeholder="주소 또는 지역 입력">
+                </div>
 
-            <div class="results-header">
-                <div class="results-count">24개 임대 목록</div>
-                <div class="sort-options">
-                    <span>정렬:</span>
-                    <select id="sort">
-                        <option value="date-desc">최신순</option>
-                        <option value="price-asc">가격 낮은순</option>
-                        <option value="price-desc">가격 높은순</option>
-                        <option value="distance">캠퍼스 가까운순</option>
+                <div class="filter-group">
+                    <label>가격 범위</label>
+                    <div class="price-range">
+                        <input type="number" id="min-price" placeholder="최소">
+                        <input type="number" id="max-price" placeholder="최대">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="property-type">매물 유형</label>
+                    <select id="property-type" multiple>
+                        <option value="apartment">아파트</option>
+                        <option value="house">주택</option>
+                        <option value="room">룸</option>
+                        <option value="studio">스튜디오</option>
                     </select>
                 </div>
-            </div>
 
-            <div id="results-container" class="listing-grid">
-                <!-- Sample listing cards -->
-                <div class="listing-card">
-                    <div class="listing-img" style="background-image: url('/api/placeholder/300/200');"></div>
-                    <div class="listing-details">
-                        <div class="distance-badge">캠퍼스에서 5-15분 도보</div>
-                        <div class="listing-price">$800/월</div>
-                        <div class="listing-location">챈시 힐</div>
-                        <div>2023년 5월 - 8월 (3개월)</div>
-                        <div class="listing-amenities">
-                            <div class="amenity">와이파이</div>
-                            <div class="amenity">수도</div>
-                            <div class="amenity">전기</div>
-                        </div>
-                        <a href="listing-detail-page.html?id=1" class="view-details">자세히 보기</a>
-                    </div>
+                <div class="filter-group">
+                    <label for="bedrooms">침실 수</label>
+                    <select id="bedrooms">
+                        <option value="">전체</option>
+                        <option value="0">스튜디오</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4+</option>
+                    </select>
                 </div>
-                <div class="listing-card">
-                    <div class="listing-img" style="background-image: url('/api/placeholder/300/200');"></div>
-                    <div class="listing-details">
-                        <div class="distance-badge">캠퍼스에서 5-15분 도보</div>
-                        <div class="listing-price">$950/월</div>
-                        <div class="listing-location">캠퍼스 서쪽</div>
-                        <div>2023년 6월 - 8월 (2개월)</div>
-                        <div class="listing-amenities">
-                            <div class="amenity">와이파이</div>
-                            <div class="amenity">가구 포함</div>
-                            <div class="amenity">헬스장</div>
-                        </div>
-                        <a href="listing-detail-page.html?id=2" class="view-details">자세히 보기</a>
-                    </div>
-                </div>
-                <div class="listing-card">
-                    <div class="listing-img" style="background-image: url('/api/placeholder/300/200');"></div>
-                    <div class="listing-details">
-                        <div class="distance-badge">캠퍼스에서 15-30분 도보</div>
-                        <div class="listing-price">$700/월</div>
-                        <div class="listing-location">다운타운</div>
-                        <div>2023년 5월 - 7월 (3개월)</div>
-                        <div class="listing-amenities">
-                            <div class="amenity">모든 유틸리티 포함</div>
-                            <div class="amenity">주차장</div>
-                        </div>
-                        <a href="listing-detail-page.html?id=3" class="view-details">자세히 보기</a>
-                    </div>
-                </div>
-                <div class="listing-card">
-                    <div class="listing-img" style="background-image: url('/api/placeholder/300/200');"></div>
-                    <div class="listing-details">
-                        <div class="distance-badge">캠퍼스에서 15-30분 도보</div>
-                        <div class="listing-price">$850/월</div>
-                        <div class="listing-location">리버사이드</div>
-                        <div>2023년 6월 - 8월 (2개월)</div>
-                        <div class="listing-amenities">
-                            <div class="amenity">와이파이</div>
-                            <div class="amenity">세탁시설</div>
-                        </div>
-                        <a href="listing-detail-page.html?id=4" class="view-details">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="pagination">
-                <button class="pagination-btn">이전</button>
-                <div class="page-numbers">
-                    <div class="page-number active">1</div>
-                    <div class="page-number">2</div>
-                    <div class="page-number">3</div>
+                <div class="filter-group">
+                    <label>편의시설</label>
+                    <div class="amenities-list">
+                        <label class="amenity-checkbox">
+                            <input type="checkbox" name="amenities" value="parking">
+                            주차장
+                        </label>
+                        <label class="amenity-checkbox">
+                            <input type="checkbox" name="amenities" value="laundry">
+                            세탁시설
+                        </label>
+                        <label class="amenity-checkbox">
+                            <input type="checkbox" name="amenities" value="gym">
+                            헬스장
+                        </label>
+                        <label class="amenity-checkbox">
+                            <input type="checkbox" name="amenities" value="pool">
+                            수영장
+                        </label>
+                    </div>
                 </div>
-                <button class="pagination-btn">다음</button>
-            </div>
+
+                <div class="filter-group">
+                    <label for="available-date">입주 가능일</label>
+                    <input type="date" id="available-date">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">검색</button>
+            </form>
+        </aside>
+
+        <div class="results-panel">
+            <div id="map"></div>
+            <div class="listings-grid" id="listings-container"></div>
         </div>
     </main>
 
@@ -488,6 +486,147 @@
             });
         }
     });
+    </script>
+
+    <!-- Import Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module">
+        import { searchListings, getSearchPreferences, saveSearchPreferences } from './js/supabase-client.js';
+
+        let map;
+        let markers = [];
+        let currentUser = null;
+        
+        // Initialize Google Maps
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 40.4237, lng: -86.9212 }, // Purdue University coordinates
+                zoom: 14
+            });
+
+            // Initialize the autocomplete
+            const input = document.getElementById('location');
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+        }
+
+        // Add markers to the map
+        function addMarkers(listings) {
+            // Clear existing markers
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
+
+            // Add new markers
+            listings.forEach(listing => {
+                if (listing.latitude && listing.longitude) {
+                    const marker = new google.maps.Marker({
+                        position: { lat: listing.latitude, lng: listing.longitude },
+                        map: map,
+                        title: listing.title
+                    });
+
+                    // Add info window
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `
+                            <div>
+                                <h3>${listing.title}</h3>
+                                <p>$${listing.price}/month</p>
+                                <p>${listing.bedrooms} bed, ${listing.bathrooms} bath</p>
+                                <a href="listing-detail-page.html?id=${listing.id}">자세히 보기</a>
+                            </div>
+                        `
+                    });
+
+                    marker.addListener('click', () => {
+                        infoWindow.open(map, marker);
+                    });
+
+                    markers.push(marker);
+                }
+            });
+        }
+
+        // Render listings in the grid
+        function renderListings(listings) {
+            const container = document.getElementById('listings-container');
+            container.innerHTML = '';
+
+            listings.forEach(listing => {
+                const card = document.createElement('div');
+                card.className = 'listing-card';
+                card.innerHTML = `
+                    <img src="${listing.images[0]}" alt="${listing.title}" class="listing-image">
+                    <div class="listing-details">
+                        <h3>${listing.title}</h3>
+                        <p class="listing-price">$${listing.price}/month</p>
+                        <p>${listing.bedrooms} bed, ${listing.bathrooms} bath</p>
+                        <p>${listing.location}</p>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => {
+                    window.location.href = `listing-detail-page.html?id=${listing.id}`;
+                });
+
+                container.appendChild(card);
+            });
+        }
+
+        // Handle form submission
+        document.getElementById('search-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                query: document.getElementById('location').value,
+                minPrice: document.getElementById('min-price').value || null,
+                maxPrice: document.getElementById('max-price').value || null,
+                minBedrooms: document.getElementById('bedrooms').value || null,
+                propertyTypes: Array.from(document.getElementById('property-type').selectedOptions).map(opt => opt.value),
+                availableAfter: document.getElementById('available-date').value || null,
+                amenities: Array.from(document.querySelectorAll('input[name="amenities"]:checked')).map(cb => cb.value)
+            };
+
+            // Save search preferences if user is logged in
+            if (currentUser) {
+                await saveSearchPreferences(currentUser.id, formData);
+            }
+
+            // Perform search
+            const { data: listings, error } = await searchListings(formData);
+            
+            if (error) {
+                console.error('Search failed:', error);
+                return;
+            }
+
+            renderListings(listings);
+            addMarkers(listings);
+        });
+
+        // Initialize the page
+        async function init() {
+            initMap();
+
+            // Check if user is logged in
+            const { data: { user }, error } = await supabase.auth.getUser();
+            currentUser = user;
+
+            if (user) {
+                // Load saved preferences
+                const { data: preferences } = await getSearchPreferences(user.id);
+                if (preferences) {
+                    // Apply saved preferences to form
+                    // ... implement this based on your needs
+                }
+            }
+
+            // Load initial listings
+            const { data: listings } = await searchListings();
+            renderListings(listings);
+            addMarkers(listings);
+        }
+
+        init();
     </script>
 </body>
 </html>
