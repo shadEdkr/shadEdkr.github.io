@@ -1188,7 +1188,7 @@
             position: fixed;
             left: 15px;
             top: 15px;
-            z-index: 1000;
+            z-index: 1002;
             background: var(--purdue-black);
             border: 2px solid var(--purdue-gold);
             cursor: pointer;
@@ -1238,6 +1238,13 @@
             background-color: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(3px);
             z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            display: block;
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
@@ -1289,10 +1296,6 @@
                 background: var(--purdue-gold);
                 color: var(--purdue-black);
                 padding-left: 20px;
-            }
-
-            .menu-overlay.active {
-                display: block;
             }
         }
     </style>
@@ -1894,23 +1897,28 @@
 
         // Mobile Menu Functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const menuOverlay = document.querySelector('.menu-overlay');
             const nav = document.querySelector('nav');
-            const overlay = document.querySelector('.overlay');
-            const menuLinks = document.querySelectorAll('nav ul li a');
+            const body = document.body;
 
             function toggleMenu() {
-                menuToggle.classList.toggle('active');
-                nav.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+                // First toggle the menu button
+                mobileMenuToggle.classList.toggle('active');
+                
+                // Then toggle the menu and overlay together
+                requestAnimationFrame(() => {
+                    nav.classList.toggle('active');
+                    menuOverlay.classList.toggle('active');
+                    body.classList.toggle('menu-open');
+                });
             }
 
-            menuToggle.addEventListener('click', toggleMenu);
-            overlay.addEventListener('click', toggleMenu);
+            mobileMenuToggle.addEventListener('click', toggleMenu);
+            menuOverlay.addEventListener('click', toggleMenu);
 
-            // Close menu when clicking a link
-            menuLinks.forEach(link => {
+            // Close menu when clicking a nav link
+            document.querySelectorAll('nav a').forEach(link => {
                 link.addEventListener('click', () => {
                     toggleMenu();
                     // Smooth scroll to section
@@ -1922,51 +1930,22 @@
                 });
             });
 
-            // Close menu on window resize if open
+            // Close menu on window resize
             window.addEventListener('resize', () => {
-                if (window.innerWidth > 768 && nav.classList.contains('active')) {
-                    toggleMenu();
+                if (window.innerWidth > 768) {
+                    mobileMenuToggle.classList.remove('active');
+                    menuOverlay.classList.remove('active');
+                    nav.classList.remove('active');
+                    body.classList.remove('menu-open');
                 }
             });
-        });
 
-        // Mobile menu functionality
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const menuOverlay = document.querySelector('.menu-overlay');
-        const nav = document.querySelector('nav');
-        const body = document.body;
-
-        function toggleMenu() {
-            mobileMenuToggle.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            nav.classList.toggle('active');
-            body.classList.toggle('menu-open');
-        }
-
-        mobileMenuToggle.addEventListener('click', toggleMenu);
-        menuOverlay.addEventListener('click', toggleMenu);
-
-        // Close menu when clicking a nav link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                toggleMenu();
-                // Smooth scroll to section
-                const targetId = link.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
+            // Prevent body scroll when menu is open
+            document.addEventListener('touchmove', (e) => {
+                if (body.classList.contains('menu-open')) {
+                    e.preventDefault();
                 }
-            });
-        });
-
-        // Close menu on window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                mobileMenuToggle.classList.remove('active');
-                menuOverlay.classList.remove('active');
-                nav.classList.remove('active');
-                body.classList.remove('menu-open');
-            }
+            }, { passive: false });
         });
 
         // Prevent body scroll when menu is open
