@@ -214,7 +214,7 @@
                     <span style="color: #6B7280;">또는</span>
                 </div>
                 
-                <button class="btn btn-outline btn-full">Google 계정으로 로그인</button>
+                <button id="google-login" class="btn btn-outline btn-full">Google 계정으로 로그인</button>
                 
                 <div style="text-align: center; margin-top: 2rem;">
                     <span style="color: #6B7280;">계정이 없으신가요?</span>
@@ -225,6 +225,9 @@
                 <div id="login-message" style="margin-top: 2rem; text-align: center; display: none; color: #EF4444; padding: 1rem; background-color: #FEF2F2; border-radius: 0.375rem;">
                     판매자 로그인이 필요한 기능입니다. 로그인 후 이용해 주세요.
                 </div>
+
+                <!-- Error message -->
+                <div id="error-message" style="margin-top: 1rem; text-align: center; display: none; color: #EF4444;"></div>
             </div>
         </div>
     </main>
@@ -260,67 +263,55 @@
 
     <script src="common-js.js"></script>
     
-    <!-- Custom Login Page Script with Redirect Support -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Check if there's a redirect parameter in the URL
+    <!-- Import Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module">
+        import { signIn } from './js/supabase-client.js';
+
+        // Handle form submission
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error-message');
+            
+            try {
+                const { data, error } = await signIn(email, password);
+                
+                if (error) {
+                    errorDiv.textContent = '로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.';
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+                
+                // Login successful
+                const redirectUrl = document.getElementById('redirect-url').value;
+                window.location.href = redirectUrl || 'complete-main-html.html';
+            } catch (err) {
+                errorDiv.textContent = '로그인 중 오류가 발생했습니다. 다시 시도해주세요.';
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // Handle Google login
+        document.getElementById('google-login').addEventListener('click', async () => {
+            const { data, error } = await supabase.auth.signInWithOAuth({
+                provider: 'google'
+            });
+            
+            if (error) {
+                const errorDiv = document.getElementById('error-message');
+                errorDiv.textContent = 'Google 로그인에 실패했습니다. 다시 시도해주세요.';
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // Check if we need to show the login message
         const urlParams = new URLSearchParams(window.location.search);
-        const redirectParam = urlParams.get('redirect');
-        
-        // Store the redirect URL if available
-        if (redirectParam) {
-            document.getElementById('redirect-url').value = redirectParam;
+        if (urlParams.get('message') === 'login-required') {
             document.getElementById('login-message').style.display = 'block';
         }
-        
-        // Handle form submission
-        const loginForm = document.getElementById('login-form');
-        if (loginForm) {
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // For demo purposes, consider any login attempt successful
-                localStorage.setItem('sellerLoggedIn', 'true');
-                
-                // Check if there's a redirect URL
-                const redirectUrl = document.getElementById('redirect-url').value;
-                
-                if (redirectUrl && redirectUrl.includes('post-listing-page.html')) {
-                    // If they were trying to access the listing page, redirect there
-                    alert('로그인 성공! 이제 등록하기 기능을 사용할 수 있습니다.');
-                    window.location.href = 'post-listing-page.html';
-                } else if (redirectUrl) {
-                    // Redirect to any other specified page
-                    alert('로그인 성공! 이제 등록하기 기능을 사용할 수 있습니다.');
-                    window.location.href = redirectUrl;
-                } else {
-                    // Default redirect to home page
-                    alert('로그인 성공! 이제 등록하기 기능을 사용할 수 있습니다.');
-                    window.location.href = 'complete-main-html.html';
-                }
-            });
-        }
-        
-        // Handle Google login button
-        const googleLoginBtn = document.querySelector('.btn-outline');
-        if (googleLoginBtn) {
-            googleLoginBtn.addEventListener('click', function() {
-                // For demo purposes, log in with Google also succeeds
-                localStorage.setItem('sellerLoggedIn', 'true');
-                
-                // Check if there's a redirect URL
-                const redirectUrl = document.getElementById('redirect-url').value;
-                
-                if (redirectUrl) {
-                    alert('Google 로그인 성공! 이제 등록하기 기능을 사용할 수 있습니다.');
-                    window.location.href = redirectUrl;
-                } else {
-                    alert('Google 로그인 성공! 이제 등록하기 기능을 사용할 수 있습니다.');
-                    window.location.href = 'complete-main-html.html';
-                }
-            });
-        }
-    });
     </script>
 </body>
 </html>
