@@ -1902,27 +1902,57 @@
             const nav = document.querySelector('nav');
             const body = document.body;
 
+            // Only the mobile menu toggle button should trigger the menu
+            mobileMenuToggle.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent event bubbling
+                toggleMenu();
+            });
+            
+            // Close the menu when clicking on the overlay
+            menuOverlay.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent event bubbling
+                toggleMenu();
+            });
+
             function toggleMenu() {
-                // First toggle the menu button
                 mobileMenuToggle.classList.toggle('active');
-                
-                // Then toggle the menu and overlay together
-                requestAnimationFrame(() => {
-                    nav.classList.toggle('active');
-                    menuOverlay.classList.toggle('active');
-                    body.classList.toggle('menu-open');
-                });
+                nav.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+                body.classList.toggle('menu-open');
             }
 
-            mobileMenuToggle.addEventListener('click', toggleMenu);
-            menuOverlay.addEventListener('click', toggleMenu);
-
-            // Close menu when clicking a nav link
+            // Handle navigation links
             document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', () => {
-                    toggleMenu();
-                    // Smooth scroll to section
-                    const targetId = link.getAttribute('href');
+                link.addEventListener('click', function(e) {
+                    // If the mobile menu is active, close it
+                    if (nav.classList.contains('active')) {
+                        toggleMenu();
+                    }
+                    
+                    // Check if the link points to an anchor on the page
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId.startsWith('#')) {
+                        e.preventDefault();
+                        const targetSection = document.querySelector(targetId);
+                        if (targetSection) {
+                            targetSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+
+            // Remove any event handlers that might be on the header
+            // that could be triggering the menu overlay
+            const header = document.querySelector('header');
+            const newHeader = header.cloneNode(true);
+            header.parentNode.replaceChild(newHeader, header);
+            
+            // Add proper smooth scrolling to any navigation links in the header
+            newHeader.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation(); // Stop any event bubbling
+                    const targetId = this.getAttribute('href');
                     const targetSection = document.querySelector(targetId);
                     if (targetSection) {
                         targetSection.scrollIntoView({ behavior: 'smooth' });
@@ -1931,8 +1961,8 @@
             });
 
             // Close menu on window resize
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && nav.classList.contains('active')) {
                     mobileMenuToggle.classList.remove('active');
                     menuOverlay.classList.remove('active');
                     nav.classList.remove('active');
@@ -1940,12 +1970,28 @@
                 }
             });
 
-            // Prevent body scroll when menu is open
-            document.addEventListener('touchmove', (e) => {
-                if (body.classList.contains('menu-open')) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
+            // Make sure the theme toggle in the header works properly
+            const themeToggle = newHeader.querySelector('.theme-switch input[type="checkbox"]');
+            if (themeToggle) {
+                themeToggle.addEventListener('change', function(e) {
+                    e.stopPropagation(); // Prevent event bubbling
+                    if (this.checked) {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        try {
+                            localStorage.setItem('theme', 'dark');
+                        } catch (e) {
+                            console.log('LocalStorage not available in this environment');
+                        }
+                    } else {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                        try {
+                            localStorage.setItem('theme', 'light');
+                        } catch (e) {
+                            console.log('LocalStorage not available in this environment');
+                        }
+                    }
+                });
+            }
         });
 
         // Prevent body scroll when menu is open
