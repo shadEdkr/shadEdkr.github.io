@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Cybersecurity Checkup Tool</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .date-banner {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .progress-container {
+            margin: 15px 0;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            height: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #3498db;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .section {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .section-header:hover {
+            background-color: #e9ecef;
+        }
+        
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+        
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .status-incomplete {
+            background-color: #e74c3c;
+        }
+        
+        .status-complete {
+            background-color: #2ecc71;
+        }
+        
+        .section-content {
+            padding: 15px;
+        }
+        
+        .checklist {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+            margin-bottom: 5px;
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 14px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+        }
+        
+        .password-input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 0 8px rgba(52,152,219,0.6);
+        }
+        
+        .strength-meter {
+            height: 5px;
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 2px;
+            margin: 5px 0 10px 0;
+            overflow: hidden;
+        }
+        
+        .strength-indicator {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .wallpaper-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .wallpaper-option {
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 16 / 9;
+        }
+        
+        .wallpaper-option:hover {
+            transform: scale(1.05);
+            border-color: #3498db;
+        }
+        
+        .wallpaper-option.selected {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52,152,219,0.3);
+        }
+        
+        .wallpaper-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .tips-section {
+            background-color: #f8f9fa;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .tips-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .submit-section {
+            text-align: center;
+            margin: 30px 0 10px 0;
+        }
+        
+        .submit-button {
+            background-color: #2ecc71;
+            font-size: 1.1rem;
+            padding: 12px 30px;
+        }
+        
+        .submit-button:hover {
+            background-color: #27ae60;
+        }
+        
+        /* Modal overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalAppear 0.5s ease-out forwards;
+        }
+        
+        @keyframes modalAppear {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-title {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .modal-date {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px dashed #ddd;
+        }
+        
+        .modal-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .modal-button:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Social links styling */
+        .social-links {
+            margin: 20px 0;
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            margin: 0 15px;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+        
+        .social-links svg {
+            margin-right: 5px;
+        }
+        
+        .copyright {
+            width: 100%;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-links a {
+                margin: 8px 0;
+            }
+            
+            .wallpaper-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Monthly Cybersecurity Checkup Tool</h1>
+        
+        <div class="date-banner" id="current-date">
+            Cybersecurity Checkup Day: April 27, 2025
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="overall-progress"></div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('software-section')">
+                <h2>1. Software Updates</h2>
+                <span class="status-badge status-incomplete" id="software-status">Incomplete</span>
+            </div>
+            <div class="section-content" id="software-section">
+                <ul class="checklist">
+                    <li class="checklist-item">
+                        <input type="checkbox" id="os-update" onchange="updateProgress()">
+                        <label for="os-update">Check and install operating system updates</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="antivirus-update" onchange="updateProgress()">
+                        <label for="antivirus-update">Update antivirus software</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="office-update" onchange="updateProgress()">
+                        <label for="office-update">Update office software</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="browser-update" onchange="updateProgress()">
+                        <label for="browser-update">Update browsers and plugins</label>
+                    </li>
+                </ul>
+                <button onclick="checkForUpdates()">Check for Updates</button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('password-section')">
+                <h2>2. Password Changes</h2>
+                <span class="status-badge status-incomplete" id="password-status">Incomplete</span>
+            </div>
+            <div class="section-content" id="password-section">
+                <ul class="checklist">
+                    <li class="checklist-item">
+                        <input type="checkbox" id="primary-password" onchange="updateProgress()">
+                        <label for="primary-password">Change primary password</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="secondary-password" onchange="updateProgress()">
+                        <label for="secondary-password">Change secondary password</label>
+                    </li>
+                </ul>
+                
+                <div>
+                    <h3>Password Generator</h3>
+                    <input type="password" id="new-password" class="password-input" placeholder="Enter new password" oninput="checkPasswordStrength()">
+                    <div class="strength-meter">
+                        <div class="strength-indicator" id="password-strength"></div>
+                    </div>
+                    <p id="password-feedback">Enter a secure password</p>
+                    <button onclick="generatePassword()">Generate Secure Password</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('wallpaper-section')">
+                <h2>3. Security Wallpaper Change</h2>
+                <span class="status-badge status-incomplete" id="wallpaper-status">Incomplete</span>
+            </div>
+            <div class="section-content" id="wallpaper-section">
+                <p>Select one of the security wallpapers below:</p>
+                <div class="wallpaper-grid">
+                    <div class="wallpaper-option" onclick="selectWallpaper(0)">
+                        <img src="/api/placeholder/240/135" alt="Security Wallpaper 1">
+                    </div>
+                    <div class="wallpaper-option" onclick="selectWallpaper(1)">
+                        <img src="/api/placeholder/240/135" alt="Security Wallpaper 2">
+                    </div>
+                    <div class="wallpaper-option" onclick="selectWallpaper(2)">
+                        <img src="/api/placeholder/240/135" alt="Security Wallpaper 3">
+                    </div>
+                    <div class="wallpaper-option" onclick="selectWallpaper(3)">
+                        <img src="/api/placeholder/240/135" alt="Security Wallpaper 4">
+                    </div>
+                </div>
+                <div class="checklist-item" style="margin-top: 15px;">
+                    <input type="checkbox" id="wallpaper-applied" onchange="updateProgress()">
+                    <label for="wallpaper-applied">Applied selected wallpaper</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tips-section">
+            <h3>Security Tips of the Month</h3>
+            <ul>
+                <li>Always log out from shared computers</li>
+                <li>Don't open suspicious email attachments</li>
+                <li>Use a VPN when connecting to public Wi-Fi</li>
+                <li>Enable two-factor authentication wherever possible</li>
+                <li>Scan USB devices before using them</li>
+            </ul>
+        </div>
+        
+        <div class="submit-section">
+            <button class="submit-button" onclick="submitReport()">Complete Security Checkup</button>
+        </div>
+    </div>
+    
+    <!-- Celebration Modal -->
+    <div id="celebration-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="modal-title">🎉 Congratulations!</h2>
+            <p>You've successfully completed your monthly security checkup!</p>
+            <p>Your systems are now more secure.</p>
+            
+            <div>
+                <h3>Next Checkup Date:</h3>
+                <div class="modal-date" id="next-checkup-date"></div>
+            </div>
+            
+            <p>Add this date to your calendar to ensure you don't miss it!</p>
+            
+            <button class="modal-button" onclick="closeModal()">Got it!</button>
+        </div>
+    </div>
+    
+    <footer>
+        <!-- Social links section -->
+        <div class="social-links">
+            <a href="https://github.com/yourusername" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                GitHub Repository
+            </a>
+            <a href="https://medium.com/@yourusername" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <path d="M21 15l-5-5L5 21"></path>
+                </svg>
+                Medium
+            </a>
+            <a href="https://www.linkedin.com/in/yourusername/" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+                LinkedIn
+            </a>
+            <div class="copyright">
+                © 2025 Your Company - Cybersecurity Division
+            </div>
+        </div>
+        <p>Monthly Cybersecurity Checkup - Helps protect your systems and data</p>
+    </footer>
+
+    <!-- Import confetti.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
+    
+    <script>
+        // Initialize when page loads
+        window.onload = function() {
+            displayCurrentDate();
+            updateProgress();
+        };
+        
+        // Display current date
+        function displayCurrentDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = 'Cybersecurity Checkup Day: ' + now.toLocaleDateString('en-US', options);
+        }
+        
+        // Toggle section visibility
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.style.display = section.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Update overall progress
+        function updateProgress() {
+            const totalChecks = document.querySelectorAll('input[type="checkbox"]').length;
+            const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const progressPercentage = (checkedBoxes / totalChecks) * 100;
+            
+            document.getElementById('overall-progress').style.width = progressPercentage + '%';
+            
+            // Update software section status
+            const softwareChecks = document.querySelectorAll('#os-update, #antivirus-update, #office-update, #browser-update');
+            const checkedSoftware = Array.from(softwareChecks).filter(checkbox => checkbox.checked).length;
+            
+            if (checkedSoftware === softwareChecks.length) {
+                document.getElementById('software-status').textContent = 'Complete';
+                document.getElementById('software-status').className = 'status-badge status-complete';
+            } else {
+                document.getElementById('software-status').textContent = 'Incomplete';
+                document.getElementById('software-status').className = 'status-badge status-incomplete';
+            }
+            
+            // Update password section status
+            const passwordChecks = document.querySelectorAll('#primary-password, #secondary-password');
+            const checkedPasswords = Array.from(passwordChecks).filter(checkbox => checkbox.checked).length;
+            
+            if (checkedPasswords === passwordChecks.length) {
+                document.getElementById('password-status').textContent = 'Complete';
+                document.getElementById('password-status').className = 'status-badge status-complete';
+            } else {
+                document.getElementById('password-status').textContent = 'Incomplete';
+                document.getElementById('password-status').className = 'status-badge status-incomplete';
+            }
+            
+            // Update wallpaper section status
+            if (document.getElementById('wallpaper-applied').checked) {
+                document.getElementById('wallpaper-status').textContent = 'Complete';
+                document.getElementById('wallpaper-status').className = 'status-badge status-complete';
+            } else {
+                document.getElementById('wallpaper-status').textContent = 'Incomplete';
+                document.getElementById('wallpaper-status').className = 'status-badge status-incomplete';
+            }
+        }
+        
+        // Check for updates (would connect to actual system APIs in full implementation)
+        function checkForUpdates() {
+            alert('Checking for system updates... In a real implementation, this would check for OS and software updates.');
+        }
+        
+        // Password strength checker
+        function checkPasswordStrength() {
+            const password = document.getElementById('new-password').value;
+            const strengthIndicator = document.getElementById('password-strength');
+            const feedback = document.getElementById('password-feedback');
+            
+            // Simple password strength calculation
+            let strength = 0;
+            
+            if (password.length >= 8) strength += 20;
+            if (password.match(/[A-Z]/)) strength += 20;
+            if (password.match(/[a-z]/)) strength += 20;
+            if (password.match(/[0-9]/)) strength += 20;
+            if (password.match(/[^A-Za-z0-9]/)) strength += 20;
+            
+            strengthIndicator.style.width = strength + '%';
+            
+            // Set color based on strength
+            if (strength < 40) {
+                strengthIndicator.style.backgroundColor = '#e74c3c'; // Weak (red)
+                feedback.textContent = 'Weak password. Add more complexity.';
+            } else if (strength < 70) {
+                strengthIndicator.style.backgroundColor = '#f39c12'; // Medium (orange)
+                feedback.textContent = 'Decent password, but could be stronger.';
+            } else {
+                strengthIndicator.style.backgroundColor = '#2ecc71'; // Strong (green)
+                feedback.textContent = 'Strong password!';
+            }
+        }
+        
+        // Generate secure password
+        function generatePassword() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+';
+            let password = '';
+            
+            // Generate a 12-character password
+            for (let i = 0; i < 12; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            document.getElementById('new-password').value = password;
+            checkPasswordStrength();
+        }
+        
+        // Select wallpaper
+        function selectWallpaper(index) {
+            // Remove selection from all options
+            document.querySelectorAll('.wallpaper-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selection to chosen option
+            document.querySelectorAll('.wallpaper-option')[index].classList.add('selected');
+            
+            // Would connect to system wallpaper API in real implementation
+            alert('Wallpaper selected. In a real implementation, this would change the system wallpaper.');
+        }
+        
+        // Calculate next checkup date (last day of next month)
+        function getNextCheckupDate() {
+            const today = new Date();
+            // Get the first day of next month
+            const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+            // Get the last day of next month by going to the first day of the month after next and subtracting one day
+            const lastDay = new Date(today.getFullYear(), today.getMonth() + 2, 0);
+            
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return lastDay.toLocaleDateString('en-US', options);
+        }
+        
+        // Close celebration modal
+        function closeModal() {
+            document.getElementById('celebration-modal').style.display = 'none';
+        }
+        
+        // Show celebration with confetti
+        function showCelebration() {
+            // Set next checkup date
+            document.getElementById('next-checkup-date').textContent = getNextCheckupDate();
+            
+            // Display the modal
+            document.getElementById('celebration-modal').style.display = 'flex';
+            
+            // Initial burst of confetti
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            
+            // Multiple confetti bursts for a more dramatic effect
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+            }, 250);
+            
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+            }, 400);
+            
+            // Final central burst
+            setTimeout(() => {
+                confetti({
+                    particleCount: 75,
+                    spread: 100,
+                    origin: { y: 0.7 }
+                });
+            }, 600);
+        }
+        
+        // Submit security checkup report
+        function submitReport() {
+            const totalChecks = document.querySelectorAll('input[type="checkbox"]').length;
+            const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            
+            if (checkedBoxes < totalChecks) {
+                alert('Please complete all security checkup items before submitting!');
+            } else {
+                const reportData = {
+                    timestamp: new Date().toISOString(),
+                    user: 'demo-user', // Would use actual user ID in real implementation
+                    company: 'Your Company',
+                    items: {
+                        softwareUpdates: {
+                            os: document.getElementById('os-update').checked,
+                            antivirus: document.getElementById('antivirus-update').checked,
+                            office: document.getElementById('office-update').checked,
+                            browser: document.getElementById('browser-update').checked
+                        },
+                        passwordChanges: {
+                            primary: document.getElementById('primary-password').checked,
+                            secondary: document.getElementById('secondary-password').checked
+                        },
+                        wallpaperApplied: document.getElementById('wallpaper-applied').checked
+                    },
+                    nextCheckupDate: getNextCheckupDate()
+                };
+                
+                console.log('Security checkup report:', reportData);
+                
+                // In a real implementation, this would send data to a server
+                // Then show celebration
+                showCelebration();
+            }
+        }
+    </script>
+</body>
+</html>
