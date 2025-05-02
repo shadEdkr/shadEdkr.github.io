@@ -96,6 +96,24 @@
             box-shadow: var(--shadow);
         }
         
+        .next-mass {
+            margin-top: 0.5rem;
+            font-weight: 700;
+            color: var(--brown);
+            background-color: white;
+            border-radius: 5px;
+            padding: 0.5rem;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(206, 184, 136, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(206, 184, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(206, 184, 136, 0); }
+        }
+        
         /* Navigation */
         nav {
             background-color: white;
@@ -571,6 +589,7 @@
             
             <div class="mass-schedule">
                 ✝️ 매달 2, 4주차 토요일, 오후 5시 미사
+                <div class="next-mass">다음 미사: <span id="directionsNextMassDate">계산 중...</span></div>
             </div>
             
             <div class="directions-content">
@@ -734,37 +753,30 @@
             });
         });
         
-        // Accordion functionality for activity items
-        const accordionItems = document.querySelectorAll('.accordion-item');
-        
-        // Function to toggle accordion
-        function toggleAccordion() {
-            const isActive = this.classList.contains('active');
+        // 다음 미사 날짜 계산 함수
+        function calculateNextMassDates() {
+            const today = new Date();
+            const currentYear = today.getFullYear();
+            const currentMonth = today.getMonth();
+            const currentDate = today.getDate();
             
-            // Close all accordion items
-            accordionItems.forEach(item => {
-                item.classList.remove('active');
+            // 해당 월의 미사 날짜 계산 (2, 4주차 토요일)
+            const massesThisMonth = [];
+            const massesNextMonth = [];
+            
+            // 이번 달의 미사 날짜 계산
+            massesThisMonth.push(...getMassesForMonth(currentYear, currentMonth));
+            
+            // 다음 달의 미사 날짜 계산
+            const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+            const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+            massesNextMonth.push(...getMassesForMonth(nextMonthYear, nextMonth));
+            
+            // 오늘 이후의 미사 날짜만 필터링
+            const upcomingMasses = [...massesThisMonth, ...massesNextMonth].filter(massDate => {
+                return massDate > today;
             });
             
-            // Open the clicked item (unless it was already open)
-            if (!isActive) {
-                this.classList.add('active');
-                
-                // Scroll into view if needed
-                const headerRect = this.querySelector('.accordion-header').getBoundingClientRect();
-                if (headerRect.top < 0) {
-                    this.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }
+            // 가장 가까운 미사 날짜 반환
+            return upcomingMasses.length > 0 ? upcomingMasses[0] : null;
         }
-        
-        // Add click event to accordion headers
-        accordionItems.forEach(item => {
-            const header = item.querySelector('.accordion-header');
-            header.addEventListener('click', function() {
-                toggleAccordion.call(item);
-            });
-        });
-    </script>
-</body>
-</html>
