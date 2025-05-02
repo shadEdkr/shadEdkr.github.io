@@ -17,6 +17,8 @@
             --text-dark: #333;
             --text-light: #f8f9fa;
             --purdue-black: #000000; /* Purdue Black */
+            --background-beige: #F5EFE0; /* Background color matching logo */
+            --brown: #4A2C1A; /* Brown color from logo */
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
@@ -31,7 +33,7 @@
             font-family: 'Noto Sans KR', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background-color: #f8f9fa;
+            background-color: var(--background-beige);
         }
         
         a {
@@ -41,8 +43,8 @@
         
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--purdue-black), #333);
-            color: var(--text-light);
+            background: linear-gradient(135deg, var(--background-beige), #f0e8d6);
+            color: var(--brown);
             padding: 1rem 0;
             box-shadow: var(--shadow);
             position: relative;
@@ -50,46 +52,43 @@
             border-bottom: 5px solid var(--primary);
         }
         
-        .header-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('/api/placeholder/1200/400');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.15;
-            z-index: 0;
-        }
-        
         .header-content {
             position: relative;
             z-index: 1;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 2rem;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .church-logo {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
         }
         
         .site-title {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            color: var(--brown);
         }
         
         .site-subtitle {
             font-size: 1.2rem;
             font-weight: 400;
             margin-bottom: 1rem;
-            opacity: 0.9;
+            color: var(--brown);
         }
         
         .mass-time {
             display: inline-block;
             background-color: var(--primary);
-            color: var(--purdue-black);
+            color: var(--brown);
             font-weight: 700;
             padding: 0.5rem 1.5rem;
             border-radius: 30px;
@@ -118,15 +117,16 @@
         .nav-logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--purdue-black);
+            color: var(--brown);
             padding: 1rem 0;
             display: flex;
             align-items: center;
         }
         
-        .nav-logo i {
-            color: var(--primary);
-            margin-right: 0.5rem;
+        .nav-logo img {
+            height: 36px;
+            margin-right: 0.8rem;
+            border-radius: 4px;
         }
         
         .nav-links {
@@ -143,16 +143,16 @@
             display: block;
             padding: 1rem 0;
             font-weight: 500;
-            color: var(--text-dark);
+            color: var(--brown);
             transition: var(--transition);
         }
         
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--primary-dark);
         }
         
         .nav-links a.active {
-            color: var(--primary);
+            color: var(--primary-dark);
         }
         
         .nav-links a.active::after {
@@ -200,14 +200,14 @@
             display: flex;
             align-items: center;
             margin-bottom: 1.5rem;
-            color: var(--purdue-black);
+            color: var(--brown);
             font-weight: 700;
             font-size: 1.8rem;
         }
         
-        .section-title i {
+        .section-emoji {
             margin-right: 0.5rem;
-            color: var(--primary);
+            font-size: 1.8rem;
         }
         
         /* Directions */
@@ -244,6 +244,7 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             font-size: 1.2rem;
+            color: var(--brown);
         }
         
         .address-line {
@@ -257,13 +258,7 @@
             margin-bottom: 1.5rem;
             text-align: center;
             font-weight: 700;
-        }
-        
-        .mass-icon {
-            color: var(--purdue-black);
-            font-size: 1.5rem;
-            margin-right: 0.5rem;
-            vertical-align: middle;
+            color: var(--brown);
         }
         
         .contact-info {
@@ -280,11 +275,12 @@
             font-size: 1.2rem;
             display: flex;
             align-items: center;
+            color: var(--brown);
         }
         
         .contact-title i {
             margin-right: 0.5rem;
-            color: var(--primary);
+            color: var(--primary-dark);
         }
         
         .social-link {
@@ -292,7 +288,7 @@
             align-items: center;
             margin-top: 1rem;
             font-weight: 500;
-            color: var(--purdue-black);
+            color: var(--brown);
             transition: var(--transition);
         }
         
@@ -302,7 +298,7 @@
         
         .social-link i {
             background-color: var(--primary);
-            color: white;
+            color: var(--brown);
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -325,24 +321,13 @@
             overflow: hidden;
             border: 1px solid #eee;
             transition: var(--transition);
+            padding: 1.5rem;
         }
         
         .activity-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow);
             border-color: var(--primary);
-        }
-        
-        .activity-image {
-            width: 100%;
-            height: 200px;
-            background-color: var(--secondary);
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .activity-content {
-            padding: 1.5rem;
         }
         
         .activity-date {
@@ -362,7 +347,7 @@
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            color: var(--purdue-black);
+            color: var(--brown);
         }
         
         .activity-excerpt {
@@ -374,25 +359,9 @@
             overflow: hidden;
         }
         
-        .read-more {
-            display: inline-block;
-            color: var(--primary-dark);
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        
-        .read-more:hover {
-            color: var(--purdue-black);
-        }
-        
-        .read-more i {
-            font-size: 0.8rem;
-            margin-left: 0.2rem;
-        }
-        
         /* Footer */
         footer {
-            background-color: var(--purdue-black);
+            background-color: var(--brown);
             color: var(--text-light);
             padding: 3rem 0;
             text-align: center;
@@ -405,7 +374,7 @@
             padding: 0 2rem;
         }
         
-        .footer-logo {
+        .footer-title {
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 1rem;
@@ -420,32 +389,18 @@
             margin-bottom: 0.5rem;
         }
         
-        .social-links {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            margin-bottom: 2rem;
+        .social-info {
+            margin: 1.5rem 0;
         }
         
-        .social-links li {
-            margin: 0 1rem;
+        .social-info p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
         }
         
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            color: var(--purdue-black);
-            transition: var(--transition);
-        }
-        
-        .social-links a:hover {
-            background-color: var(--primary-light);
-            transform: translateY(-3px);
+        .social-info i {
+            margin-right: 0.5rem;
+            color: var(--primary);
         }
         
         .copyright {
@@ -456,6 +411,11 @@
         
         /* Responsive */
         @media (max-width: 768px) {
+            .church-logo {
+                width: 140px;
+                height: 140px;
+            }
+            
             .site-title {
                 font-size: 2rem;
             }
@@ -503,12 +463,12 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="header-bg"></div>
         <div class="header-content">
+            <img src="logo.png" alt="퍼듀 천주교 로고" class="church-logo">
             <h1 class="site-title">인디애나폴리스 한인성당 퍼듀(Purdue) 공소</h1>
             <p class="site-subtitle">Indianapolis Korean Catholic Church - Purdue Mission</p>
             <div class="mass-time">
-                <i class="fas fa-cross mass-icon"></i> 매달 2, 4주차 토요일, 오후 5시 미사
+                ✝️ 매달 2, 4주차 토요일, 오후 5시 미사
             </div>
         </div>
     </header>
@@ -517,7 +477,8 @@
     <nav>
         <div class="nav-container">
             <a href="#" class="nav-logo">
-                <i class="fas fa-church"></i> 퍼듀 공소
+                <img src="logo.png" alt="퍼듀 천주교 로고 작은 버전">
+                퍼듀 공소
             </a>
             
             <button class="mobile-menu-btn">
@@ -537,10 +498,10 @@
     <main>
         <!-- Directions Section -->
         <section class="section" id="directions">
-            <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> 오시는 길</h2>
+            <h2 class="section-title"><span class="section-emoji">🧭</span> 오시는 길</h2>
             
             <div class="mass-schedule">
-                <i class="fas fa-cross mass-icon"></i> 매달 2, 4주차 토요일, 오후 5시 미사
+                ✝️ 매달 2, 4주차 토요일, 오후 5시 미사
             </div>
             
             <div class="directions-content">
@@ -555,64 +516,42 @@
                         <div class="contact-title">
                             <i class="fas fa-envelope"></i> 문의하기
                         </div>
-                        <p>미사 및 공소 활동에 관한 문의사항이나 라이드가 필요하신 분들은 DM으로 연락 주세요!</p>
+                        <p>미사 및 공소 활동에 관한 문의사항이나 라이드가 필요하신 분들은 DM으로 연락 주세요! 😄</p>
                         
-                        <a href="https://www.instagram.com/catholic_purdue/" target="_blank" class="social-link">
+                        <div class="social-link">
                             <i class="fab fa-instagram"></i> @catholic_purdue
-                        </a>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="directions-map">
-                    <!-- 여기에 지도 이미지를 업로드하세요 -->
-                    <img src="/api/placeholder/800/400" alt="퍼듀 공소 지도" style="width: 100%; height: 100%; object-fit: cover;">
+                    <!-- 지도 이미지 -->
+                    <img src="map.png" alt="퍼듀 공소 지도" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
         </section>
         
         <!-- Recent Activities Section -->
         <section class="section" id="activities">
-            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> 최근 활동</h2>
+            <h2 class="section-title"><span class="section-emoji">📅</span> 최근 활동</h2>
             
             <div class="activities-grid">
                 <div class="activity-card">
-                    <div class="activity-image" style="background-image: url('/api/placeholder/500/300')"></div>
-                    <div class="activity-content">
-                        <div class="activity-date"><i class="far fa-calendar"></i> 2025년 4월 27일</div>
-                        <h3 class="activity-title">부활절 미사 및 친교 모임</h3>
-                        <p class="activity-excerpt">부활의 기쁨을 함께 나누는 특별한 미사와 식사 시간을 가졌습니다. 많은 교우들이 참석해 주셔서 더욱 뜻깊은 시간이 되었습니다.</p>
-                        <a href="#" class="read-more">더 읽기 <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                    <div class="activity-date"><i class="far fa-calendar"></i> 2025년 4월 20일</div>
+                    <h3 class="activity-title">인디애나폴리스 부활절 미사</h3>
+                    <p class="activity-excerpt">2025년 4월 20일 부활의 기쁨을 함께 나누기 위해 인디애나폴리스 한인 성당을 방문했습니다. 그리스도의 부활이 우리 삶 속에서도 희망과 빛으로 살아 숨 쉬기를 기도합니다. 🌿✨</p>
                 </div>
                 
                 <div class="activity-card">
-                    <div class="activity-image" style="background-image: url('/api/placeholder/500/300')"></div>
-                    <div class="activity-content">
-                        <div class="activity-date"><i class="far fa-calendar"></i> 2025년 4월 13일</div>
-                        <h3 class="activity-title">성지 주일 미사</h3>
-                        <p class="activity-excerpt">성주간의 시작을 알리는 성지 주일 미사를 봉헌했습니다. 종려나무 축복식과 함께 예수님의 수난을 묵상하는 시간이었습니다.</p>
-                        <a href="#" class="read-more">더 읽기 <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                    <div class="activity-date"><i class="far fa-calendar"></i> 2025년 2월 8일</div>
+                    <h3 class="activity-title">2025년 위령미사</h3>
+                    <p class="activity-excerpt">2025년 2월 8일 미사는 앞서 있던 설날을 맞이하여 위령미사로 진행하여 먼저 떠난 조상님들을 기억하고 기도하였습니다. 또 저녁 식사로 명절 음식을 같이 먹으며 모두 함께 명절 분위기를 즐겼습니다. 새해 복 많이 받으세요!</p>
                 </div>
                 
                 <div class="activity-card">
-                    <div class="activity-image" style="background-image: url('/api/placeholder/500/300')"></div>
-                    <div class="activity-content">
-                        <div class="activity-date"><i class="far fa-calendar"></i> 2025년 3월 30일</div>
-                        <h3 class="activity-title">사순 특강</h3>
-                        <p class="activity-excerpt">사순 시기를 맞아 보다 의미있는 부활을 준비하기 위한 특별 강의가 있었습니다. 많은 학생들이 참석하여 신앙을 깊이하는 시간이었습니다.</p>
-                        <a href="#" class="read-more">더 읽기 <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                
-                <div class="activity-card">
-                    <div class="activity-image" style="background-image: url('/api/placeholder/500/300')"></div>
-                    <div class="activity-content">
-                        <div class="activity-date"><i class="far fa-calendar"></i> 2025년 3월 16일</div>
-                        <h3 class="activity-title">성 요셉 축일 기념 미사</h3>
-                        <p class="activity-excerpt">성 요셉 대축일을 맞아 특별 미사가 봉헌되었습니다. 미사 후 함께 나눈 식사와 친교는 공동체의 일치를 더욱 강화하는 시간이 되었습니다.</p>
-                        <a href="#" class="read-more">더 읽기 <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                    <div class="activity-date"><i class="far fa-calendar"></i> 2024년 12월 28일</div>
+                    <h3 class="activity-title">성가정 축일 및 유아세례식</h3>
+                    <p class="activity-excerpt">2024년 12월 28일 성가정 축일에 유아세례식이 있었습니다. 하느님의 축복 속에서 세례 받은 아이들이 앞으로 사랑과 믿음으로 잘 자라나도록 함께 기도 부탁 드립니다!</p>
                 </div>
             </div>
         </section>
@@ -621,7 +560,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">인디애나폴리스 한인성당 퍼듀 공소</div>
+            <div class="footer-title">인디애나폴리스 한인성당 퍼듀 공소</div>
             
             <div class="footer-contact">
                 <p>St. Thomas Aquinas Catholic Church</p>
@@ -629,12 +568,9 @@
                 <p>미사 시간: 매달 2, 4주차 토요일, 오후 5시</p>
             </div>
             
-            <ul class="social-links">
-                <li><a href="https://www.instagram.com/catholic_purdue/" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                <li><a href="#"><i class="fab fa-kakao"></i></a></li>
-            </ul>
+            <div class="social-info">
+                <p><i class="fab fa-instagram"></i> Instagram: @catholic_purdue</p>
+            </div>
             
             <div class="copyright">
                 &copy; 2025 인디애나폴리스 한인성당 퍼듀 공소. All Rights Reserved.
