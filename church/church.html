@@ -322,6 +322,7 @@
             border: 1px solid #eee;
             transition: var(--transition);
             padding: 1.5rem;
+            cursor: pointer;
         }
         
         .activity-card:hover {
@@ -357,6 +358,101 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+        }
+        
+        /* Modal Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: var(--brown);
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .modal-title {
+            color: var(--brown);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .modal-date {
+            color: var(--primary-dark);
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .modal-date i {
+            margin-right: 0.5rem;
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .modal-description {
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
         }
         
         /* Footer */
@@ -401,6 +497,16 @@
         .social-info i {
             margin-right: 0.5rem;
             color: var(--primary);
+        }
+        
+        .social-info a {
+            color: var(--primary-light);
+            transition: var(--transition);
+        }
+        
+        .social-info a:hover {
+            color: white;
+            text-decoration: underline;
         }
         
         .copyright {
@@ -511,17 +617,6 @@
                         <div class="address-line">St. Thomas Aquinas Catholic Church</div>
                         <div class="address-line">535 W State St, West Lafayette, IN 47906</div>
                     </div>
-                    
-                    <div class="contact-info" id="contact">
-                        <div class="contact-title">
-                            <i class="fas fa-envelope"></i> 문의하기
-                        </div>
-                        <p>미사 및 공소 활동에 관한 문의사항이나 라이드가 필요하신 분들은 DM으로 연락 주세요! 😄</p>
-                        
-                        <div class="social-link">
-                            <i class="fab fa-instagram"></i> @catholic_purdue
-                        </div>
-                    </div>
                 </div>
                 
                 <div class="directions-map">
@@ -536,23 +631,50 @@
             <h2 class="section-title"><span class="section-emoji">📅</span> 최근 활동</h2>
             
             <div class="activities-grid">
-                <div class="activity-card">
+                <div class="activity-card" data-id="1">
                     <div class="activity-date"><i class="far fa-calendar"></i> 2025년 4월 20일</div>
                     <h3 class="activity-title">인디애나폴리스 부활절 미사</h3>
                     <p class="activity-excerpt">2025년 4월 20일 부활의 기쁨을 함께 나누기 위해 인디애나폴리스 한인 성당을 방문했습니다. 그리스도의 부활이 우리 삶 속에서도 희망과 빛으로 살아 숨 쉬기를 기도합니다. 🌿✨</p>
                 </div>
                 
-                <div class="activity-card">
+                <div class="activity-card" data-id="2">
                     <div class="activity-date"><i class="far fa-calendar"></i> 2025년 2월 8일</div>
                     <h3 class="activity-title">2025년 위령미사</h3>
                     <p class="activity-excerpt">2025년 2월 8일 미사는 앞서 있던 설날을 맞이하여 위령미사로 진행하여 먼저 떠난 조상님들을 기억하고 기도하였습니다. 또 저녁 식사로 명절 음식을 같이 먹으며 모두 함께 명절 분위기를 즐겼습니다. 새해 복 많이 받으세요!</p>
                 </div>
                 
-                <div class="activity-card">
+                <div class="activity-card" data-id="3">
                     <div class="activity-date"><i class="far fa-calendar"></i> 2024년 12월 28일</div>
                     <h3 class="activity-title">성가정 축일 및 유아세례식</h3>
                     <p class="activity-excerpt">2024년 12월 28일 성가정 축일에 유아세례식이 있었습니다. 하느님의 축복 속에서 세례 받은 아이들이 앞으로 사랑과 믿음으로 잘 자라나도록 함께 기도 부탁 드립니다!</p>
                 </div>
+            </div>
+            
+            <!-- Modal Popup for Activities -->
+            <div class="modal" id="activityModal">
+                <div class="modal-content">
+                    <button class="modal-close">&times;</button>
+                    <h3 class="modal-title"></h3>
+                    <div class="modal-date"><i class="far fa-calendar"></i> <span id="modalDate"></span></div>
+                    <img class="modal-image" src="" alt="활동 사진">
+                    <div class="modal-description"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <h2 class="section-title"><span class="section-emoji">📞</span> 문의하기</h2>
+            
+            <div class="contact-info">
+                <div class="contact-title">
+                    <i class="fas fa-envelope"></i> 문의 및 연락 안내
+                </div>
+                <p>미사 및 공소 활동에 관한 문의사항이나 라이드가 필요하신 분들은 DM으로 연락 주세요! 😄</p>
+                
+                <a href="https://www.instagram.com/catholic_purdue/" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i> @catholic_purdue
+                </a>
             </div>
         </section>
     </main>
@@ -569,7 +691,7 @@
             </div>
             
             <div class="social-info">
-                <p><i class="fab fa-instagram"></i> Instagram: @catholic_purdue</p>
+                <p><i class="fab fa-instagram"></i> Instagram: <a href="https://www.instagram.com/catholic_purdue/" target="_blank">@catholic_purdue</a></p>
             </div>
             
             <div class="copyright">
@@ -606,6 +728,81 @@
                     navLinks.classList.remove('active');
                 }
             });
+        });
+        
+        // Activity Modal Popup
+        const modal = document.getElementById('activityModal');
+        const modalTitle = document.querySelector('.modal-title');
+        const modalDate = document.getElementById('modalDate');
+        const modalImage = document.querySelector('.modal-image');
+        const modalDescription = document.querySelector('.modal-description');
+        const modalClose = document.querySelector('.modal-close');
+        
+        // Activity details
+        const activityDetails = [
+            {
+                id: 1,
+                title: "인디애나폴리스 부활절 미사",
+                date: "2025년 4월 20일",
+                image: "event1.png",
+                description: "2025년 4월 20일 부활의 기쁨을 함께 나누기 위해 인디애나폴리스 한인 성당을 방문했습니다. 주일미사는 물론 식사 준비 및 뒷정리까지 함께 봉사할 수 있었습니다.<br><br>주임 신부님의 부활 대축일 강론에서는 예수님의 부활이 우리 삶 속에 어떤 의미를 가지는지에 대해 깊이 있는 말씀을 나누어 주셨습니다. 미사 후에는 특별히 준비된 만찬과 함께 공동체 친교의 시간을 가졌으며, 부활절 특별 행사도 진행되었습니다.<br><br>그리스도의 부활이 우리 삶 속에서도 희망과 빛으로 살아 숨 쉬기를 기도합니다. 🌿✨"
+            },
+            {
+                id: 2,
+                title: "2025년 위령미사",
+                date: "2025년 2월 8일",
+                image: "event2.png",
+                description: "2025년 2월 8일 미사는 앞서 있던 설날을 맞이하여 위령미사로 진행하였습니다. 한국의 설 명절 전통에 따라 먼저 떠난 조상님들을 기억하고 기도하는 특별한 시간이었습니다.<br><br>미사 중에는 학생들과 교우들이 각자 가족과 조상님들을 위한 지향을 봉헌하였으며, 공동체 전체가 함께 조상님들의 영혼을 위해 기도했습니다.<br><br>미사 후에는 저녁 식사로 떡국, 전, 잡채 등 다양한 명절 음식을 함께 나누며 모두 함께 명절 분위기를 즐겼습니다. 서로의 고향과 가족 이야기를 나누며 타지에서 느끼는 명절의 그리움을 함께 위로하는 따뜻한 시간이었습니다.<br><br>새해 복 많이 받으세요! 🎊"
+            },
+            {
+                id: 3,
+                title: "성가정 축일 및 유아세례식",
+                date: "2024년 12월 28일",
+                image: "event3.png",
+                description: "2024년 12월 28일 성가정 축일에 특별한 유아세례식이 있었습니다. 세 가정의 아이들이 하느님의 자녀로 새롭게 태어나는 은총의 시간이었습니다.<br><br>세례식은 신부님의 집전으로 엄숙하고도 따뜻한 분위기 속에서 진행되었으며, 세례를 받는 아이들의 부모님과 대부모님, 그리고 공동체 모든 구성원들이 함께 기쁨을 나누었습니다.<br><br>특히 성가정 축일을 맞아 가정의 소중함과 성가정을 본받는 삶에 대한 신부님의 강론이 많은 이들에게 깊은 울림을 주었습니다.<br><br>하느님의 축복 속에서 세례 받은 아이들이 앞으로 사랑과 믿음으로 잘 자라나도록 함께 기도 부탁 드립니다! 👶✝️"
+            }
+        ];
+        
+        // Open modal when clicking on activity card
+        document.querySelectorAll('.activity-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const activityId = parseInt(this.getAttribute('data-id'));
+                const activity = activityDetails.find(item => item.id === activityId);
+                
+                if (activity) {
+                    modalTitle.textContent = activity.title;
+                    modalDate.textContent = activity.date;
+                    modalImage.src = activity.image;
+                    modalImage.alt = activity.title;
+                    modalDescription.innerHTML = activity.description;
+                    
+                    // Show modal
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                }
+            });
+        });
+        
+        // Close modal
+        modalClose.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Enable scrolling
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Enable scrolling
+            }
+        });
+        
+        // Close modal with Escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Enable scrolling
+            }
         });
     </script>
 </body>
