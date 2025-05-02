@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인디애나폴리스 한인성당 퍼듀(Purdue) 공소</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --primary: #CEB888; /* Purdue Gold */
+            --primary-light: #E6D9B8;
+            --primary-dark: #9E8B50;
+            --secondary: #F9F7F0;
+            --accent: #9D9D9D; /* Purdue secondary accent */
+            --text-dark: #333;
+            --text-light: #f8f9fa;
+            --purdue-black: #000000; /* Purdue Black */
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f8f9fa;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--purdue-black), #333);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px solid var(--primary);
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .site-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .site-subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        
+        .mass-time {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--purdue-black);
+            font-weight: 700;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            margin-top: 1rem;
+            box-shadow: var(--shadow);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--purdue-black);
+            padding: 1rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-logo i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+        
+        .nav-links a {
+            display: block;
+            padding: 1rem 0;
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            border-top: 4px solid var(--primary);
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: var(--purdue-black);
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .section-title i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+        
+        /* Directions */
+        .directions-content {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .directions-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .directions-map {
+            flex: 2;
+            min-width: 300px;
+            height: 400px;
+            background-color: var(--secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        
+        .address-box {
+            background-color: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .address-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .address-line {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mass-schedule {
+            background-color: var(--primary-light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .mass-icon {
+            color: var(--purdue-black);
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        .contact-info {
+            background-color: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .contact-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-title i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+            font-weight: 500;
+            color: var(--purdue-black);
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            color: var(--primary-dark);
+        }
+        
+        .social-link i {
+            background-color: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.8rem;
+        }
+        
+        /* Recent Activities */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .activity-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: var(--transition);
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+        
+        .activity-image {
+            width: 100%;
+            height: 200px;
+            background-color: var(--secondary);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .activity-content {
+            padding: 1.5rem;
+        }
+        
+        .activity-date {
+            color: var(--primary-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .activity-date i {
+            margin-right: 0.5rem;
+        }
+        
+        .activity-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--purdue-black);
+        }
+        
+        .activity-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: var(--primary-dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .read-more:hover {
+            color: var(--purdue-black);
+        }
+        
+        .read-more i {
+            font-size: 0.8rem;
+            margin-left: 0.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--purdue-black);
+            color: var(--text-light);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 5px solid var(--primary);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .footer-contact {
+            margin-bottom: 2rem;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links li {
+            margin: 0 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--purdue-black);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .site-title {
+                font-size: 2rem;
+            }
+            
+            .site-subtitle {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                height: 0;
+                flex-direction: column;
+                background-color: white;
+                overflow: hidden;
+                transition: height 0.3s ease;
+                box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                height: 180px;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .directions-content {
+                flex-direction: column;
+            }
+            
+            .directions-map {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <h1 class="site-title">인디애나폴리스 한인성당 퍼듀(Purdue) 공소</h1>
+            <p class="site-subtitle">Indianapolis Korean Catholic Church - Purdue Mission</p>
+            <div class="mass-time">
+                <i class="fas fa-cross mass-icon"></i> 매달 2, 4주차 토요일, 오후 5시 미사
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <i class="fas fa-church"></i> 퍼듀 공소
+            </a>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="#" class="active">홈</a></li>
+                <li><a href="#directions">오시는 길</a></li>
+                <li><a href="#activities">최근 활동</a></li>
+                <li><a href="#contact">문의하기</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Directions Section -->
+        <section class="section" id="directions">
+            <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> 오시는 길</h2>
+            
+            <div class="mass-schedule">
+                <i class="fas fa-cross mass-icon"></i> 매달 2, 4주차 토요일, 오후 5시 미사
+            </div>
+            
+            <div class="directions-content">
+                <div class="directions-info">
+                    <div class="address-box">
+                        <div class="address-title">주소</div>
+                        <div class="address-line">St. Thomas Aquinas Catholic Church</div>
+                        <div class="address-line">535 W State St, West Lafayette, IN 47906</div>
+                    </div>
+                    
+                    <div class="contact-info" id="contact">
+                        <div class="contact-title">
+                            <i class="fas fa-envelope"></i> 문의하기
+                        </div>
+                        <p>미사 및 공소 활동에 관한 문의사항이나 라이드가 필요하신 분들은 DM으로 연락 주세요!</p>
+                        
+                        <a href="https://www.instagram.com/catholic_purdue/" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i> @catholic_purdue
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="directions-map">
+                    <!-- 여기에 지도 이미지를 업로드하세요 -->
+                    <img src="/api/placeholder/800/400" alt="퍼듀 공소 지도" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Recent Activities Section -->
+        <section class="section" id="activities">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> 최근 활동</h2>
+            
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-image" style="background-image: url('/api/placeholder/500/300')"></div>
+                    <div class="activity-content">
+                        <div class="activity-date"><i class="far fa-calendar"></i> 2025년 4월 27일</div>
+                        <h3 class="activity-title">부활절 미사 및 친교 모임</h3>
+                        <p class="activity-excerpt">부활의 기쁨을 함께 나누는 특별한 미사와 식사 시간을 가졌습니다. 많은 교우들이 참석해 주셔서 더욱 뜻깊은 시간이 되었습니다.</p>
+                        <a href="#" class="read-more">더 읽기 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-image" style="background-image: url('/api/placeholder/500/300')"></div>
+                    <div class="activity-content">
+                        <div class="activity-date"><i class="far fa-calendar"></i> 2025년 4월 13일</div>
+                        <h3 class="activity-title">성지 주일 미사</h3>
+                        <p class="activity-excerpt">성주간의 시작을 알리는 성지 주일 미사를 봉헌했습니다. 종려나무 축복식과 함께 예수님의 수난을 묵상하는 시간이었습니다.</p>
+                        <a href="#" class="read-more">더 읽기 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-image" style="background-image: url('/api/placeholder/500/300')"></div>
+                    <div class="activity-content">
+                        <div class="activity-date"><i class="far fa-calendar"></i> 2025년 3월 30일</div>
+                        <h3 class="activity-title">사순 특강</h3>
+                        <p class="activity-excerpt">사순 시기를 맞아 보다 의미있는 부활을 준비하기 위한 특별 강의가 있었습니다. 많은 학생들이 참석하여 신앙을 깊이하는 시간이었습니다.</p>
+                        <a href="#" class="read-more">더 읽기 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-image" style="background-image: url('/api/placeholder/500/300')"></div>
+                    <div class="activity-content">
+                        <div class="activity-date"><i class="far fa-calendar"></i> 2025년 3월 16일</div>
+                        <h3 class="activity-title">성 요셉 축일 기념 미사</h3>
+                        <p class="activity-excerpt">성 요셉 대축일을 맞아 특별 미사가 봉헌되었습니다. 미사 후 함께 나눈 식사와 친교는 공동체의 일치를 더욱 강화하는 시간이 되었습니다.</p>
+                        <a href="#" class="read-more">더 읽기 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">인디애나폴리스 한인성당 퍼듀 공소</div>
+            
+            <div class="footer-contact">
+                <p>St. Thomas Aquinas Catholic Church</p>
+                <p>535 W State St, West Lafayette, IN 47906</p>
+                <p>미사 시간: 매달 2, 4주차 토요일, 오후 5시</p>
+            </div>
+            
+            <ul class="social-links">
+                <li><a href="https://www.instagram.com/catholic_purdue/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fab fa-kakao"></i></a></li>
+            </ul>
+            
+            <div class="copyright">
+                &copy; 2025 인디애나폴리스 한인성당 퍼듀 공소. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
