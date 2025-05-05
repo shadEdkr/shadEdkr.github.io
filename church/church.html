@@ -308,27 +308,42 @@
             margin-right: 0.8rem;
         }
         
-        /* Recent Activities */
-        .activities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+        /* Recent Activities - Accordion Style */
+        .accordion-container {
+            border-radius: 8px;
+            overflow: hidden;
         }
         
-        .activity-card {
+        .accordion-item {
+            margin-bottom: 1rem;
             background-color: white;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #eee;
-            transition: var(--transition);
-            padding: 1.5rem;
-            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
         
-        .activity-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-            border-color: var(--primary);
+        .accordion-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .accordion-item:hover .accordion-header {
+            background-color: var(--primary-light);
+        }
+        
+        .accordion-info {
+            flex: 1;
         }
         
         .activity-date {
@@ -347,112 +362,60 @@
         .activity-title {
             font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
             color: var(--brown);
+            margin: 0;
         }
         
-        .activity-excerpt {
-            color: #666;
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        /* Modal Popup */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-            animation: modalFadeIn 0.3s ease;
-        }
-        
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            color: var(--brown);
+        .accordion-toggle {
             background: none;
             border: none;
-            cursor: pointer;
             width: 30px;
             height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            transition: var(--transition);
-        }
-        
-        .modal-close:hover {
             background-color: var(--primary-light);
-        }
-        
-        .modal-title {
             color: var(--brown);
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .modal-date {
-            color: var(--primary-dark);
-            font-weight: 500;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
+        .accordion-toggle i {
+            transition: transform 0.3s ease;
         }
         
-        .modal-date i {
-            margin-right: 0.5rem;
+        .accordion-item.active .accordion-toggle {
+            background-color: var(--primary);
         }
         
-        .modal-image {
+        .accordion-item.active .accordion-toggle i {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 2000px; /* Large enough value to accommodate content */
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .activity-image {
             width: 100%;
             height: auto;
             border-radius: 8px;
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
+            margin: 1.5rem 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         
-        .modal-description {
-            color: var(--text-dark);
+        .activity-description p {
+            margin-bottom: 1rem;
             line-height: 1.8;
-            margin-bottom: 1.5rem;
         }
         
         /* Footer */
@@ -563,6 +526,29 @@
             .directions-map {
                 height: 300px;
             }
+            
+            /* 모바일 UI 수정 - 주소와 오시는 방법 상자 간격 조정 */
+            .address-box {
+                margin-bottom: 0.8rem;
+                padding: 1.2rem;
+            }
+            
+            #directions .address-box + .address-box {
+                margin-top: 0.8rem;
+            }
+            
+            .directions-info {
+                margin-bottom: 1rem;
+            }
+            
+            .mass-schedule {
+                margin-bottom: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -574,7 +560,7 @@
             <h1 class="site-title">퍼듀 (Purdue) 한인성당 - 인디애나폴리스 퍼듀 공소</h1>
             <p class="site-subtitle">Purdue Korean Catholic Church - Indianapolis Purdue Mission</p>
             <div class="mass-time">
-                ✝️ 매달 2, 4주차 토요일, 오후 5시 미사
+                ✝️ 처음과 같이 이제와 항상 영원히, 아멘 ✝️
             </div>
         </div>
     </header>
@@ -584,7 +570,7 @@
         <div class="nav-container">
             <a href="#" class="nav-logo">
                 <img src="logo.png" alt="퍼듀 천주교 로고 작은 버전">
-                퍼듀 공소
+                퍼듀 한인성당
             </a>
             
             <button class="mobile-menu-btn">
@@ -631,38 +617,74 @@
             </div>
         </section>
         
-        <!-- Recent Activities Section -->
+        <!-- Recent Activities Section - Accordion Style -->
         <section class="section" id="activities">
             <h2 class="section-title"><span class="section-emoji">📅</span> 최근 활동</h2>
             
-            <div class="activities-grid">
-                <div class="activity-card" data-id="1">
-                    <div class="activity-date"><i class="far fa-calendar"></i> 2025년 4월 20일</div>
-                    <h3 class="activity-title">인디애나폴리스 부활절 미사</h3>
-                    <p class="activity-excerpt">2025년 4월 20일 부활의 기쁨을 함께 나누기 위해 인디애나폴리스 한인 성당을 방문했습니다. 그리스도의 부활이 우리 삶 속에서도 희망과 빛으로 살아 숨 쉬기를 기도합니다. 🌿✨</p>
+            <div class="accordion-container">
+                <!-- Accordion Item 1 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-info">
+                            <div class="activity-date"><i class="far fa-calendar"></i> 2025년 4월 20일</div>
+                            <h3 class="activity-title">인디애나폴리스 부활절 미사</h3>
+                        </div>
+                        <button class="accordion-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="accordion-content">
+                        <img src="event1.jpg" alt="인디애나폴리스 부활절 미사" class="activity-image">
+                        <div class="activity-description">
+                            <p>2025년 4월 20일 부활의 기쁨을 함께 나누기 위해 인디애나폴리스 한인 성당을 방문했습니다. 주일미사는 물론 식사 준비 및 뒷정리까지 함께 봉사할 수 있었습니다.</p>
+                            <p>주임 신부님의 부활 대축일 강론에서는 예수님의 부활이 우리 삶 속에 어떤 의미를 가지는지에 대해 깊이 있는 말씀을 나누어 주셨습니다. 미사 후에는 특별히 준비된 만찬과 함께 공동체 친교의 시간을 가졌으며, 부활절 특별 행사도 진행되었습니다.</p>
+                            <p>그리스도의 부활이 우리 삶 속에서도 희망과 빛으로 살아 숨 쉬기를 기도합니다. 🌿✨</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="activity-card" data-id="2">
-                    <div class="activity-date"><i class="far fa-calendar"></i> 2025년 2월 8일</div>
-                    <h3 class="activity-title">2025년 위령미사</h3>
-                    <p class="activity-excerpt">2025년 2월 8일 미사는 앞서 있던 설날을 맞이하여 위령미사로 진행하여 먼저 떠난 조상님들을 기억하고 기도하였습니다. 또 저녁 식사로 명절 음식을 같이 먹으며 모두 함께 명절 분위기를 즐겼습니다. 새해 복 많이 받으세요!</p>
+                <!-- Accordion Item 2 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-info">
+                            <div class="activity-date"><i class="far fa-calendar"></i> 2025년 2월 8일</div>
+                            <h3 class="activity-title">2025년 위령미사</h3>
+                        </div>
+                        <button class="accordion-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="accordion-content">
+                        <img src="event2.jpg" alt="2025년 위령미사" class="activity-image">
+                        <div class="activity-description">
+                            <p>2025년 2월 8일 미사는 앞서 있던 설날을 맞이하여 위령미사로 진행하였습니다. 한국의 설 명절 전통에 따라 먼저 떠난 조상님들을 기억하고 기도하는 특별한 시간이었습니다.</p>
+                            <p>미사 중에는 학생들과 교우들이 각자 가족과 조상님들을 위한 지향을 봉헌하였으며, 공동체 전체가 함께 조상님들의 영혼을 위해 기도했습니다.</p>
+                            <p>미사 후에는 저녁 식사로 떡국, 전, 잡채 등 다양한 명절 음식을 함께 나누며 모두 함께 명절 분위기를 즐겼습니다. 서로의 고향과 가족 이야기를 나누며 타지에서 느끼는 명절의 그리움을 함께 위로하는 따뜻한 시간이었습니다.</p>
+                            <p>새해 복 많이 받으세요! 🎊</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="activity-card" data-id="3">
-                    <div class="activity-date"><i class="far fa-calendar"></i> 2024년 12월 28일</div>
-                    <h3 class="activity-title">성가정 축일 및 유아세례식</h3>
-                    <p class="activity-excerpt">2024년 12월 28일 성가정 축일에 유아세례식이 있었습니다. 하느님의 축복 속에서 세례 받은 아이들이 앞으로 사랑과 믿음으로 잘 자라나도록 함께 기도 부탁 드립니다!</p>
-                </div>
-            </div>
-            
-            <!-- Modal Popup for Activities -->
-            <div class="modal" id="activityModal">
-                <div class="modal-content">
-                    <button class="modal-close">&times;</button>
-                    <h3 class="modal-title"></h3>
-                    <div class="modal-date"><i class="far fa-calendar"></i> <span id="modalDate"></span></div>
-                    <img class="modal-image" src="" alt="활동 사진">
-                    <div class="modal-description"></div>
+                <!-- Accordion Item 3 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-info">
+                            <div class="activity-date"><i class="far fa-calendar"></i> 2024년 12월 28일</div>
+                            <h3 class="activity-title">성가정 축일 및 유아세례식</h3>
+                        </div>
+                        <button class="accordion-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="accordion-content">
+                        <img src="event3.jpg" alt="성가정 축일 및 유아세례식" class="activity-image">
+                        <div class="activity-description">
+                            <p>2024년 12월 28일 성가정 축일에 특별한 유아세례식이 있었습니다. 세 가정의 아이들이 하느님의 자녀로 새롭게 태어나는 은총의 시간이었습니다.</p>
+                            <p>세례식은 신부님의 집전으로 엄숙하고도 따뜻한 분위기 속에서 진행되었으며, 세례를 받는 아이들의 부모님과 대부모님, 그리고 공동체 모든 구성원들이 함께 기쁨을 나누었습니다.</p>
+                            <p>특히 성가정 축일을 맞아 가정의 소중함과 성가정을 본받는 삶에 대한 신부님의 강론이 많은 이들에게 깊은 울림을 주었습니다.</p>
+                            <p>하느님의 축복 속에서 세례 받은 아이들이 앞으로 사랑과 믿음으로 잘 자라나도록 함께 기도 부탁 드립니다! 👶✝️</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -735,79 +757,36 @@
             });
         });
         
-        // Activity Modal Popup
-        const modal = document.getElementById('activityModal');
-        const modalTitle = document.querySelector('.modal-title');
-        const modalDate = document.getElementById('modalDate');
-        const modalImage = document.querySelector('.modal-image');
-        const modalDescription = document.querySelector('.modal-description');
-        const modalClose = document.querySelector('.modal-close');
+        // Accordion functionality for activity items
+        const accordionItems = document.querySelectorAll('.accordion-item');
         
-        // Activity details
-        const activityDetails = [
-            {
-                id: 1,
-                title: "인디애나폴리스 부활절 미사",
-                date: "2025년 4월 20일",
-                image: "event1.jpg",
-                description: "2025년 4월 20일 부활의 기쁨을 함께 나누기 위해 인디애나폴리스 한인 성당을 방문했습니다. 주일미사는 물론 식사 준비 및 뒷정리까지 함께 봉사할 수 있었습니다.<br><br>주임 신부님의 부활 대축일 강론에서는 예수님의 부활이 우리 삶 속에 어떤 의미를 가지는지에 대해 깊이 있는 말씀을 나누어 주셨습니다. 미사 후에는 특별히 준비된 만찬과 함께 공동체 친교의 시간을 가졌으며, 부활절 특별 행사도 진행되었습니다.<br><br>그리스도의 부활이 우리 삶 속에서도 희망과 빛으로 살아 숨 쉬기를 기도합니다. 🌿✨"
-            },
-            {
-                id: 2,
-                title: "2025년 위령미사",
-                date: "2025년 2월 8일",
-                image: "event2.jpg",
-                description: "2025년 2월 8일 미사는 앞서 있던 설날을 맞이하여 위령미사로 진행하였습니다. 한국의 설 명절 전통에 따라 먼저 떠난 조상님들을 기억하고 기도하는 특별한 시간이었습니다.<br><br>미사 중에는 학생들과 교우들이 각자 가족과 조상님들을 위한 지향을 봉헌하였으며, 공동체 전체가 함께 조상님들의 영혼을 위해 기도했습니다.<br><br>미사 후에는 저녁 식사로 떡국, 전, 잡채 등 다양한 명절 음식을 함께 나누며 모두 함께 명절 분위기를 즐겼습니다. 서로의 고향과 가족 이야기를 나누며 타지에서 느끼는 명절의 그리움을 함께 위로하는 따뜻한 시간이었습니다.<br><br>새해 복 많이 받으세요! 🎊"
-            },
-            {
-                id: 3,
-                title: "성가정 축일 및 유아세례식",
-                date: "2024년 12월 28일",
-                image: "event3.jpg",
-                description: "2024년 12월 28일 성가정 축일에 특별한 유아세례식이 있었습니다. 세 가정의 아이들이 하느님의 자녀로 새롭게 태어나는 은총의 시간이었습니다.<br><br>세례식은 신부님의 집전으로 엄숙하고도 따뜻한 분위기 속에서 진행되었으며, 세례를 받는 아이들의 부모님과 대부모님, 그리고 공동체 모든 구성원들이 함께 기쁨을 나누었습니다.<br><br>특히 성가정 축일을 맞아 가정의 소중함과 성가정을 본받는 삶에 대한 신부님의 강론이 많은 이들에게 깊은 울림을 주었습니다.<br><br>하느님의 축복 속에서 세례 받은 아이들이 앞으로 사랑과 믿음으로 잘 자라나도록 함께 기도 부탁 드립니다! 👶✝️"
-            }
-        ];
-        
-        // Open modal when clicking on activity card
-        document.querySelectorAll('.activity-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const activityId = parseInt(this.getAttribute('data-id'));
-                const activity = activityDetails.find(item => item.id === activityId);
-                
-                if (activity) {
-                    modalTitle.textContent = activity.title;
-                    modalDate.textContent = activity.date;
-                    modalImage.src = activity.image;
-                    modalImage.alt = activity.title;
-                    modalDescription.innerHTML = activity.description;
-                    
-                    // Show modal
-                    modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling
-                }
+        // Function to toggle accordion
+        function toggleAccordion() {
+            const isActive = this.classList.contains('active');
+            
+            // Close all accordion items
+            accordionItems.forEach(item => {
+                item.classList.remove('active');
             });
-        });
-        
-        // Close modal
-        modalClose.addEventListener('click', () => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Enable scrolling
-        });
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Enable scrolling
+            
+            // Open the clicked item (unless it was already open)
+            if (!isActive) {
+                this.classList.add('active');
+                
+                // Scroll into view if needed
+                const headerRect = this.querySelector('.accordion-header').getBoundingClientRect();
+                if (headerRect.top < 0) {
+                    this.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
-        });
+        }
         
-        // Close modal with Escape key
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.style.display === 'flex') {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Enable scrolling
-            }
+        // Add click event to accordion headers
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', function() {
+                toggleAccordion.call(item);
+            });
         });
     </script>
 </body>
