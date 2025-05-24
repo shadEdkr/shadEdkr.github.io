@@ -5,2122 +5,648 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/images/favicon.png" type="image/png">
     <title>Yoonsung Ed Cho - Purdue Cybersecurity Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'purdue-gold': '#CEB888',
+                        'purdue-black': '#000000',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --purdue-gold: #CEB888;
-            --purdue-black: #000000;
-            --dark-gray: #333333;
-            --light-gray: #f5f5f5;
-            --accent-color: #9D2235;
-            --text-color: var(--dark-gray);
-            --bg-color: var(--light-gray);
-            --card-bg: white;
-        }
-        
-        [data-theme="dark"] {
-            --purdue-gold: #D4AF37;
-            --dark-gray: #f5f5f5;
-            --light-gray: #1a1a1a;
-            --text-color: #f5f5f5;
-            --bg-color: #121212;
-            --card-bg: #2a2a2a;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
-        header {
-            background-color: var(--purdue-black);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: var(--purdue-gold);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        /* Toggle Switch for Dark Mode */
-        .theme-switch-wrapper {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        .timeline-card {
-        opacity: 1 !important;
-        }
-                
-        .theme-switch {
-            display: inline-block;
-            height: 24px;
-            position: relative;
-            width: 48px;
-        }
-        
-        .theme-switch input {
-            display: none;
-        }
-        
-        .slider {
-            background-color: #ccc;
-            bottom: 0;
-            cursor: pointer;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            transition: .4s;
-            border-radius: 34px;
-        }
-        
-        .slider:before {
-            background-color: white;
-            bottom: 4px;
-            content: "";
-            height: 16px;
-            left: 4px;
-            position: absolute;
-            transition: .4s;
-            width: 16px;
-            border-radius: 50%;
-        }
-        
-        input:checked + .slider {
-            background-color: var(--purdue-gold);
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(24px);
-        }
-        
-        .slider-icons {
-            color: white;
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 8px;
-            line-height: 24px;
-        }
-        
-        nav {
-            background-color: var(--purdue-gold);
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin: 0 15px;
-        }
-        
-        nav ul li a {
-            color: var(--purdue-black);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: white;
-        }
-        
-        .hero {
-            display: flex;
-            padding: 60px 20px;
-            background-color: var(--card-bg);
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-            transition: background-color 0.3s;
-        }
-        
-        .hero-text {
-            flex: 1;
-            padding-right: 40px;
-        }
-        
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 50%;
-            border: 5px solid var(--purdue-gold);
-        }
-        
-        .section {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .section:nth-child(even) {
-            background-color: var(--card-bg);
-            transition: background-color 0.3s;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: var(--purdue-gold);
-        }
-        
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: var(--purdue-gold);
-            border-bottom: 2px solid var(--purdue-gold);
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-        
-        h3 {
-            font-size: 1.5rem;
-            margin: 20px 0 10px 0;
-            color: var(--accent-color);
-        }
-        
-        p {
-            margin-bottom: 15px;
-        }
-        
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .skill-category {
-            flex: 1;
-            min-width: 250px;
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: background-color 0.3s;
-        }
-        
-        .skill-bar {
-            height: 10px;
-            background-color: var(--light-gray);
-            border-radius: 5px;
-            margin-bottom: 15px;
-            position: relative;
-        }
-        
-        .skill-level {
-            height: 100%;
-            border-radius: 5px;
-            background-color: var(--purdue-gold);
-        }
-        
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        /* Standardized fixed-size project boxes */
-        .project-card {
-            height: 520px; /* Fixed height that accommodates all content */
-            display: flex;
-            flex-direction: column;
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s, background-color 0.3s;
-        }
-        
-        .project-img {
-            width: 100%;
-            height: 200px; /* Fixed height for image area */
-            background-color: var(--light-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-            flex-shrink: 0; /* Prevent shrinking */
-        }
-        
-        .project-content {
-            padding: 20px;
-            flex-grow: 1; /* Allow content area to grow */
-            display: flex;
-            flex-direction: column;
-            overflow: hidden; /* Prevent content overflow */
-        }
-        
-        .project-content h3 {
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-        
-        .project-content p {
-            flex-grow: 1;
-            overflow: auto; /* Add scrolling if needed */
-            margin-bottom: 15px;
-        }
-        
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-top: auto; /* Push to bottom */
-        }
-        
-        /* Ensure grid layout maintains equal sizes */
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .tag {
-            background-color: var(--purdue-gold);
-            color: var(--purdue-black);
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-        
-        .education, .certifications {
-            margin-top: 20px;
-        }
-        
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .cert-card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: background-color 0.3s;
-        }
-        
-        .cert-logo {
-            height: 60px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--light-gray);
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        
-        footer {
-            background-color: var(--purdue-black);
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 60px;
-        }
-        
-        .social-links {
-            margin: 20px 0;
-        }
-        
-        .social-links a {
-            color: var(--purdue-gold);
-            margin: 0 10px;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-        
-        .contact-info {
-            margin-top: 20px;
-        }
-        
-        .cta-button, .download-resume {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--purdue-gold);
-            color: var(--purdue-black);
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 20px 0;
-            transition: background-color 0.3s, transform 0.3s;
-            width: 220px; /* Increased fixed width */
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .download-resume svg, 
-        .download-resume img,
-        .download-resume span {
-        margin-right: 8px;
-        }
-        
-        .cta-button:hover, .download-resume:hover {
-            background-color: var(--accent-color);
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        }
-
-        .skill-highlights {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 15px 0;
-        }
-        
-        .skill-tag {
-            background-color: var(--purdue-gold);
-            color: var(--purdue-black);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        
-        /* Timeline Styles */
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
-        
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background-color: var(--purdue-gold);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-        }
-        
-        .timeline-container {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-        
-        .timeline-container::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -12px;
-            background-color: var(--bg-color);
-            border: 4px solid var(--purdue-gold);
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-        
-        .left {
-            left: 0;
-        }
-        
-        .right {
-            left: 50%;
-        }
-        
-        .left::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            right: 30px;
-            border: medium solid var(--purdue-gold);
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent var(--purdue-gold);
-        }
-        
-        .right::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            left: 30px;
-            border: medium solid var(--purdue-gold);
-            border-width: 10px 10px 10px 0;
-            border-color: transparent var(--purdue-gold) transparent transparent;
-        }
-        
-        .right::after {
-            left: -12px;
-        }
-        
-        .timeline-content {
-            padding: 20px 30px;
-            background-color: var(--card-bg);
-            position: relative;
-            border-radius: 6px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: background-color 0.3s;
-        }
-        
-        .timeline-date {
-            color: var(--purdue-gold);
-            font-weight: bold;
-        }
-        
-        /* Download Resume Button */
-        
-        .download-resume i {
-            margin-right: 10px;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-text {
-                padding-right: 0;
-                padding-bottom: 40px;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul li {
-                margin: 5px 0;
-            }
-            
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-container {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-container::before {
-                left: 60px;
-                border: medium solid var(--purdue-gold);
-                border-width: 10px 10px 10px 0;
-                border-color: transparent var(--purdue-gold) transparent transparent;
-            }
-            
-            .left::after, .right::after {
-                left: 19px;
-            }
-            
-            .right {
-                left: 0%;
-            }
-        }
-
-                /* Add these styles to your existing CSS */
-        .timeline-container-wrapper {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 0;
-        }
-        
-        .timeline-progress-bar {
-            position: absolute;
-            width: 6px;
-            background-color: var(--purdue-gold);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-        }
-        
-        .timeline-cards {
-            position: relative;
-        }
-        
-        .timeline-card {
-            position: relative;
-            margin-bottom: 30px;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-        
-        .timeline-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .timeline-card:nth-child(odd) {
-            padding-right: calc(50% + 30px);
-            text-align: right;
-        }
-        
-        .timeline-card:nth-child(even) {
-            padding-left: calc(50% + 30px);
-            text-align: left;
-        }
-        
-        .timeline-card-content {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            transition: all 0.3s ease;
-            border-left: 5px solid var(--purdue-gold);
-        }
-        
-        .timeline-card:nth-child(odd) .timeline-card-content {
-            border-left: none;
-            border-right: 5px solid var(--purdue-gold);
-        }
-        
-        .timeline-card-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .timeline-marker {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background-color: var(--bg-color);
-            border: 4px solid var(--purdue-gold);
-            border-radius: 50%;
-            z-index: 2;
-            top: 20px;
-        }
-        
-        .timeline-card:nth-child(odd) .timeline-marker {
-            right: -42px;
-        }
-        
-        .timeline-card:nth-child(even) .timeline-marker {
-            left: -42px;
-        }
-        
-        .timeline-date {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: var(--purdue-gold);
-            color: var(--purdue-black);
-            border-radius: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .timeline-card h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: var(--accent-color);
-        }
-        
-        .timeline-icon {
-            position: absolute;
-            bottom: 15px;
-            font-size: 28px;
-            opacity: 0.8;
-        }
-        
-        .timeline-card:nth-child(odd) .timeline-icon {
-            left: 15px;
-        }
-        
-        .timeline-card:nth-child(even) .timeline-icon {
-            right: 15px;
-        }
-        
-        .highlight-card .timeline-card-content {
-            border-color: var(--accent-color);
-            background-color: rgba(var(--purdue-gold-rgb, 206, 184, 136), 0.1);
-        }
-        
-        .highlight-card .timeline-marker {
-            border-color: var(--accent-color);
-        }
-        
-        .timeline-year-indicator {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--purdue-gold);
-            color: var(--purdue-black);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            z-index: 2;
-        }
-        
-        /* Add a CSS variable for rgb version of purdue-gold */
-        :root {
-            --purdue-gold-rgb: 206, 184, 136;
-        }
-        
-        [data-theme="dark"] {
-            --purdue-gold-rgb: 212, 175, 55;
-        }
-        
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .timeline-progress-bar {
-                left: 30px;
-            }
-            
-            .timeline-card:nth-child(odd),
-            .timeline-card:nth-child(even) {
-                padding-left: 60px;
-                padding-right: 10px;
-                text-align: left;
-            }
-            
-            .timeline-card:nth-child(odd) .timeline-card-content {
-                border-left: 5px solid var(--purdue-gold);
-                border-right: none;
-            }
-            
-            .timeline-card:nth-child(odd) .timeline-marker,
-            .timeline-card:nth-child(even) .timeline-marker {
-                left: 18px;
-            }
-            
-            .timeline-card:nth-child(odd) .timeline-icon {
-                right: 15px;
-                left: auto;
-            }
-            
-            .timeline-year-indicator {
-                left: 30px;
-                transform: none;
-            }
-        }
-
-        /* Updated Horizontal Timeline Styles */
-        .horizontal-timeline-container {
-            position: relative;
-            max-width: 100%;
-            margin: 40px auto 0;
-            padding: 20px 0;
-            background: var(--bg-color);
-        }
-
-        .timeline-navigation {
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .nav-arrow {
-            background-color: var(--card-bg);
-            color: var(--purdue-gold);
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            z-index: 5;
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nav-arrow:hover {
-            background-color: var(--purdue-gold);
-            color: var(--purdue-black);
-            transform: scale(1.1);
-        }
-
-        .prev-arrow {
-            margin-right: 15px;
-        }
-
-        .next-arrow {
-            margin-left: 15px;
-        }
-
-        .horizontal-timeline {
-            display: flex;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 20px;
-            position: relative;
-            width: 100%;
+        .scrollbar-hide {
+            -ms-overflow-style: none;
             scrollbar-width: none;
-            gap: 25px;
         }
-
-        .horizontal-timeline::-webkit-scrollbar {
+        .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
-
-        .timeline-event {
-            position: relative;
-            min-width: 300px;
-            max-width: 300px;
-            z-index: 2;
+        html {
+            scroll-behavior: smooth;
         }
-
-        .event-content {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            height: 280px; /* Increased height to fit content without scrolling */
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(206, 184, 136, 0.1);
+        .timeline-scroll {
+            scroll-snap-type: x mandatory;
         }
-
-        .timeline-event:hover .event-content {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            border-color: var(--purdue-gold);
-        }
-
-        .event-date {
-            display: inline-block;
-            padding: 4px 12px;
-            background-color: rgba(206, 184, 136, 0.15);
-            color: var(--purdue-gold);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-            align-self: flex-start;
-        }
-
-        .event-icon {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            font-size: 24px;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-event:hover .event-icon {
-            opacity: 1;
-        }
-
-        .event-content h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            color: var(--accent-color);
-            font-size: 1.2rem;
-            line-height: 1.4;
-            padding-right: 30px;
-        }
-
-        .event-content p {
-            margin: 0;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--text-color);
-            opacity: 0.9;
-            overflow: auto;
-        }
-
-        /* Highlight important events */
-        .timeline-event.highlight .event-content {
-            background: linear-gradient(to bottom right, 
-                var(--card-bg), 
-                rgba(206, 184, 136, 0.05));
-            border: 1px solid rgba(206, 184, 136, 0.2);
-        }
-
-        .timeline-event.highlight .event-date {
-            background-color: rgba(206, 184, 136, 0.15);
-            color: var(--purdue-gold);
-        }
-
-        .timeline-event.highlight h3 {
-            color: var(--purdue-gold);
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .timeline-event {
-                min-width: 280px;
-                max-width: 280px;
-            }
-
-            .event-content {
-                height: 280px; /* Keep same height on mobile */
-            }
-
-            .horizontal-timeline {
-                padding: 20px 10px;
-                gap: 20px;
-            }
-
-            .nav-arrow {
-                width: 38px;
-                height: 38px;
-                font-size: 16px;
-            }
-        }
-
-        /* Mobile-specific styles */
-        @media (max-width: 768px) {
-            header {
-                padding: 15px;
-                height: auto;
-                background: linear-gradient(to bottom, var(--purdue-black) 0%, rgba(0,0,0,0.95) 100%);
-            }
-
-            header h1 {
-                font-size: 1.6rem;
-                margin: 35px 0 8px 0;
-                background: linear-gradient(to right, var(--purdue-gold), #D4AF37);
-                -webkit-background-clip: text;
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-
-            header p {
-                font-size: 0.9rem;
-                opacity: 0.9;
-                font-style: italic;
-            }
-
-            .logo {
-                font-size: 1rem;
-                top: 10px;
-                left: 10px;
-            }
-
-            .theme-switch-wrapper {
-                top: 10px;
-                right: 10px;
-            }
-
-            nav {
-                background: rgba(33, 33, 33, 0.98);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-            }
-
-            nav ul {
-                display: flex;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                padding: 5px 10px;
-                gap: 15px;
-            }
-
-            nav ul::-webkit-scrollbar {
-                display: none;
-            }
-
-            nav ul li {
-                margin: 0;
-                flex-shrink: 0;
-            }
-
-            nav ul li a {
-                padding: 16px 25px;
-                display: flex;
-                align-items: center;
-                font-weight: 500;
-                letter-spacing: 0.3px;
-                transition: all 0.3s ease;
-            }
-
-            nav ul li a::before {
-                content: '';
-                width: 0;
-                height: 2px;
-                background: var(--purdue-gold);
-                position: absolute;
-                left: 25px;
-                bottom: 0;
-                transition: width 0.3s ease;
-            }
-
-            nav ul li a:hover::before {
-                width: 30px;
-            }
-
-            .hero {
-                flex-direction: column;
-                padding: 20px 15px 40px;
-                background: linear-gradient(to bottom, var(--bg-color), rgba(206, 184, 136, 0.1));
-                border-radius: 0 0 30px 30px;
-                margin: 0 -15px;
-            }
-
-            .hero-text {
-                padding: 0 10px;
-            }
-
-            .hero-image {
-                margin: 20px 0;
-            }
-
-            .hero-image img {
-                max-width: 160px;
-                border: 4px solid var(--purdue-gold);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .section {
-                padding: 40px 15px;
-                margin: 0;
-                border-radius: 30px;
-                background: var(--card-bg);
-                margin: 15px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            }
-
-            h2 {
-                font-size: 1.5rem;
-                text-align: center;
-                margin-bottom: 25px;
-                position: relative;
-                display: inline-block;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            h2::after {
-                content: '';
-                position: absolute;
-                bottom: -8px;
-                left: 0;
-                width: 100%;
-                height: 2px;
-                background: linear-gradient(to right, transparent, var(--purdue-gold), transparent);
-            }
-
-            .skill-highlights {
-                flex-wrap: wrap;
-                gap: 8px;
-                justify-content: center;
-                margin: 15px 0;
-            }
-
-            .skill-tag {
-                background: rgba(206, 184, 136, 0.15);
-                color: var(--purdue-gold);
-                padding: 6px 12px;
-                border-radius: 20px;
-                font-size: 0.85rem;
-                backdrop-filter: blur(5px);
-                -webkit-backdrop-filter: blur(5px);
-            }
-
-            .cta-button, 
-            .download-resume {
-                margin: 8px;
-                padding: 12px 20px;
-                border-radius: 25px;
-                font-size: 0.95rem;
-                background: linear-gradient(to right, var(--purdue-gold), #D4AF37);
-                border: none;
-                color: var(--purdue-black);
-                font-weight: 600;
-                letter-spacing: 0.3px;
-                box-shadow: 0 4px 15px rgba(206, 184, 136, 0.3);
-                transition: all 0.3s ease;
-            }
-
-            .cta-button:active, 
-            .download-resume:active {
-                transform: translateY(2px);
-                box-shadow: 0 2px 8px rgba(206, 184, 136, 0.2);
-            }
-
-            /* Timeline mobile adjustments */
-            .timeline-event {
-                min-width: 280px;
-                max-width: 280px;
-            }
-
-            .event-content {
-                height: 280px;
-            }
-
-            .horizontal-timeline {
-                padding: 20px 10px;
-                gap: 15px;
-            }
-
-            .nav-arrow {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
-            }
-
-            /* Projects section mobile adjustments */
-            .projects {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .project-card {
-                height: auto;
-                min-height: 450px;
-            }
-
-            /* Certifications mobile adjustments */
-            .cert-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            /* Footer mobile adjustments */
-            footer {
-                padding: 30px 15px;
-                background: linear-gradient(to top, var(--purdue-black), rgba(0,0,0,0.95));
-                border-radius: 30px 30px 0 0;
-                margin-top: 30px;
-            }
-
-            .social-links {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-                margin: 25px 0;
-            }
-
-            .social-links a {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 12px;
-                background: rgba(206, 184, 136, 0.1);
-                border-radius: 12px;
-                transition: all 0.3s ease;
-            }
-
-            .social-links a:hover {
-                background: rgba(206, 184, 136, 0.2);
-                transform: translateY(-2px);
-            }
-        }
-
-        /* Additional mobile optimization for smaller screens */
-        @media (max-width: 380px) {
-            header h1 {
-                font-size: 1.4rem;
-            }
-
-            .section {
-                margin: 10px;
-                padding: 30px 15px;
-            }
-
-            .hero-image img {
-                max-width: 140px;
-            }
-
-            .social-links {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Mobile Navigation Styles */
-        .mobile-menu-toggle {
-            display: none;
-            position: fixed;
-            left: 15px;
-            top: 15px;
-            z-index: 1002;
-            background: var(--purdue-black);
-            border: 2px solid var(--purdue-gold);
-            cursor: pointer;
-            padding: 10px;
-            width: 44px;
-            height: 44px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .mobile-menu-toggle span {
-            display: block;
-            width: 100%;
-            height: 3px;
-            background-color: var(--purdue-gold);
-            margin: 5px 0;
-            transition: all 0.3s ease;
-            border-radius: 3px;
-            transform-origin: center;
-        }
-
-        .mobile-menu-toggle.active {
-            background: var(--purdue-gold);
-            border-color: var(--purdue-black);
-        }
-
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        .menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(3px);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .menu-overlay.active {
-            display: block;
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            nav {
-                position: fixed;
-                left: -280px;
-                top: 0;
-                height: 100vh;
-                width: 280px;
-                background-color: var(--card-bg);
-                padding: 80px 20px 20px;
-                transition: left 0.3s ease;
-                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-                z-index: 1000;
-                overflow-y: auto;
-            }
-
-            nav.active {
-                left: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 0;
-                margin: 0;
-            }
-
-            nav ul li {
-                margin: 0;
-                width: 100%;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            }
-
-            nav ul li a {
-                display: block;
-                padding: 15px;
-                width: 100%;
-                color: var(--text-color);
-                font-weight: 500;
-                transition: all 0.3s ease;
-            }
-
-            nav ul li a:hover {
-                background: var(--purdue-gold);
-                color: var(--purdue-black);
-                padding-left: 20px;
-            }
+        .timeline-card {
+            scroll-snap-align: start;
         }
     </style>
 </head>
-<body>
-    <header>
-        <div class="logo">PURDUE</div>
-        <h1>Yoonsung Ed Cho</h1>
-        <p>"With great power comes great electricity bills."</p>
-        
-        <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <div class="slider">
-                    <div class="slider-icons">
-                        <span>☀️</span>
-                        <span>🌙</span>
-                    </div>
+<body class="min-h-screen transition-colors duration-300">
+    <!-- Welcome Popup -->
+    <div id="welcome-popup" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4 relative">
+            <button onclick="closeWelcome()" class="absolute right-4 top-4 text-gray-500 hover:text-gray-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h2 class="text-xl font-bold mb-4">Welcome! 👋</h2>
+            <p class="mb-3">Thanks for visiting my cybersecurity portfolio.</p>
+            <p class="mb-3">Built with HTML, CSS, and JavaScript</p>
+            <p class="mb-3">Created by Yoonsung Ed Cho</p>
+            <p class="mb-4 text-sm">
+                Check out my 
+                <a href="https://github.com/shadEdkr" target="_blank" class="text-yellow-600 hover:underline">GitHub</a> 
+                or 
+                <a href="https://github.com/shadEdkr/shadEdkr.github.io" target="_blank" class="text-yellow-600 hover:underline">view this site's repository</a>
+            </p>
+            <button onclick="closeWelcome()" class="w-full bg-yellow-600 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
+                Got it!
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-black text-white relative">
+        <div class="container mx-auto px-4 py-4 md:py-6">
+            <div class="flex items-center justify-between">
+                <div class="text-yellow-500 font-bold text-lg md:text-xl">PURDUE</div>
+                
+                <div class="text-center flex-1 mx-4">
+                    <h1 class="text-xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                        Yoonsung Ed Cho
+                    </h1>
+                    <p class="text-gray-300 italic text-xs md:text-sm hidden sm:block">
+                        "With great power comes great electricity bills."
+                    </p>
                 </div>
-            </label>
+
+                <div class="flex items-center gap-2 md:gap-4">
+                    <button onclick="toggleTheme()" class="text-white hover:bg-gray-800 p-2 rounded">
+                        <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-white p-2">
+                        <svg id="menu-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                        <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
     </header>
-    
-    <button class="mobile-menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    <div class="menu-overlay"></div>
-    
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#timeline">Timeline</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#volunteering">Volunteering</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden hidden"></div>
+
+    <!-- Navigation -->
+    <nav id="mobile-nav" class="bg-yellow-600 sticky top-0 z-50 transform -translate-x-full md:translate-x-0 md:relative fixed md:static w-64 md:w-full h-full md:h-auto transition-transform duration-300 ease-in-out">
+        <div class="pt-16 md:pt-0 px-4 md:px-0">
+            <div class="md:container md:mx-auto md:px-4">
+                <ul class="flex flex-col md:flex-row md:justify-center space-y-2 md:space-y-0 md:space-x-8 py-4">
+                    <li><a href="#about" onclick="closeMenu()" class="block py-3 px-4 md:py-2 text-black font-semibold hover:text-white transition-colors rounded-md hover:bg-black/10">About</a></li>
+                    <li><a href="#timeline" onclick="closeMenu()" class="block py-3 px-4 md:py-2 text-black font-semibold hover:text-white transition-colors rounded-md hover:bg-black/10">Timeline</a></li>
+                    <li><a href="#skills" onclick="closeMenu()" class="block py-3 px-4 md:py-2 text-black font-semibold hover:text-white transition-colors rounded-md hover:bg-black/10">Skills</a></li>
+                    <li><a href="#projects" onclick="closeMenu()" class="block py-3 px-4 md:py-2 text-black font-semibold hover:text-white transition-colors rounded-md hover:bg-black/10">Projects</a></li>
+                    <li><a href="#education" onclick="closeMenu()" class="block py-3 px-4 md:py-2 text-black font-semibold hover:text-white transition-colors rounded-md hover:bg-black/10">Education</a></li>
+                    <li><a href="#volunteering" onclick="closeMenu()" class="block py-3 px-4 md:py-2 text-black font-semibold hover:text-white transition-colors rounded-md hover:bg-black/10">Volunteering</a></li>
+                    <li><a href="#certifications" onclick="closeMenu()" class="block py-3 px-4 md:py-2 text-black font-semibold hover:text-white transition-colors rounded-md hover:bg-black/10">Certifications</a></li>
+                    <li><a href="#contact" onclick="closeMenu()" class="block py-3 px-4 md:py-2 text-black font-semibold hover:text-white transition-colors rounded-md hover:bg-black/10">Contact</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
-    
-    <div class="hero">
-    <div class="hero-text">
-        <h1>Yoonsung Ed Cho</h1>
-        <p>Cybersecurity Student at Purdue University</p>
-        <p>ResNet Tier 2 Representative | Datacenter Infrastructure Technician</p>
-        <div class="skill-highlights">
-            <span class="skill-tag">Network Security</span>
-            <span class="skill-tag">Penetration Test</span>
-            <span class="skill-tag">SOC Analysis</span>
-            <span class="skill-tag">Access Control</span>
-        </div>
-        <p>Passionate cybersecurity professional seeking a Winter 2025 + Summer 2026 internship in network security, Security Operation Center Analysis (SOC) role, and secure software development.</p>
-        <div class="hero-buttons">
-            <a href="#contact" class="cta-button">Get In Touch</a>
-            <a href="Resume.pdf" class="download-resume" download>
-              <div style="display: flex; align-items: center; justify-content: center; width: 100%;">
-                <span style="margin-right: 10px;">📄</span>
-                <span>Download Resume</span>
-              </div>
-            </a>
-        </div>
-    </div>
-    <div class="hero-image">
-        <img src="images/image.jpg" alt="Professional headshot">
-    </div>
-</div>
-    
-    <div class="section" id="about">
-        <h2>About Me</h2>
-        <p>My journey in tech began at Murray State University in Kentucky, where I pursued a Computer Science major. During my studies, I discovered a deeper passion for networking and cybersecurity, leading me to transfer to Purdue University to specialize in Cybersecurity.</p>
-        
-        <p>As a student, I've always wanted to help others with what I love most—computers and IT. Whether troubleshooting network issues, securing systems, or developing web applications, I strive to strengthen digital infrastructure and protect critical data. </p>
-        
-        <p>Now, I'm actively seeking a Winter 2025 + Summer 2026 Cybersecurity Internship to gain hands-on experience in network security, virtualization, and secure software development while collaborating with innovative teams to build a safer digital future.</p>
-    </div>
-    
-    <div class="section" id="timeline">
-        <h2>My Cybersecurity Journey</h2>
-        <div class="horizontal-timeline-container">
-            <div class="timeline-navigation">
-                <button class="nav-arrow prev-arrow">◀</button>
-                <div class="horizontal-timeline">
-                    <!-- Timeline Item -->
-                    <div class="timeline-event">
-                        <div class="event-dot"></div>
-                        <div class="event-content">
-                            <div class="event-date">2021</div>
-                            <h3>First Steps into Computing</h3>
-                            <div class="event-icon">🖥️</div>
-                            <p>Started studying Computer Science at Murray State University, where I developed foundational knowledge in IT and programming.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Timeline Item -->
-                    <div class="timeline-event">
-                        <div class="event-dot"></div>
-                        <div class="event-content">
-                            <div class="event-date">Nov 2021 - May 2022</div>
-                            <h3>IT Support & Student Ambassador</h3>
-                            <div class="event-icon">🔧</div>
-                            <p>Worked as a Student IT Support in the ESL department, assisting with computer lab setup, troubleshooting, and technical support.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Timeline Item -->
-                    <div class="timeline-event">
-                        <div class="event-dot"></div>
-                        <div class="event-content">
-                            <div class="event-date">2022</div>
-                            <h3>Transferred to Purdue University</h3>
-                            <div class="event-icon">🎓</div>
-                            <p>Transferred to Purdue University to major in Cybersecurity. Joined the Cybersecurity Club and attended college-level security workshops.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Timeline Item -->
-                    <div class="timeline-event">
-                        <div class="event-dot"></div>
-                        <div class="event-content">
-                            <div class="event-date">Oct 2022</div>
-                            <h3>Bug Bounty Hunting & Security Research</h3>
-                            <div class="event-icon">🐛</div>
-                            <p>Conducted QA testing on Web 3.0 games inspired by the Saw franchise. Identified vulnerabilities in game mechanics and reported a critical bug that earned a performance bounty.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Timeline Item - Changed from highlight to regular -->
-                    <div class="timeline-event">
-                        <div class="event-dot"></div>
-                        <div class="event-content">
-                            <div class="event-date">Jan 2023 - July 2024</div>
-                            <h3>Military IT & Network Security Experience</h3>
-                            <div class="event-icon">🔐</div>
-                            <p>Served as a Network Communication Systems Specialist in the Republic of Korea Army. Managed military crypto devices, troubleshot brigade facility networks with 400+ devices.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Timeline Item -->
-                    <div class="timeline-event">
-                        <div class="event-dot"></div>
-                        <div class="event-content">
-                            <div class="event-date">Sep 2024</div>
-                            <h3>Google Cybersecurity Certificate</h3>
-                            <div class="event-icon">🛡️</div>
-                            <p>Earned the Google Cybersecurity Certificate, developing expertise in SIEM tools, malware analysis, AI-driven threat detection, and risk mitigation.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Timeline Item -->
-                    <div class="timeline-event">
-                        <div class="event-dot"></div>
-                        <div class="event-content">
-                            <div class="event-date">Dec 2024</div>
-                            <h3>Google Project Management Certificate</h3>
-                            <div class="event-icon">📊</div>
-                            <p>Gained experience in Agile methodologies, Scrum framework, and project lifecycle management through the Google Project Management Certificate.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Timeline Item -->
-                    <div class="timeline-event">
-                        <div class="event-dot"></div>
-                        <div class="event-content">
-                            <div class="event-date">Jan 2025</div>
-                            <h3>Google IT Support Certificate</h3>
-                            <div class="event-icon">💻</div>
-                            <p>Earned the Google IT Support Certificate, gaining hands-on skills in troubleshooting, networking, operating systems, and system administration.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Timeline Item - Changed from highlight to regular -->
-                    <div class="timeline-event">
-                        <div class="event-dot"></div>
-                        <div class="event-content">
-                            <div class="event-date">Feb 2025 - Present</div>
-                            <h3>ResNet Tier 2 IT Support - Purdue University</h3>
-                            <div class="event-icon">🌐</div>
-                            <p>Providing advanced IT support for Purdue's residential network, troubleshooting connectivity issues, and working closely with Network Engineering.</p>
-                        </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-gray-50 to-yellow-50 dark:from-gray-900 dark:to-gray-800 py-8 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-8 md:gap-12">
+                <div class="flex-1 space-y-4 md:space-y-6 text-center lg:text-left">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">Yoonsung Ed Cho</h1>
+                    <p class="text-lg md:text-xl text-gray-700 dark:text-gray-300">Cybersecurity Student at Purdue University</p>
+                    <p class="text-base md:text-lg text-gray-600 dark:text-gray-400">ResNet Tier 2 Representative | Datacenter Infrastructure Technician</p>
+
+                    <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
+                        <span class="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 text-xs md:text-sm px-3 py-1 rounded-full">Network Security</span>
+                        <span class="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 text-xs md:text-sm px-3 py-1 rounded-full">Penetration Test</span>
+                        <span class="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 text-xs md:text-sm px-3 py-1 rounded-full">SOC Analysis</span>
+                        <span class="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 text-xs md:text-sm px-3 py-1 rounded-full">Access Control</span>
                     </div>
 
-                    <!-- Timeline Item - Changed from highlight to regular -->
-                    <div class="timeline-event">
-                        <div class="event-dot"></div>
-                        <div class="event-content">
-                            <div class="event-date">May 2025 - Present</div>
-                            <h3>Datacenter Infra Technician - Purdue University</h3>
-                            <div class="event-icon">🖥️</div>
-                            <p>Installed cable and wires, ensuring network reliability. Configured Cisco and HP devices, optimizing performance in a learning environment.</p>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Passionate cybersecurity professional seeking a Winter 2025 + Summer 2026 internship in network security, Security Operation Center Analysis (SOC) role, and secure software development.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
+                        <a href="#contact" class="bg-yellow-600 hover:bg-yellow-700 text-black text-sm md:text-base font-semibold py-2 px-6 rounded-lg transition-colors">Get In Touch</a>
+                        <a href="Resume.pdf" download class="border border-gray-300 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 text-sm md:text-base font-semibold py-2 px-6 rounded-lg transition-colors flex items-center gap-2 justify-center">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex-1 flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <div class="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-yellow-600 overflow-hidden shadow-2xl">
+                            <img src="images/image.jpg" alt="Professional headshot" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 bg-yellow-600 text-black p-2 md:p-3 rounded-full shadow-lg">
+                            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
                         </div>
                     </div>
                 </div>
-                <button class="nav-arrow next-arrow">▶</button>
             </div>
         </div>
-    </div>
-    
-    <div class="section" id="skills">
-        <h2>Technical Skills</h2>
-        <div class="skills">
-            <div class="skill-category">
-                <h3>Cybersecurity & Networking</h3>
-                <ul>
-                    <li><strong>Network Security</strong> – Firewall traffic control, Genian NAC, and SIEM tools</li>
-                    <li><strong>Threat Detection & Analysis</strong> – Malware analysis, AI-driven threat detection, and packet analysis</li>
-                    <li><strong>Incident Response</strong> – Troubleshooting network issues, risk mitigation, and forensic investigation</li>
-                    <li><strong>Penetration Testing & Bug Bounty</strong> – Identifying and exploiting vulnerabilities in applications</li>
-                    <li><strong>System Administration</strong> – Active Directory, DNS management, and disaster recovery</li>
-                </ul>
-            </div>
-            
-            <div class="skill-category">
-                <h3>IT Support & Troubleshooting</h3>
-                <ul>
-                    <li><strong>Technical Support</strong> – ResNet Tier 2 IT Support, troubleshooting wired/wireless network issues</li>
-                    <li><strong>OS Administration</strong> – Windows, Linux (Ubuntu, Rocky), and VMware virtualization</li>
-                    <li><strong>IT Infrastructure</strong> – Configuring ESXi, vSphere, iSCSI, and Windows Server</li>
-                    <li><strong>Backup & Restoration</strong> – Data backups, system restoration, and disaster recovery</li>
-                    <li><strong>Hardware Deployment</strong> – Installing and managing cables and wiring across lab environments to ensure connectivity</li>
-                </ul>
-            </div>
-            
-            <div class="skill-category">
-                <h3>Programming & Automation</h3>
-                <ul>
-                    <li><strong>Python Scripting</strong> – Security automation, API integrations, and log analysis</li>
-                    <li><strong>Bash & PowerShell</strong> – Writing scripts for system administration and automation</li>
-                    <li><strong>Packet Analysis</strong> – Using tools like Wireshark for traffic inspection</li>
-                    <li><strong>Automation Development</strong> – Building Python scripts to streamline log analysis and enhance threat detection processes</li>
-                </ul>
-            </div>
-            
-            <div class="skill-category">
-                <h3>Project Management</h3>
-                <ul>
-                    <li><strong>Agile & Scrum</strong> – Google Project Management Certificate</li>
-                    <li><strong>Technical Writing</strong> – Published cybersecurity-related articles on Medium</li>
-                    <li><strong>Diagramming & Documentation</strong> – Creating use case diagrams, sequence diagrams, and technical guides</li>
-                    <li><strong>Event Coordination</strong> – Organizing networking events as PKA Director of Corporate Relations to foster community engagement</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-   <!-- Replace the existing projects section with this updated code -->
+    </section>
 
-   <div class="section" id="projects">
-        <h2>Projects</h2>
-        <div style="text-align: center; padding: 40px 0;">
-            <p style="margin-bottom: 25px; font-size: 1.2rem;">Check out my cybersecurity and web development projects</p>
-            <a href="https://yoonsungcho.dev/projects/projects.html" class="cta-button" style="font-size: 1.1rem; padding: 15px 30px; display: inline-flex; align-items: center; justify-content: center; margin: 0 auto; max-width: 300px;">
-                <span style="margin-right: 10px;">🚀</span>
+    <!-- About Section -->
+    <section id="about" class="py-12 md:py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-900 dark:text-white">About Me</h2>
+            <div class="max-w-4xl mx-auto space-y-4 md:space-y-6 text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p>My journey in tech began at Murray State University in Kentucky, where I pursued a Computer Science major. During my studies, I discovered a deeper passion for networking and cybersecurity, leading me to transfer to Purdue University to specialize in Cybersecurity.</p>
+                <p>As a student, I've always wanted to help others with what I love most—computers and IT. Whether troubleshooting network issues, securing systems, or developing web applications, I strive to strengthen digital infrastructure and protect critical data.</p>
+                <p>Now, I'm actively seeking a Winter 2025 + Summer 2026 Cybersecurity Internship to gain hands-on experience in network security, virtualization, and secure software development while collaborating with innovative teams to build a safer digital future.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="py-12 md:py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-900 dark:text-white">My Cybersecurity Journey</h2>
+            
+            <div class="relative">
+                <div class="flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-8">
+                    <button onclick="scrollTimeline('left')" class="border border-gray-300 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="text-xs md:text-sm text-gray-600 dark:text-gray-400">Swipe or use arrows</span>
+                    <button onclick="scrollTimeline('right')" class="border border-gray-300 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800 rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="timeline-container" class="timeline-scroll flex gap-4 md:gap-6 overflow-x-auto pb-4 scrollbar-hide">
+                    <!-- Timeline items will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-12 md:py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-900 dark:text-white">Technical Skills</h2>
+            
+            <div class="grid gap-6 md:gap-8 md:grid-cols-2">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6">
+                    <h3 class="text-lg md:text-xl font-semibold mb-4 flex items-center gap-3">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                        Cybersecurity & Networking
+                    </h3>
+                    <ul class="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li>• Network Security – Firewall traffic control, Genian NAC, and SIEM tools</li>
+                        <li>• Threat Detection & Analysis – Malware analysis, AI-driven threat detection, and packet analysis</li>
+                        <li>• Incident Response – Troubleshooting network issues, risk mitigation, and forensic investigation</li>
+                        <li>• Penetration Testing & Bug Bounty – Identifying and exploiting vulnerabilities in applications</li>
+                        <li>• System Administration – Active Directory, DNS management, and disaster recovery</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6">
+                    <h3 class="text-lg md:text-xl font-semibold mb-4 flex items-center gap-3">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+                        </svg>
+                        IT Support & Troubleshooting
+                    </h3>
+                    <ul class="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li>• Technical Support – ResNet Tier 2 IT Support, troubleshooting wired/wireless network issues</li>
+                        <li>• OS Administration – Windows, Linux (Ubuntu, Rocky), and VMware virtualization</li>
+                        <li>• IT Infrastructure – Configuring ESXi, vSphere, iSCSI, and Windows Server</li>
+                        <li>• Backup & Restoration – Data backups, system restoration, and disaster recovery</li>
+                        <li>• Hardware Deployment – Installing and managing cables and wiring across lab environments</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6">
+                    <h3 class="text-lg md:text-xl font-semibold mb-4 flex items-center gap-3">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                        Programming & Automation
+                    </h3>
+                    <ul class="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li>• Python Scripting – Security automation, API integrations, and log analysis</li>
+                        <li>• Bash & PowerShell – Writing scripts for system administration and automation</li>
+                        <li>• Packet Analysis – Using tools like Wireshark for traffic inspection</li>
+                        <li>• Automation Development – Building Python scripts to streamline log analysis and enhance threat detection</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6">
+                    <h3 class="text-lg md:text-xl font-semibold mb-4 flex items-center gap-3">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                        Project Management
+                    </h3>
+                    <ul class="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li>• Agile & Scrum – Google Project Management Certificate</li>
+                        <li>• Technical Writing – Published cybersecurity-related articles on Medium</li>
+                        <li>• Diagramming & Documentation – Creating use case diagrams, sequence diagrams, and technical guides</li>
+                        <li>• Event Coordination – Organizing networking events as PKA Director of Corporate Relations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-12 md:py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-gray-900 dark:text-white">Projects</h2>
+            <p class="text-lg md:text-xl mb-6 md:mb-8 text-gray-700 dark:text-gray-300">Check out my cybersecurity and web development projects</p>
+            <a href="https://yoonsungcho.dev/projects/projects.html" target="_blank" class="inline-flex items-center gap-2 bg-yellow-600 hover:bg-yellow-700 text-black font-semibold py-3 px-6 rounded-lg transition-colors">
+                <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
                 View All Projects
+                <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
             </a>
         </div>
-    </div>
-    
-    <div class="section" id="education">
-        <h2>Education</h2>
-        
-        <div class="education">
-            <h3 style="color: var(--accent-color); margin-top: 30px;">Purdue University</h3>
-            <p><strong>Bachelor of Science in Cybersecurity</strong></p>
-            <p>Expected Graduation: Dec 2026</p>
-            <p>GPA: 3.3/4.0</p>
-            <p>Aug 2022 - Present</p>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-12 md:py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-900 dark:text-white">Education</h2>
             
-            <div style="margin-top: 20px;">
-                <h3 style="color: var(--accent-color);">Relevant Coursework:</h3>
-                <ul style="list-style-type: disc; margin-left: 20px;">
-                    <li>CNIT 155 - Intro To Software Dev Concepts</li>
-                    <li>CNIT 176 - Info Tech Architecture</li>
-                    <li>CNIT 182 - System & Org Security</li>
-                    <li>CNIT 242 - System Administrations</li>
-                    <li>CNIT 270 - Cybersecurity Fundamentals I</li>
-                    <li>CNIT 271 - Cybersecurity Fundamentals II</li>
-                    <li>CNIT 280 - Syst Analysis & Design</li>
-                    <li>CNIT 340 - UNIX Administration</li>
-                    <li>CNIT 344 - Network Engr Fundamentals</li>
-                    <li>CNIT 342 - Network Administration</li>
-                    <li>CNIT 370 - Introduction to Cryptography</li>
-                </ul>
+            <div class="max-w-4xl mx-auto space-y-6 md:space-y-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6">
+                    <div class="flex items-start gap-3 md:gap-4 mb-4">
+                        <svg class="w-6 h-6 md:w-8 md:h-8 text-yellow-600 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        </svg>
+                        <div class="flex-1">
+                            <h3 class="text-lg md:text-xl font-semibold">Purdue University</h3>
+                            <p class="text-base md:text-lg text-gray-600 dark:text-gray-400">Bachelor of Science in Cybersecurity</p>
+                            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-2">Expected Graduation: Dec 2026 | GPA: 3.3/4.0 | Aug 2022 - Present</p>
+                        </div>
+                    </div>
+                    <h4 class="font-semibold mb-3 text-sm md:text-base">Relevant Coursework:</h4>
+                    <div class="grid gap-1 md:gap-2 text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <div>• CNIT 155 - Intro To Software Dev Concepts</div>
+                        <div>• CNIT 176 - Info Tech Architecture</div>
+                        <div>• CNIT 182 - System & Org Security</div>
+                        <div>• CNIT 242 - System Administrations</div>
+                        <div>• CNIT 270 - Cybersecurity Fundamentals I</div>
+                        <div>• CNIT 271 - Cybersecurity Fundamentals II</div>
+                        <div>• CNIT 280 - Syst Analysis & Design</div>
+                        <div>• CNIT 340 - UNIX Administration</div>
+                        <div>• CNIT 344 - Network Engr Fundamentals</div>
+                        <div>• CNIT 342 - Network Administration</div>
+                        <div>• CNIT 370 - Introduction to Cryptography</div>
+                    </div>
+                </div>
+
+                <div class="grid gap-4 md:gap-6 md:grid-cols-2">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                        <h3 class="text-base md:text-lg font-semibold">Murray State University</h3>
+                        <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">Undergraduate, Computer Science</p>
+                        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400">Aug 2021 - May 2022</p>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                        <h3 class="text-base md:text-lg font-semibold">Dongducheon Foreign Language High School</h3>
+                        <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">High School Diploma, English major, Chinese minor</p>
+                        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400">Mar 2018 - Jan 2021</p>
+                    </div>
+                </div>
             </div>
-            
-            <h3 style="color: var(--accent-color); margin-top: 40px; border-top: 1px solid var(--purdue-gold); padding-top: 20px;">Murray State University</h3>
-            <p><strong>Undergraduate, Computer Science</strong></p>
-            <p>Aug 2021 - May 2022</p>
-            
-            <h3 style="color: var(--accent-color); margin-top: 40px; border-top: 1px solid var(--purdue-gold); padding-top: 20px;">Dongducheon Foreign Language High School</h3>
-            <p><strong>High School Diploma, English major, Chinese minor</strong></p>
-            <p>Mar 2018 - Jan 2021</p>
         </div>
-    </div>
+    </section>
 
-    <div class="section" id="volunteering">
-        <h2>Volunteering</h2>
-        <div class="education">
-            <h3 style="color: var(--accent-color); margin-top: 30px;">Technical Support Specialist</h3>
-            <p><strong>The Royal Asiatic Society 🌏🤝</strong></p>
-            <p>March 2019 - Present </p>
-            <ul style="list-style-type: disc; margin-left: 20px;">
-                <li>Promoting a deeper understanding of Korea through lectures and other Korean historical-related information</li>
-                <li>Manage +300 user data and email list (database) for efficient communication and organization within the system</li>
-                <li>Provide lecture environments and general online meetings</li>
-            </ul>
+    <!-- Volunteering Section -->
+    <section id="volunteering" class="py-12 md:py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-900 dark:text-white">Volunteering</h2>
             
-            <h3 style="color: var(--accent-color); margin-top: 40px; border-top: 1px solid var(--purdue-gold); padding-top: 20px;">Church Choir</h3>
-            <p><strong>Purdue Christian Campus House ✝️🎶</strong></p>
-            <p>January 2023 - Present </p>
-            <ul style="list-style-type: disc; margin-left: 20px;">
-                <li>Started as Military Chaplain Assistant (Jan 2023 ~ July 2024)</li>
-                <li>Currently in Choir for PKC (Purdue Korean Catholic Church)</li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="section" id="certifications">
-        <h2>Certifications</h2>
-        <div class="cert-grid">
-                <!-- Google Cybersecurity Certificate -->
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <span style="font-size: 40px;">🔒</span>
+            <div class="max-w-4xl mx-auto space-y-4 md:space-y-6">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6">
+                    <div class="flex items-start gap-3 md:gap-4">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-red-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                        <div class="flex-1">
+                            <h3 class="text-base md:text-lg font-semibold">Technical Support Specialist</h3>
+                            <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">The Royal Asiatic Society 🌏🤝</p>
+                            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400">March 2019 - Present</p>
+                            <ul class="space-y-1 md:space-y-2 text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-3">
+                                <li>• Promoting a deeper understanding of Korea through lectures and other Korean historical-related information</li>
+                                <li>• Manage +300 user data and email list (database) for efficient communication and organization within the system</li>
+                                <li>• Provide lecture environments and general online meetings</li>
+                            </ul>
+                        </div>
                     </div>
-                    <h3>Google Cybersecurity Certificate</h3>
-                    <p>Issued: September 2024</p>
                 </div>
 
-                <!-- Google Project Management Certificate -->
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <span style="font-size: 40px;">📊</span>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6">
+                    <div class="flex items-start gap-3 md:gap-4">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-red-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                        <div class="flex-1">
+                            <h3 class="text-base md:text-lg font-semibold">Church Choir</h3>
+                            <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">Purdue Christian Campus House ✝️🎶</p>
+                            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400">January 2023 - Present</p>
+                            <ul class="space-y-1 md:space-y-2 text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-3">
+                                <li>• Started as Military Chaplain Assistant (Jan 2023 ~ July 2024)</li>
+                                <li>• Currently in Choir for PKC (Purdue Korean Catholic Church)</li>
+                            </ul>
+                        </div>
                     </div>
-                    <h3>Google Project Management Certificate</h3>
-                    <p>Issued: December 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-12 md:py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-900 dark:text-white">Certifications</h2>
+            
+            <div class="grid gap-4 md:gap-6 md:grid-cols-3 max-w-4xl mx-auto">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6 text-center">
+                    <div class="text-3xl md:text-4xl mb-3 md:mb-4">🔒</div>
+                    <h3 class="text-base md:text-lg font-semibold leading-tight">Google Cybersecurity Certificate</h3>
+                    <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400">Issued: September 2024</p>
                 </div>
 
-                <!-- Google IT Support Certificate -->
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <span style="font-size: 40px;">💻</span>
-                    </div>
-                    <h3>Google IT Support Certificate</h3>
-                    <p>Issued: January 2025</p>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6 text-center">
+                    <div class="text-3xl md:text-4xl mb-3 md:mb-4">📊</div>
+                    <h3 class="text-base md:text-lg font-semibold leading-tight">Google Project Management Certificate</h3>
+                    <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400">Issued: December 2024</p>
                 </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6 text-center">
+                    <div class="text-3xl md:text-4xl mb-3 md:mb-4">💻</div>
+                    <h3 class="text-base md:text-lg font-semibold leading-tight">Google IT Support Certificate</h3>
+                    <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400">Issued: January 2025</p>
+                </div>
+            </div>
         </div>
-    </div>
-    
-    <div class="section" id="contact">
-        <h2>Get In Touch</h2>
-        <p>I'm always interested in collaborating on cybersecurity projects, participating in CTF competitions, or discussing the latest security trends. Feel free to reach out!</p>
-        
-        <div class="contact-info">
-            <p><strong>Email:</strong> cho526@purdue.edu</p>
-            <p><strong>LinkedIn:</strong> linkedin.com/in/edchokr/</p>
-            <p><strong>Medium:</strong> https://medium.com/@edchokr</p>
-            <p><strong>GitHub:</strong> https://github.com/shadEdkr</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 md:py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-gray-900 dark:text-white">Get In Touch</h2>
+            <p class="text-sm md:text-lg mb-6 md:mb-8 text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
+                I'm always interested in collaborating on cybersecurity projects, participating in CTF competitions, or discussing the latest security trends. Feel free to reach out!
+            </p>
+
+            <div class="space-y-2 md:space-y-4 mb-6 md:mb-8 text-sm md:text-base">
+                <p class="text-gray-600 dark:text-gray-400"><strong>Email:</strong> cho526@purdue.edu</p>
+                <p class="text-gray-600 dark:text-gray-400"><strong>LinkedIn:</strong> linkedin.com/in/edchokr/</p>
+                <p class="text-gray-600 dark:text-gray-400"><strong>Medium:</strong> https://medium.com/@edchokr</p>
+                <p class="text-gray-600 dark:text-gray-400"><strong>GitHub:</strong> https://github.com/shadEdkr</p>
+            </div>
         </div>
-    </div>
-    
-    <footer style="background-color: black; color: white; padding: 20px; text-align: center;">
-        <div class="social-links">
-            <a href="mailto:cho526@purdue.edu" style="color: white; margin: 0 10px; text-decoration: none;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              Email
-            </a>
-            <a href="https://linkedin.com/in/edchokr/" target="_blank" style="color: white; margin: 0 10px; text-decoration: none;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-              LinkedIn
-            </a>
-            <a href="https://medium.com/@edchokr" target="_blank" style="color: white; margin: 0 10px; text-decoration: none;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <path d="M21 15l-5-5L5 21"></path>
-              </svg>
-              Medium
-            </a>
-            <a href="https://github.com/shadEdkr" target="_blank" style="color: white; margin: 0 10px; text-decoration: none;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-              </svg>
-              GitHub
-            </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 md:py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-4 md:space-x-6 mb-6 md:mb-8">
+                <a href="mailto:cho526@purdue.edu" class="text-yellow-500 hover:text-yellow-400 p-2">
+                    <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com/in/edchokr/" target="_blank" class="text-yellow-500 hover:text-yellow-400 p-2">
+                    <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="https://github.com/shadEdkr" target="_blank" class="text-yellow-500 hover:text-yellow-400 p-2">
+                    <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path>
+                    </svg>
+                </a>
+            </div>
+            <p class="text-gray-400 text-xs md:text-sm">&copy; 2025 Yoonsung Ed Cho - Purdue University Cybersecurity Student</p>
         </div>
-        <p style="margin-top: 10px;">&copy; 2025 Yoonsung Ed Cho - Purdue University Cybersecurity Student</p>
-</footer>
+    </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-         // Dark mode toggle functionality
-        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-        
-        function switchTheme(e) {
-            if (e.target.checked) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                try {
-                    localStorage.setItem('theme', 'dark'); // Save preference to localStorage
-                } catch (e) {
-                    console.log('LocalStorage not available in this environment');
-                }
+        // Timeline data
+        const timelineEvents = [
+            {
+                date: "2021",
+                title: "First Steps into Computing",
+                description: "Started studying Computer Science at Murray State University, where I developed foundational knowledge in IT and programming.",
+                icon: "💻"
+            },
+            {
+                date: "Nov 2021 - May 2022",
+                title: "IT Support & Student Ambassador",
+                description: "Worked as a Student IT Support in the ESL department, assisting with computer lab setup, troubleshooting, and technical support.",
+                icon: "🔧"
+            },
+            {
+                date: "2022",
+                title: "Transferred to Purdue University",
+                description: "Transferred to Purdue University to major in Cybersecurity. Joined the Cybersecurity Club and attended college-level security workshops.",
+                icon: "🎓"
+            },
+            {
+                date: "Oct 2022",
+                title: "Bug Bounty Hunting & Security Research",
+                description: "Conducted QA testing on Web 3.0 games inspired by the Saw franchise. Identified vulnerabilities in game mechanics and reported a critical bug that earned a performance bounty.",
+                icon: "🐛"
+            },
+            {
+                date: "Jan 2023 - July 2024",
+                title: "Military IT & Network Security Experience",
+                description: "Served as a Network Communication Systems Specialist in the Republic of Korea Army. Managed military crypto devices, troubleshot brigade facility networks with 400+ devices.",
+                icon: "🔐"
+            },
+            {
+                date: "Sep 2024",
+                title: "Google Cybersecurity Certificate",
+                description: "Earned the Google Cybersecurity Certificate, developing expertise in SIEM tools, malware analysis, AI-driven threat detection, and risk mitigation.",
+                icon: "🛡️"
+            },
+            {
+                date: "Dec 2024",
+                title: "Google Project Management Certificate",
+                description: "Gained experience in Agile methodologies, Scrum framework, and project lifecycle management through the Google Project Management Certificate.",
+                icon: "📊"
+            },
+            {
+                date: "Jan 2025",
+                title: "Google IT Support Certificate",
+                description: "Earned the Google IT Support Certificate, gaining hands-on skills in troubleshooting, networking, operating systems, and system administration.",
+                icon: "💻"
+            },
+            {
+                date: "Feb 2025 - Present",
+                title: "ResNet Tier 2 IT Support - Purdue University",
+                description: "Providing advanced IT support for Purdue's residential network, troubleshooting connectivity issues, and working closely with Network Engineering.",
+                icon: "🌐"
+            },
+            {
+                date: "May 2025 - Present",
+                title: "Datacenter Infra Technician - Purdue University",
+                description: "Installed cable and wires, ensuring network reliability. Configured Cisco and HP devices, optimizing performance in a learning environment.",
+                icon: "🖥️"
+            }
+        ];
+
+        // Initialize timeline
+        function initTimeline() {
+            const container = document.getElementById('timeline-container');
+            container.innerHTML = timelineEvents.map(event => `
+                <div class="timeline-card min-w-[280px] md:min-w-[300px] max-w-[280px] md:max-w-[300px] bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1 pr-2">
+                            <span class="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 text-xs px-3 py-1 rounded-full">${event.date}</span>
+                            <h3 class="text-base md:text-lg font-semibold leading-tight mt-2">${event.title}</h3>
+                        </div>
+                        <div class="text-xl md:text-2xl flex-shrink-0">${event.icon}</div>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">${event.description}</p>
+                </div>
+            `).join('');
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.classList.contains('dark');
+            
+            if (isDark) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                document.getElementById('sun-icon').classList.add('hidden');
+                document.getElementById('moon-icon').classList.remove('hidden');
             } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-                try {
-                    localStorage.setItem('theme', 'light'); // Save preference to localStorage
-                } catch (e) {
-                    console.log('LocalStorage not available in this environment');
-                }
-            }    
-        }
-        
-        toggleSwitch.addEventListener('change', switchTheme, false);
-        
-        // Check for saved user preference - with try/catch for sandboxed environments
-        let currentTheme = null;
-        try {
-            currentTheme = localStorage.getItem('theme');
-        } catch (e) {
-            console.log('LocalStorage not available in this environment');
-        }
-        
-        if (currentTheme) {
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            
-            if (currentTheme === 'dark') {
-                toggleSwitch.checked = true;
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                document.getElementById('sun-icon').classList.remove('hidden');
+                document.getElementById('moon-icon').classList.add('hidden');
             }
         }
 
-        // Horizontal Timeline Functionality
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mobile-nav');
+            const overlay = document.getElementById('mobile-overlay');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            nav.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        function closeMenu() {
+            const nav = document.getElementById('mobile-nav');
+            const overlay = document.getElementById('mobile-overlay');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            nav.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+        }
+
+        // Timeline scroll
+        function scrollTimeline(direction) {
+            const container = document.getElementById('timeline-container');
+            const scrollAmount = window.innerWidth < 768 ? 280 : 320;
+            container.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // Welcome popup
+        function closeWelcome() {
+            document.getElementById('welcome-popup').classList.add('hidden');
+        }
+
+        // Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
-            const timeline = document.querySelector('.horizontal-timeline');
-            const prevArrow = document.querySelector('.prev-arrow');
-            const nextArrow = document.querySelector('.next-arrow');
-            const cardWidth = 305; // Card width + margin
+            // Initialize timeline
+            initTimeline();
             
-            // Check if arrows should be visible initially
-            checkArrowVisibility();
-            
-            prevArrow.addEventListener('click', () => {
-                timeline.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-                setTimeout(checkArrowVisibility, 500);
-            });
-            
-            nextArrow.addEventListener('click', () => {
-                timeline.scrollBy({ left: cardWidth, behavior: 'smooth' });
-                setTimeout(checkArrowVisibility, 500);
-            });
-            
-            // Update arrow visibility when scrolling
-            timeline.addEventListener('scroll', () => {
-                checkArrowVisibility();
-            });
-            
-            function checkArrowVisibility() {
-                // Show/hide prev arrow based on scroll position
-                if (timeline.scrollLeft <= 10) {
-                    prevArrow.style.opacity = '0.5';
-                    prevArrow.style.pointerEvents = 'none';
-                } else {
-                    prevArrow.style.opacity = '1';
-                    prevArrow.style.pointerEvents = 'auto';
-                }
-                
-                // Show/hide next arrow based on whether we can scroll more
-                const maxScroll = timeline.scrollWidth - timeline.clientWidth;
-                if (timeline.scrollLeft >= maxScroll - 10) {
-                    nextArrow.style.opacity = '0.5';
-                    nextArrow.style.pointerEvents = 'none';
-                } else {
-                    nextArrow.style.opacity = '1';
-                    nextArrow.style.pointerEvents = 'auto';
-                }
+            // Check for saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.getElementById('sun-icon').classList.remove('hidden');
+                document.getElementById('moon-icon').classList.add('hidden');
             }
             
-            // Add keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (isElementInViewport(timeline)) {
-                    if (e.key === 'ArrowLeft') {
-                        prevArrow.click();
-                    } else if (e.key === 'ArrowRight') {
-                        nextArrow.click();
-                    }
-                }
-            });
-            
-            function isElementInViewport(el) {
-                const rect = el.getBoundingClientRect();
-                return (
-                    rect.top >= 0 &&
-                    rect.left >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-                );
+            // Show welcome popup
+            const hasVisited = sessionStorage.getItem('hasVisited');
+            if (!hasVisited) {
+                setTimeout(() => {
+                    document.getElementById('welcome-popup').classList.remove('hidden');
+                    sessionStorage.setItem('hasVisited', 'true');
+                }, 1000);
             }
-        });
-
-        // Mobile Menu Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-            const menuOverlay = document.querySelector('.menu-overlay');
-            const nav = document.querySelector('nav');
-            const body = document.body;
-
-            // Only the mobile menu toggle button should trigger the menu
-            mobileMenuToggle.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent event bubbling
-                toggleMenu();
-            });
             
-            // Close the menu when clicking on the overlay
-            menuOverlay.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent event bubbling
-                toggleMenu();
-            });
-
-            function toggleMenu() {
-                mobileMenuToggle.classList.toggle('active');
-                nav.classList.toggle('active');
-                menuOverlay.classList.toggle('active');
-                body.classList.toggle('menu-open');
-            }
-
-            // Handle navigation links
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // If the mobile menu is active, close it
-                    if (nav.classList.contains('active')) {
-                        toggleMenu();
-                    }
-                    
-                    // Check if the link points to an anchor on the page
-                    const targetId = this.getAttribute('href');
-                    if (targetId && targetId.startsWith('#')) {
-                        e.preventDefault();
-                        const targetSection = document.querySelector(targetId);
-                        if (targetSection) {
-                            targetSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }
-                });
-            });
-
-            // Remove any event handlers that might be on the header
-            // that could be triggering the menu overlay
-            const header = document.querySelector('header');
-            const newHeader = header.cloneNode(true);
-            header.parentNode.replaceChild(newHeader, header);
+            // Close mobile menu when clicking overlay
+            document.getElementById('mobile-overlay').addEventListener('click', closeMenu);
             
-            // Add proper smooth scrolling to any navigation links in the header
-            newHeader.querySelectorAll('a[href^="#"]').forEach(link => {
-                link.addEventListener('click', function(e) {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    e.stopPropagation(); // Stop any event bubbling
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    if (targetSection) {
-                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
                     }
                 });
             });
-
-            // Close menu on window resize
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768 && nav.classList.contains('active')) {
-                    mobileMenuToggle.classList.remove('active');
-                    menuOverlay.classList.remove('active');
-                    nav.classList.remove('active');
-                    body.classList.remove('menu-open');
-                }
-            });
-
-            // Make sure the theme toggle in the header works properly
-            const themeToggle = newHeader.querySelector('.theme-switch input[type="checkbox"]');
-            if (themeToggle) {
-                themeToggle.addEventListener('change', function(e) {
-                    e.stopPropagation(); // Prevent event bubbling
-                    if (this.checked) {
-                        document.documentElement.setAttribute('data-theme', 'dark');
-                        try {
-                            localStorage.setItem('theme', 'dark');
-                        } catch (e) {
-                            console.log('LocalStorage not available in this environment');
-                        }
-                    } else {
-                        document.documentElement.setAttribute('data-theme', 'light');
-                        try {
-                            localStorage.setItem('theme', 'light');
-                        } catch (e) {
-                            console.log('LocalStorage not available in this environment');
-                        }
-                    }
-                });
-            }
         });
-
-        // Prevent body scroll when menu is open
-        document.addEventListener('touchmove', (e) => {
-            if (body.classList.contains('menu-open')) {
-                e.preventDefault();
-            }
-        }, { passive: false });
     </script>
-
-<!-- Add this HTML right before the closing </body> tag -->
-<!-- Improved popup that mentions tech stack -->
-<div id="welcome-popup" class="popup-container">
-  <div class="popup-content">
-    <span class="close-popup">&times;</span>
-    <h2>Welcome! 👋</h2>
-    <p>Thanks for visiting my cybersecurity portfolio.</p>
-    <p>Built with HTML, CSS, and JavaScript</p>
-    <p>Created by Yoonsung Ed Cho</p>
-    <p>Check out my GitHub: 
-      <a href="https://github.com/shadEdkr" target="_blank">github.com/shadEdkr</a> or 
-      <a href="https://github.com/shadEdkr/shadEdkr.github.io" target="_blank">view this site's repository</a>
-    </p>
-    <button class="popup-button">Got it!</button>
-  </div>
-</div>
-
-<!-- Add this CSS to your existing <style> section in the <head> -->
-<style>
-  .popup-container {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: auto;
-      height: auto;
-      background-color: transparent;
-      z-index: 1000;
-    }
-  
-    .popup-content {
-        background-color: var(--card-bg);
-        color: var(--text-color);
-        padding: 30px;
-        border-radius: 10px;
-        max-width: 400px;
-        width: 100%;
-        text-align: center;
-        position: relative;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        transition: background-color 0.3s;
-    }
-  .close-popup {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--purdue-gold);
-  }
-  
-  .popup-button {
-    background-color: var(--purdue-gold);
-    color: var(--purdue-black);
-    border: none;
-    padding: 10px 20px;
-    margin-top: 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .popup-button:hover {
-    background-color: var(--accent-color);
-    color: white;
-    transform: scale(1.05);
-  }
-</style>
-
-<!-- Add this JavaScript right before the closing </body> tag, after your existing script -->
-<script>
-  // Welcome popup functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const popup = document.getElementById('welcome-popup');
-    const closeButton = document.querySelector('.close-popup');
-    const popupButton = document.querySelector('.popup-button');
-    
-    // Check if this is the first visit for this session
-    let hasVisited;
-    try {
-      hasVisited = sessionStorage.getItem('hasVisited');
-    } catch (e) {
-      console.log('SessionStorage not available in this environment');
-      hasVisited = true; // Default to true if sessionStorage isn't available
-    }
-    
-    if (!hasVisited) {
-      // Show popup with a slight delay for better user experience
-      setTimeout(function() {
-        popup.style.display = 'flex';
-      }, 1000);
-      
-      try {
-        sessionStorage.setItem('hasVisited', 'true');
-      } catch (e) {
-        console.log('SessionStorage not available in this environment');
-      }
-    }
-    
-    // Close popup when clicking the X button
-    closeButton.addEventListener('click', function() {
-      popup.style.display = 'none';
-    });
-    
-    // Close popup when clicking the Got it button
-    popupButton.addEventListener('click', function() {
-      popup.style.display = 'none';
-    });
-    
-    // Close popup when clicking outside
-    window.addEventListener('click', function(event) {
-      if (event.target === popup) {
-        popup.style.display = 'none';
-      }
-    });
-        
-        function initTimelineAnimation() {
-            const timelineCards = document.querySelectorAll('.timeline-card');
-            
-            // Initial check for visible cards
-            checkTimelineCardsVisibility();
-            
-            // Check on scroll
-            window.addEventListener('scroll', function() {
-                checkTimelineCardsVisibility();
-            });
-            
-            function checkTimelineCardsVisibility() {
-                const triggerBottom = window.innerHeight * 0.8;
-                
-                timelineCards.forEach(card => {
-                    const cardTop = card.getBoundingClientRect().top;
-                    
-                    if (cardTop < triggerBottom) {
-                        card.classList.add('visible');
-                    }
-                });
-            }
-            
-            // Add hover effect for better interactivity
-            timelineCards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    timelineCards.forEach(c => c.style.opacity = '0.6');
-                    this.style.opacity = '1';
-                    this.style.zIndex = '10';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    timelineCards.forEach(c => {
-                        c.style.opacity = '';
-                        c.style.zIndex = '';
-                    });
-                });
-            });
-        }
-        
-        function initYearIndicators() {
-            const timelineContainer = document.querySelector('.timeline-container-wrapper');
-            const timelineCards = document.querySelectorAll('.timeline-card');
-            const years = new Set();
-            
-            // Collect all years from the timeline cards
-            timelineCards.forEach(card => {
-                const yearData = card.getAttribute('data-year');
-                if (yearData && !yearData.includes('present')) {
-                    const yearParts = yearData.split('-');
-                    yearParts.forEach(year => {
-                        if (!isNaN(parseInt(year))) {
-                            years.add(parseInt(year));
-                        }
-                    });
-                }
-            });
-            
-            // Sort years and create year indicators
-            const sortedYears = Array.from(years).sort((a, b) => a - b);
-            
-            // We'll only show main year milestones to keep it clean
-            const keyYears = [sortedYears[0], sortedYears[Math.floor(sortedYears.length/2)], sortedYears[sortedYears.length-1]];
-            
-            keyYears.forEach((year, index) => {
-                const yearIndicator = document.createElement('div');
-                yearIndicator.classList.add('timeline-year-indicator');
-                yearIndicator.textContent = year;
-                yearIndicator.style.top = `${(index * 40) + 5}%`;
-                timelineContainer.appendChild(yearIndicator);
-            });
-        }
-        
-        // Add smooth scroll animation when clicking on timeline markers
-        document.querySelectorAll('.timeline-marker').forEach(marker => {
-            marker.addEventListener('click', function() {
-                const card = this.closest('.timeline-card');
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            });
-        });
-
-        initTimelineAnimation();
-        initYearIndicators();
-  });
-</script>
 </body>
 </html>
