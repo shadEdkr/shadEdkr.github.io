@@ -1,57 +1,45 @@
-Yoonsung Ed Cho - Cybersecurity Portfolio
+# Yoonsung Ed Cho - Cybersecurity Portfolio
 
-Welcome to my professional portfolio repository, where I showcase my skills, experience, and projects in cybersecurity. This site is designed to highlight my technical expertise and passion for securing digital environments.
+Welcome to my professional portfolio! This repository showcases my skills, experience, and projects in the field of cybersecurity. It reflects my dedication to securing digital environments and my passion for keeping technology safe in an ever-evolving threat landscape.
 
-🔐 About Me
+## 🔐 About Me
 
-I'm a Cybersecurity student at Purdue University with a strong interest in ethical hacking, network security, and digital forensics. I am committed to learning and applying cutting-edge security practices to protect digital assets and enhance cyber resilience.
+I am a Cybersecurity student at Purdue University, specializing in ethical hacking, network security, and digital forensics. With a commitment to learning and applying the latest security practices, I aim to protect digital assets and improve cyber resilience in diverse environments.
 
-🛠️ Technologies Used
+## 🛠️ Technologies & Tools
 
-Frontend: HTML5, CSS3 (responsive design), JavaScript
+- **Frontend:** HTML5, CSS3 (responsive design), JavaScript  
+- **Key Features:**
+  - Light/Dark Mode Toggle (with local storage persistence for enhanced user experience)
+  - Optimized for all screen sizes for seamless accessibility
 
-Features: Light/Dark Mode Toggle with local storage persistence
+## 🚀 Key Features
 
-🚀 Key Features
+- **Responsive Design:** Ensures an optimal viewing experience across devices.
+- **Dark/Light Mode Toggle:** Saves user preferences for an enhanced and personalized experience.
+- **Interactive Cybersecurity Timeline:** A visual journey that highlights my professional milestones.
+- **Project Portfolio:** Descriptions of hands-on technical projects demonstrating my expertise.
+- **Certifications & Education:** A summary of my academic and professional certifications.
+- **Contact & Social Links:** Easy access to reach out for collaboration or discussion.
 
-Responsive Design – Optimized for all screen sizes
+## 📋 Portfolio Sections
 
-Dark/Light Mode Toggle – Saves user preference for better accessibility
+- **About Me:** My background, areas of interest, and professional journey.
+- **Skills Overview:** A deep dive into my technical expertise in cybersecurity.
+- **Project Portfolio:** Real-world projects that demonstrate my practical skills.
+- **Education & Certifications:** Academic qualifications and industry certifications.
+- **Professional Timeline:** Key milestones in my cybersecurity career.
+- **Contact Information:** How to connect with me for opportunities or inquiries.
 
-Interactive Cybersecurity Journey Timeline – Showcasing my professional growth
-
-Project Portfolio – Detailed descriptions of my technical projects
-
-Certifications & Education – Highlights of my academic and industry credentials
-
-Contact & Social Links – Easy access to reach out and connect
-
-📋 Portfolio Sections
-
-About Me – Background, interests, and professional journey
-
-Skills Overview – Technical and cybersecurity-related expertise
-
-Project Portfolio – Real-world applications of my skills
-
-Education & Certifications – Academic background and industry-recognized credentials
-
-Professional Timeline – Key milestones in my career path
-
-Contact Information – Connect with me directly
-
-📬 Get in Touch
+## 📬 Get in Touch
 
 I’m always open to new opportunities, collaborations, and discussions in cybersecurity. Feel free to reach out:
 
-Email: cho526@purdue.edu
+- **Email:** [cho526@purdue.edu](mailto:cho526@purdue.edu)
+- **LinkedIn:** [linkedin.com/in/edchokr](https://linkedin.com/in/edchokr)
+- **GitHub:** [github.com/shadEdkr](https://github.com/shadEdkr)
+- **Medium:** [medium.com/@edchokr](https://medium.com/@edchokr)
 
-LinkedIn: linkedin.com/in/edchokr
+## 📄 License
 
-GitHub: github.com/shadEdkr
-
-Medium: medium.com/@edchokr
-
-📄 License
-
-© 2025 Yoonsung Ed Cho. All Rights Reserved.
+© 2025 Yoonsung Ed Cho. All rights reserved.
