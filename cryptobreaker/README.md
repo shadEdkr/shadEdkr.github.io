@@ -88,9 +88,9 @@ No installation required. Just open the HTML file in your browser and start decr
 
 ## 📬 Contact
 
-- **GitHub Repository**: [CryptoBreaker on GitHub](https://github.com/cryptobreaker)
-- **Medium Blog**: [CryptoBreaker Medium](https://medium.com/@cryptobreaker)
-- **LinkedIn**: [CryptoBreaker LinkedIn](https://www.linkedin.com/in/cryptobreaker/)
+- **GitHub Repository**: [GitHub](https://github.com/shadEdkr)
+- **Medium Blog**: [Medium](https://medium.com/@edchokr)
+- **LinkedIn**: [LinkedIn](https://www.linkedin.com/in/edchokr/)
 
 ---
 

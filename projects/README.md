@@ -92,11 +92,3 @@ Future features may include:
 This project is created as an independent web application to help users search and explore technical projects easily and interactively.
 
 ---
-
-## 🚀 Try It Out
-
-Check out the live version of **Googled - Ed's Project Search** [here](https://your-deployed-link.com).
-
----
-
-Feel free to fork this repository, contribute, or use it as inspiration for your own project search engine.

@@ -106,11 +106,3 @@ Potential future features may include:
 This project is created as an independent educational initiative to promote cybersecurity awareness and best practices, particularly around password security.
 
 ---
-
-## 🚀 Try It Out
-
-Experience the interactive cybersecurity quiz [here](https://your-deployed-link.com).
-
-Feel free to fork the repository, modify it, or contribute to its development!
-
----

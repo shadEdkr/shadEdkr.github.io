@@ -101,9 +101,3 @@ Future features may include:
 Created as part of a **cybersecurity portfolio project** aimed at identifying deceptive text and preventing Unicode-based attacks. This tool is designed to assist both cybersecurity professionals and everyday users in recognizing and mitigating the risks of hidden characters and homoglyphs.
 
 ---
-
-## 🚀 Try It Out
-
-Experience the **Suspicious Unicode Character Detector** tool [here](https://your-deployed-link.com).
-
-Feel free to fork the repository, modify it, or contribute to its development!

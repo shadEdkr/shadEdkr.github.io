@@ -57,9 +57,9 @@
 
 ## 📬 연락처
 
-- **이메일**: [cho526@purdue.edu](mailto:cho526@purdue.edu)
-- **GitHub**: [github.com/shadEdkr](https://github.com/shadEdkr)
-- **Instagram**: [@catholic_purdue](https://www.instagram.com/catholic_purdue/)
+- **GitHub Repository**: [GitHub](https://github.com/shadEdkr)
+- **Medium Blog**: [Medium](https://medium.com/@edchokr)
+- **LinkedIn**: [LinkedIn](https://www.linkedin.com/in/edchokr/)
 
 ## 📄 라이센스
 

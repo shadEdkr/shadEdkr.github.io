@@ -98,4 +98,3 @@ This project was created as part of an independent initiative to help users stay
 
 ---
 
-Feel free to use, fork, or contribute to the **Monthly Cybersecurity Checkup Tool**. It is designed to help protect your digital life with regular, easy-to-follow tasks.

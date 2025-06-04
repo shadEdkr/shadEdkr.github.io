@@ -100,8 +100,3 @@ Created as part of a **cybersecurity portfolio project** focused on networking f
 
 ---
 
-## 🚀 Try It Out
-
-Experience the **Subnet LEGO Visualizer** tool [here](https://your-deployed-link.com).
-
-Feel free to fork the repository, modify it, or contribute to its development!
