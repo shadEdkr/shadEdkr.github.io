@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - BoilerSwap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="border-b bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">BS</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900">BoilerSwap</h1>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="browse.html" class="text-gray-600 hover:text-gray-900">Browse</a>
+                    <a href="post.html" class="text-gray-600 hover:text-gray-900">Post Item</a>
+                    <a href="map.html" class="text-gray-600 hover:text-gray-900">Dumpster Map</a>
+                    <a href="how-it-works.html" class="text-yellow-600 font-medium">How It Works</a>
+                    <a href="about.html" class="text-gray-600 hover:text-gray-900">About</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-gray-900">Contact Us</a>
+                </nav>
+                
+                <div class="flex items-center space-x-3">
+                    <a href="auth.html" class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded">Sign In</a>
+                    <a href="post.html" class="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white px-4 py-2 rounded">+ Post Item</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-16 max-w-4xl">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">How BoilerSwap Works</h1>
+            <p class="text-xl text-gray-600">Three simple steps to reduce waste and help fellow Boilermakers</p>
+        </div>
+
+        <!-- Main Steps -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div class="text-center bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl">📤</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">1. Post Your Item</h3>
+                <p class="text-gray-600">Take a quick photo, add a description, and set your pickup location. It takes less than 2 minutes!</p>
+            </div>
+
+            <div class="text-center bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl">🔍</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">2. Students Find & Claim</h3>
+                <p class="text-gray-600">Other students browse, search, and claim items they need. They'll contact you directly to arrange pickup.</p>
+            </div>
+
+            <div class="text-center bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl">🤝</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">3. Make the Exchange</h3>
+                <p class="text-gray-600">Meet up, hand over the item, and feel good about helping a fellow student while saving the environment!</p>
+            </div>
+        </div>
+
+        <!-- Detailed Process -->
+        <div class="space-y-12">
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">For Item Givers</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <span class="text-2xl mr-3">📤</span>
+                            Posting Items
+                        </h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>• Choose from predefined item categories</li>
+                            <li>• Rate the condition honestly</li>
+                            <li>• Add photos and descriptions</li>
+                            <li>• Set pickup location and urgency</li>
+                            <li>• Items auto-expire based on urgency</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <span class="text-2xl mr-3">💬</span>
+                            Managing Requests
+                        </h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>• Receive notifications when items are claimed</li>
+                            <li>• Communicate directly with interested students</li>
+                            <li>• Arrange convenient pickup times</li>
+                            <li>• Mark items as picked up when complete</li>
+                            <li>• Build your community reputation</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">For Item Seekers</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <span class="text-2xl mr-3">🔍</span>
+                            Finding Items
+                        </h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>• Browse by category, location, or urgency</li>
+                            <li>• Use search to find specific items</li>
+                            <li>• See item condition and photos</li>
+                            <li>• Check pickup locations and times</li>
+                            <li>• Get notified about urgent items</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <span class="text-2xl mr-3">🤝</span>
+                            Claiming Items
+                        </h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>• Click "Claim It!" to express interest</li>
+                            <li>• Message the poster to arrange pickup</li>
+                            <li>• Coordinate meeting times and locations</li>
+                            <li>• Be respectful and punctual</li>
+                            <li>• Leave feedback for the community</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Safety & Guidelines</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <span class="text-2xl mr-3">🛡️</span>
+                            Safety First
+                        </h3>
+                        <ul class="space-y-2 text-gray-600 text-sm">
+                            <li>• Meet in public, well-lit areas</li>
+                            <li>• Bring a friend if possible</li>
+                            <li>• Trust your instincts</li>
+                            <li>• Use Purdue email for verification</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <span class="text-2xl mr-3">⏰</span>
+                            Be Timely
+                        </h3>
+                        <ul class="space-y-2 text-gray-600 text-sm">
+                            <li>• Respond to messages quickly</li>
+                            <li>• Show up on time for pickups</li>
+                            <li>• Cancel if plans change</li>
+                            <li>• Respect urgency levels</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <span class="text-2xl mr-3">👥</span>
+                            Community Spirit
+                        </h3>
+                        <ul class="space-y-2 text-gray-600 text-sm">
+                            <li>• Be honest about item conditions</li>
+                            <li>• Help fellow Boilermakers</li>
+                            <li>• Keep the platform positive</li>
+                            <li>• Report any issues</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="text-center mt-16 p-8 bg-yellow-50 rounded-lg">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Ready to Start Swapping?</h2>
+            <p class="text-gray-600 mb-6">Join hundreds of Purdue students making campus more sustainable</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="post.html" class="bg-yellow-400 text-gray-800 hover:bg-yellow-500 px-8 py-3 rounded-lg font-medium">Post Your First Item</a>
+                <a href="browse.html" class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-3 rounded-lg font-medium">Browse Available Items</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

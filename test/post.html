@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Item - BoilerSwap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="border-b bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">BS</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900">BoilerSwap</h1>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="browse.html" class="text-gray-600 hover:text-gray-900">Browse</a>
+                    <a href="post.html" class="text-yellow-600 font-medium">Post Item</a>
+                    <a href="map.html" class="text-gray-600 hover:text-gray-900">Dumpster Map</a>
+                    <a href="how-it-works.html" class="text-gray-600 hover:text-gray-900">How It Works</a>
+                    <a href="about.html" class="text-gray-600 hover:text-gray-900">About</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-gray-900">Contact Us</a>
+                </nav>
+                
+                <div class="flex items-center space-x-3">
+                    <a href="auth.html" class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-8 max-w-2xl">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">Post a New Item</h1>
+            <p class="text-gray-600">Help a fellow Boilermaker and keep usable items out of the trash!</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm border p-6">
+            <form onsubmit="submitItem(event)">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Item Type *</label>
+                        <select required class="w-full px-4 py-2 border rounded-lg">
+                            <option value="">Select item type</option>
+                            <option value="furniture-chair">Chair</option>
+                            <option value="furniture-desk">Desk</option>
+                            <option value="electronics-fridge">Mini Fridge</option>
+                            <option value="electronics-microwave">Microwave</option>
+                            <option value="books-textbook">Textbook</option>
+                            <option value="kitchen-cookware">Cookware</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Title *</label>
+                        <input type="text" required placeholder="e.g., IKEA Desk Chair - Great Condition" class="w-full px-4 py-2 border rounded-lg">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Condition *</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="condition" value="excellent" required class="mr-2">
+                                Excellent - Like new, minimal wear
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="condition" value="good" class="mr-2">
+                                Good - Some wear but fully functional
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="condition" value="fair" class="mr-2">
+                                Fair - Noticeable wear but still usable
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Description</label>
+                        <textarea placeholder="Add any additional details, flaws, or special instructions..." class="w-full px-4 py-2 border rounded-lg h-24"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Photos</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-yellow-400 transition-colors cursor-pointer">
+                            <div class="text-4xl mb-4">📷</div>
+                            <p class="text-gray-600 mb-2">Click to upload photos or drag and drop</p>
+                            <p class="text-sm text-gray-400">PNG, JPG up to 10MB each</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Pickup Location *</label>
+                        <select required class="w-full px-4 py-2 border rounded-lg">
+                            <option value="">Select pickup location</option>
+                            <option value="cary-east">Cary Quad - East</option>
+                            <option value="wiley">Wiley Hall</option>
+                            <option value="harrison">Harrison Hall</option>
+                            <option value="earhart">Earhart Hall</option>
+                            <option value="hillenbrand">Hillenbrand Hall</option>
+                            <option value="third-street">Third Street Suites</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Urgency Level *</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="urgency" value="low" required class="mr-2">
+                                <div>
+                                    <div class="font-medium">Flexible (3+ days)</div>
+                                    <div class="text-sm text-gray-500">No rush, available for a week or more</div>
+                                </div>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="urgency" value="medium" class="mr-2">
+                                <div>
+                                    <div class="font-medium">Soon (1-2 days)</div>
+                                    <div class="text-sm text-gray-500">Would like it gone in the next couple days</div>
+                                </div>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="urgency" value="high" class="mr-2">
+                                <div>
+                                    <div class="font-medium text-red-600">URGENT (&lt; 24 hours)</div>
+                                    <div class="text-sm text-gray-500">Moving out today/tomorrow, needs to go ASAP!</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Contact Information *</label>
+                        <input type="email" required placeholder="Your Purdue email" class="w-full px-4 py-2 border rounded-lg">
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white py-3 text-lg font-medium rounded-lg transition-colors">
+                        Post My Free Item
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tips Card -->
+        <div class="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-4">💡 Tips for a Great Post</h3>
+            <ul class="space-y-2 text-sm">
+                <li>• Take clear, well-lit photos from multiple angles</li>
+                <li>• Be honest about any flaws or damage</li>
+                <li>• Include dimensions for furniture items</li>
+                <li>• Respond quickly to interested students</li>
+                <li>• Be flexible with pickup times when possible</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function submitItem(event) {
+            event.preventDefault();
+            alert('Item posted successfully! (This is a demo - no actual posting occurred)');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

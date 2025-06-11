@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - BoilerSwap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="border-b bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">BS</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900">BoilerSwap</h1>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="browse.html" class="text-gray-600 hover:text-gray-900">Browse</a>
+                    <a href="post.html" class="text-gray-600 hover:text-gray-900">Post Item</a>
+                    <a href="map.html" class="text-gray-600 hover:text-gray-900">Dumpster Map</a>
+                    <a href="how-it-works.html" class="text-gray-600 hover:text-gray-900">How It Works</a>
+                    <a href="about.html" class="text-gray-600 hover:text-gray-900">About</a>
+                    <a href="contact.html" class="text-yellow-600 font-medium">Contact Us</a>
+                </nav>
+                
+                <div class="flex items-center space-x-3">
+                    <a href="auth.html" class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded">Sign In</a>
+                    <a href="post.html" class="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white px-4 py-2 rounded">+ Post Item</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-16 max-w-4xl">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
+            <p class="text-xl text-gray-600">We're here to help! Reach out with any questions or feedback.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact Form -->
+            <div>
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <span class="text-2xl mr-3">💬</span>
+                        Send us a Message
+                    </h2>
+                    <form onsubmit="submitContact(event)">
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">First Name *</label>
+                                    <input type="text" required placeholder="John" class="w-full px-4 py-2 border rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Last Name *</label>
+                                    <input type="text" required placeholder="Doe" class="w-full px-4 py-2 border rounded-lg">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email Address *</label>
+                                <input type="email" required placeholder="john.doe@purdue.edu" class="w-full px-4 py-2 border rounded-lg">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Type of Inquiry *</label>
+                                <select required class="w-full px-4 py-2 border rounded-lg">
+                                    <option value="">Select inquiry type</option>
+                                    <option value="general">General Question</option>
+                                    <option value="technical">Technical Issue</option>
+                                    <option value="bug">Bug Report</option>
+                                    <option value="feature">Feature Request</option>
+                                    <option value="safety">Safety Concern</option>
+                                    <option value="partnership">Partnership Inquiry</option>
+                                    <option value="feedback">Feedback</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Subject *</label>
+                                <input type="text" required placeholder="Brief description of your inquiry" class="w-full px-4 py-2 border rounded-lg">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Message *</label>
+                                <textarea required placeholder="Please provide details about your inquiry..." class="w-full px-4 py-2 border rounded-lg h-32"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-yellow-400 text-gray-800 hover:bg-yellow-500 py-3 rounded-lg transition-colors">
+                                📧 Send Message
+                            </button>
+
+                            <p class="text-sm text-gray-500 text-center">
+                                We typically respond within 24-48 hours during business days.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Contact Information & FAQ -->
+            <div class="space-y-6">
+                <!-- Quick Contact -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-xl font-bold mb-4">Quick Contact</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">📧</span>
+                            <div>
+                                <p class="font-medium">Email</p>
+                                <p class="text-gray-600">support@boilerswap.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">⏰</span>
+                            <div>
+                                <p class="font-medium">Response Time</p>
+                                <p class="text-gray-600">24-48 hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <div class="space-y-3">
+                        <a href="help-center.html" class="flex items-center space-x-3 text-gray-600 hover:text-gray-900">
+                            <span class="text-xl">🏠</span>
+                            <span>Help Center</span>
+                        </a>
+                        <a href="faq.html" class="flex items-center space-x-3 text-gray-600 hover:text-gray-900">
+                            <span class="text-xl">❓</span>
+                            <span>Frequently Asked Questions</span>
+                        </a>
+                        <a href="safety-guidelines.html" class="flex items-center space-x-3 text-gray-600 hover:text-gray-900">
+                            <span class="text-xl">🛡️</span>
+                            <span>Safety Guidelines</span>
+                        </a>
+                        <a href="report-issue.html" class="flex items-center space-x-3 text-gray-600 hover:text-gray-900">
+                            <span class="text-xl">🚨</span>
+                            <span>Report an Issue</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Emergency Contact -->
+                <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-red-800 mb-4">Safety Emergency</h3>
+                    <p class="text-red-700 text-sm mb-2">If you feel unsafe during a BoilerSwap exchange:</p>
+                    <ul class="text-red-700 text-sm space-y-1">
+                        <li>• Call Purdue Police: (765) 494-8221</li>
+                        <li>• Emergency: 911</li>
+                        <li>• Report to us immediately</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function submitContact(event) {
+            event.preventDefault();
+            alert('Message sent successfully! (This is a demo - no actual email was sent)');
+        }
+    </script>
+</body>
+</html>
