@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#ffffff">
+    <title>MediRoute - Account Setup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .app-container {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background-color: white;
+        }
+
+        .account-setup-screen {
+            padding: env(safe-area-inset-top) 20px 20px 20px;
+            background-color: white;
+            min-height: 100vh;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            text-decoration: none;
+            position: absolute;
+            top: env(safe-area-inset-top);
+            left: 15px;
+            margin-top: 20px;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 10px 0;
+            margin-top: 50px;
+        }
+
+        .progress-step {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .progress-step.active {
+            background-color: #00c896;
+        }
+
+        .progress-step.completed {
+            background-color: #00c896;
+        }
+
+        .progress-step.completed::after {
+            content: "✓";
+            position: absolute;
+        }
+
+        .progress-line {
+            flex: 1;
+            height: 2px;
+            background-color: #e0e0e0;
+            margin: 0 8px;
+        }
+
+        .progress-line.completed {
+            background-color: #00c896;
+        }
+
+        .setup-content {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .setup-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .setup-content p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        .option-list {
+            margin-top: 25px;
+            margin-bottom: 80px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            margin-bottom: 12px;
+            background-color: #f8f9fa;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .option-item:active {
+            transform: scale(0.98);
+        }
+
+        .option-item.selected {
+            background-color: #e8f5f0;
+            border-color: #00c896;
+        }
+
+        .option-icon {
+            width: 44px;
+            height: 44px;
+            background-color: #00c896;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .option-text {
+            flex: 1;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .option-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-item.selected .option-check {
+            background-color: #00c896;
+            border-color: #00c896;
+        }
+
+        .option-item.selected .option-check::after {
+            content: "✓";
+            color: white;
+            font-size: 14px;
+        }
+
+        .fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background-color: white;
+            border-top: 1px solid #eee;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+            -webkit-appearance: none;
+        }
+
+        .btn-primary:active {
+            background-color: #0056b3;
+            transform: scale(0.98);
+        }
+
+        /* Loading animation */
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <a href="patient-form.html" class="back-button">←</a>
+        <div class="account-setup-screen">
+            <div class="progress-container">
+                <div class="progress-step completed">1</div>
+                <div class="progress-line completed"></div>
+                <div class="progress-step active">2</div>
+                <div class="progress-line"></div>
+                <div class="progress-step">3</div>
+            </div>
+            <div class="setup-content">
+                <h2>Just a moment<span class="loading-dots"></span></h2>
+                <p>We're building the best<br>study plan for you!</p>
+            </div>
+            <div class="option-list">
+                <div class="option-item" onclick="selectOption(this)">
+                    <div class="option-icon">📊</div>
+                    <div class="option-text">Set up N8N account</div>
+                    <div class="option-check"></div>
+                </div>
+                <div class="option-item" onclick="selectOption(this)">
+                    <div class="option-icon">✉️</div>
+                    <div class="option-text">Confirm your email address</div>
+                    <div class="option-check"></div>
+                </div>
+                <div class="option-item" onclick="selectOption(this)">
+                    <div class="option-icon">💳</div>
+                    <div class="option-text">Choose your account</div>
+                    <div class="option-check"></div>
+                </div>
+            </div>
+            <div class="fixed-bottom">
+                <button class="btn-primary" onclick="proceedToHospital()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Option selection
+        function selectOption(element) {
+            element.classList.toggle('selected');
+        }
+
+        // Proceed to hospital selection
+        function proceedToHospital() {
+            // Check if at least one option is selected
+            const selectedOptions = document.querySelectorAll('.option-item.selected');
+            if (selectedOptions.length > 0) {
+                window.location.href = 'hospital-selection.html';
+            } else {
+                alert('Please select at least one option');
+            }
+        }
+
+        // Simulate loading animation
+        setTimeout(() => {
+            document.querySelector('.loading-dots').style.display = 'none';
+        }, 3000);
+    </script>
+</body>
+</html>
