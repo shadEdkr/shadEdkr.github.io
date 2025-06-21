@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Information - MediRoute</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .modal { display: none; }
+        .modal.active { display: flex; }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div class="p-6 pb-4">
+            <div class="flex items-center justify-between mb-6">
+                <a href="hospital-selection.html" class="text-gray-600 hover:text-gray-800">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </a>
+                <h1 class="text-xl font-semibold">Transport Information</h1>
+                <div class="w-6"></div>
+            </div>
+
+            <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl mb-6 flex items-center justify-center">
+                <div class="text-white text-center">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-sm">Route Map</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-6 pb-6 space-y-6">
+            <!-- Destination -->
+            <div>
+                <h2 class="text-lg font-bold mb-4">Destination</h2>
+                <div class="bg-gray-50 rounded-xl p-4 space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Destination</p>
+                            <p class="font-semibold" id="destination-name">Hospital Name</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">ETA</p>
+                            <p class="font-semibold" id="destination-eta">15 min</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patient Overview -->
+            <div>
+                <h2 class="text-lg font-bold mb-4">Patient Overview</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Gender/Age</p>
+                        <p class="font-semibold" id="patient-gender-age">N/A</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Consciousness</p>
+                        <p class="font-semibold" id="patient-consciousness">N/A</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Pupils</p>
+                        <p class="font-semibold" id="patient-pupils">N/A</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Skin Condition</p>
+                        <p class="font-semibold" id="patient-skin">N/A</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vital Signs -->
+            <div>
+                <h2 class="text-lg font-bold mb-4">Vital Signs</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Heart Rate</p>
+                            <p class="text-sm text-gray-500" id="vital-heart-rate">N/A bpm</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Blood Pressure</p>
+                            <p class="text-sm text-gray-500" id="vital-blood-pressure">N/A mmHg</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Oxygen Saturation</p>
+                            <p class="text-sm text-gray-500" id="vital-oxygen">N/A%</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Symptoms</p>
+                            <p class="text-sm text-gray-500" id="vital-symptoms">N/A</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treatment Given -->
+            <div>
+                <h2 class="text-lg font-bold mb-4">Treatment Given</h2>
+                <div id="treatment-list">
+                    <p class="text-gray-500 text-sm">No treatment information available</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-3">
+                <button id="navigate-btn" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl transition-colors">
+                    Navigate
+                </button>
+                <button id="back-home-btn" class="w-full text-blue-500 font-semibold py-2 hover:text-blue-600 transition-colors">
+                    Back to Home
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl w-full max-w-sm p-6 text-center">
+            <h2 class="text-lg font-semibold mb-2">Are you sure?</h2>
+            <p class="text-gray-600 mb-6">Have you completed the necessary treatment?</p>
+            <div class="flex space-x-3">
+                <button id="cancel-btn" class="flex-1 border border-blue-500 text-blue-500 py-2 rounded-xl hover:bg-blue-50 transition-colors">
+                    Cancel
+                </button>
+                <a href="index.html" class="flex-1 bg-blue-500 text-white py-2 rounded-xl hover:bg-blue-600 transition-colors text-center">
+                    Confirm
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="transport-info.js"></script>
+</body>
+</html>

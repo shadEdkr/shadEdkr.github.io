@@ -1,594 +1,142 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#ffffff">
-    <title>MediRoute - Hospital Selection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Selection - MediRoute</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: white;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-            width: 100vw;
-            height: 100vh;
-        }
-
-        .app-container {
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            background-color: white;
-        }
-
-        .hospital-selection-screen {
-            padding: env(safe-area-inset-top) 0 0 0;
-            background-color: white;
-            min-height: 100vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .hospital-header {
-            padding: 20px;
-            background-color: white;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            border-bottom: 1px solid #eee;
-        }
-
-        .hospital-header h2 {
-            font-size: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .back-button {
-            background: none;
-            border: none;
-            color: #333;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 5px;
-            text-decoration: none;
-        }
-
-        .map-container {
-            height: 200px;
-            background-color: #a8d5c8;
-            margin: 0 20px 20px;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .map-placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .map-icon {
-            font-size: 60px;
-        }
-
-        .map-hospitals {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .map-hospital-marker {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            font-size: 16px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .map-hospital-marker:hover {
-            transform: scale(1.2);
-        }
-
-        .map-hospital-marker.active {
-            background-color: #007bff;
-            transform: scale(1.3);
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 0 20px 15px;
-            color: #333;
-        }
-
-        .hospital-list {
-            padding: 0 20px 80px;
-        }
-
-        .hospital-item {
-            margin-bottom: 12px;
-            border-radius: 14px;
-            overflow: hidden;
-            background-color: #f8f9fa;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .hospital-item.expanded {
-            border-color: #007bff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .hospital-header-row {
-            display: flex;
-            align-items: center;
-            padding: 16px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .hospital-header-row:active {
-            background-color: #e9ecef;
-        }
-
-        .hospital-icon {
-            width: 50px;
-            height: 50px;
-            background-color: #e3f2fd;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 24px;
-        }
-
-        .hospital-info {
-            flex: 1;
-        }
-
-        .hospital-name {
-            font-weight: 600;
-            margin-bottom: 4px;
-            font-size: 16px;
-        }
-
-        .hospital-details {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.3;
-        }
-
-        .selection-arrow {
-            color: #666;
-            font-size: 20px;
-            margin-left: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .hospital-item.expanded .selection-arrow {
-            transform: rotate(90deg);
-            color: #007bff;
-        }
-
-        .hospital-dropdown {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background-color: #fff;
-            border-top: 1px solid #eee;
-        }
-
-        .hospital-item.expanded .hospital-dropdown {
-            max-height: 400px;
-        }
-
-        .dropdown-content {
-            padding: 20px;
-        }
-
-        .dropdown-section {
-            margin-bottom: 20px;
-        }
-
-        .dropdown-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .dropdown-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .dropdown-text {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .info-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .info-label {
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 4px;
-        }
-
-        .info-value {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .capability-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .capability-tag {
-            background-color: #e3f2fd;
-            color: #1976d2;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .select-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 15px;
-            transition: all 0.2s ease;
-        }
-
-        .select-button:active {
-            background-color: #0056b3;
-            transform: scale(0.98);
-        }
-
-        .hospital-item.selected .hospital-header-row {
-            background-color: #e3f2fd;
-        }
-
-        .hospital-item.selected {
-            border-color: #007bff;
-        }
-
-        .fixed-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            background-color: white;
-            border-top: 1px solid #eee;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 16px 30px;
-            border-radius: 30px;
-            font-size: 17px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.2s ease;
-            -webkit-appearance: none;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-primary:active {
-            background-color: #0056b3;
-            transform: scale(0.98);
-        }
-
-        .btn-primary:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
+        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body>
-    <div class="app-container">
-        <div class="hospital-selection-screen">
-            <div class="hospital-header">
-                <h2>
-                    <a href="account-setup.html" class="back-button">←</a>
-                    Hospital Selection
-                </h2>
+<body class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div class="p-6 pb-4">
+            <div class="flex items-center justify-between mb-6">
+                <a href="patient-details-2.html" class="text-gray-600 hover:text-gray-800">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </a>
+                <h1 class="text-xl font-semibold">Hospital Selection</h1>
+                <div class="w-6"></div>
             </div>
-            <div class="map-container">
-                <div class="map-placeholder">
-                    <div class="map-icon">🗺️</div>
-                </div>
-                <div class="map-hospitals">
-                    <div class="map-hospital-marker" data-hospital="0" style="top: 30%; left: 40%;">🏥</div>
-                    <div class="map-hospital-marker" data-hospital="1" style="top: 50%; left: 60%;">🏥</div>
-                    <div class="map-hospital-marker" data-hospital="2" style="top: 70%; left: 45%;">🏥</div>
-                </div>
-            </div>
-            <h3 class="section-title">Recommended Hospitals</h3>
-            <div class="hospital-list">
-                <!-- Hospital 1 -->
-                <div class="hospital-item" data-hospital-id="0">
-                    <div class="hospital-header-row" onclick="toggleHospital(this)">
-                        <div class="hospital-icon">🏥</div>
-                        <div class="hospital-info">
-                            <div class="hospital-name">City General Hospital</div>
-                            <div class="hospital-details">12 min | 2.3 miles</div>
-                        </div>
-                        <div class="selection-arrow">›</div>
-                    </div>
-                    <div class="hospital-dropdown">
-                        <div class="dropdown-content">
-                            <div class="info-grid">
-                                <div class="info-item">
-                                    <span class="info-label">Location</span>
-                                    <span class="info-value">123 Main St, Anytown</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Capability</span>
-                                    <span class="info-value">MRI/CT on-site, Neonatal ICU</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Availability</span>
-                                    <span class="info-value">ICU Beds Available</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Wait Time</span>
-                                    <span class="info-value">~15 min</span>
-                                </div>
-                            </div>
-                            <div class="dropdown-section">
-                                <div class="dropdown-title">Specialties</div>
-                                <div class="capability-list">
-                                    <span class="capability-tag">Cardiology</span>
-                                    <span class="capability-tag">Neurology</span>
-                                    <span class="capability-tag">Trauma Center</span>
-                                    <span class="capability-tag">Emergency Care</span>
-                                </div>
-                            </div>
-                            <div class="dropdown-section">
-                                <div class="dropdown-title">Additional Information</div>
-                                <div class="dropdown-text">
-                                    Level 1 Trauma Center with 24/7 specialist availability. Advanced cardiac care unit with catheterization lab. Stroke center certified.
-                                </div>
-                            </div>
-                            <button class="select-button" onclick="selectHospital(0)">Select This Hospital</button>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Hospital 2 -->
-                <div class="hospital-item" data-hospital-id="1">
-                    <div class="hospital-header-row" onclick="toggleHospital(this)">
-                        <div class="hospital-icon">🏥</div>
-                        <div class="hospital-info">
-                            <div class="hospital-name">County Medical Center</div>
-                            <div class="hospital-details">15 min | 3.2 miles</div>
-                        </div>
-                        <div class="selection-arrow">›</div>
+            <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl mb-6 flex items-center justify-center">
+                <div class="text-white text-center">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
                     </div>
-                    <div class="hospital-dropdown">
-                        <div class="dropdown-content">
-                            <div class="info-grid">
-                                <div class="info-item">
-                                    <span class="info-label">Location</span>
-                                    <span class="info-value">456 Oak Ave, Anytown</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Capability</span>
-                                    <span class="info-value">General Surgery, Pediatrics</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Availability</span>
-                                    <span class="info-value">2 OR Available</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Wait Time</span>
-                                    <span class="info-value">~25 min</span>
-                                </div>
-                            </div>
-                            <div class="dropdown-section">
-                                <div class="dropdown-title">Specialties</div>
-                                <div class="capability-list">
-                                    <span class="capability-tag">General Surgery</span>
-                                    <span class="capability-tag">Pediatrics</span>
-                                    <span class="capability-tag">Orthopedics</span>
-                                    <span class="capability-tag">Maternity</span>
-                                </div>
-                            </div>
-                            <div class="dropdown-section">
-                                <div class="dropdown-title">Additional Information</div>
-                                <div class="dropdown-text">
-                                    Full-service community hospital with comprehensive medical services. Specialized pediatric emergency department. Joint replacement center of excellence.
-                                </div>
-                            </div>
-                            <button class="select-button" onclick="selectHospital(1)">Select This Hospital</button>
-                        </div>
-                    </div>
+                    <p class="text-sm">GPS Location</p>
                 </div>
+            </div>
 
-                <!-- Hospital 3 -->
-                <div class="hospital-item" data-hospital-id="2">
-                    <div class="hospital-header-row" onclick="toggleHospital(this)">
-                        <div class="hospital-icon">🏥</div>
-                        <div class="hospital-info">
-                            <div class="hospital-name">Regional Trauma Center</div>
-                            <div class="hospital-details">18 min | 4.1 miles</div>
+            <h2 class="text-lg font-bold mb-4">Recommended Hospitals</h2>
+        </div>
+
+        <div class="px-6 pb-6 space-y-3">
+            <div class="hospital-item p-4 rounded-xl cursor-pointer transition-colors bg-gray-100 hover:bg-gray-200" 
+                 data-id="1" data-name="St. Luke's Medical Center" data-time="12 min" data-location="123 Main St, Medford" 
+                 data-capability="MRI/CT on-site, Neonatal ICU" data-availability="ICU beds available, ER Wait Time: 10 min">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <img src="/placeholder.svg?height=48&width=48&text=H1" alt="Hospital" class="w-12 h-12 rounded-lg object-cover">
+                        <div>
+                            <h3 class="font-semibold">St. Luke's Medical Center</h3>
+                            <p class="text-sm text-gray-500">12 min</p>
                         </div>
-                        <div class="selection-arrow">›</div>
                     </div>
-                    <div class="hospital-dropdown">
-                        <div class="dropdown-content">
-                            <div class="info-grid">
-                                <div class="info-item">
-                                    <span class="info-label">Location</span>
-                                    <span class="info-value">789 Emergency Blvd, Anytown</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Capability</span>
-                                    <span class="info-value">Level 1 Trauma, Burn Unit</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Availability</span>
-                                    <span class="info-value">Trauma Bay Open</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Wait Time</span>
-                                    <span class="info-value">Immediate</span>
-                                </div>
-                            </div>
-                            <div class="dropdown-section">
-                                <div class="dropdown-title">Specialties</div>
-                                <div class="capability-list">
-                                    <span class="capability-tag">Level 1 Trauma</span>
-                                    <span class="capability-tag">Burn Center</span>
-                                    <span class="capability-tag">Neurosurgery</span>
-                                    <span class="capability-tag">Air Ambulance</span>
-                                </div>
-                            </div>
-                            <div class="dropdown-section">
-                                <div class="dropdown-title">Additional Information</div>
-                                <div class="dropdown-text">
-                                    Regional Level 1 Trauma Center serving 5-county area. Specialized burn unit with hyperbaric chamber. Helipad available for critical transfers.
-                                </div>
-                            </div>
-                            <button class="select-button" onclick="selectHospital(2)">Select This Hospital</button>
-                        </div>
+                    <svg class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="hospital-details mt-4 pt-4 border-t border-blue-400 space-y-2 hidden">
+                    <div>
+                        <p class="font-medium">Location</p>
+                        <p class="text-sm text-blue-100">123 Main St, Medford</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Capability</p>
+                        <p class="text-sm text-blue-100">MRI/CT on-site, Neonatal ICU</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Availability</p>
+                        <p class="text-sm text-blue-100">ICU beds available, ER Wait Time: 10 min</p>
                     </div>
                 </div>
             </div>
-            <div class="fixed-bottom">
-                <button class="btn-primary" id="nextButton" onclick="proceedToStatus()" disabled>Select a Hospital to Continue</button>
+
+            <div class="hospital-item p-4 rounded-xl cursor-pointer transition-colors bg-gray-100 hover:bg-gray-200" 
+                 data-id="2" data-name="City General Hospital" data-time="15 min" data-location="456 Oak Ave, Medford" 
+                 data-capability="Trauma Center, Burn Unit" data-availability="No ICU beds available, ER Wait Time: 30 min">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <img src="/placeholder.svg?height=48&width=48&text=H2" alt="Hospital" class="w-12 h-12 rounded-lg object-cover">
+                        <div>
+                            <h3 class="font-semibold">City General Hospital</h3>
+                            <p class="text-sm text-gray-500">15 min</p>
+                        </div>
+                    </div>
+                    <svg class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="hospital-details mt-4 pt-4 border-t border-blue-400 space-y-2 hidden">
+                    <div>
+                        <p class="font-medium">Location</p>
+                        <p class="text-sm text-blue-100">456 Oak Ave, Medford</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Capability</p>
+                        <p class="text-sm text-blue-100">Trauma Center, Burn Unit</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Availability</p>
+                        <p class="text-sm text-blue-100">No ICU beds available, ER Wait Time: 30 min</p>
+                    </div>
+                </div>
             </div>
+
+            <div class="hospital-item p-4 rounded-xl cursor-pointer transition-colors bg-gray-100 hover:bg-gray-200" 
+                 data-id="3" data-name="Community Health Center" data-time="18 min" data-location="789 Pine St, Medford" 
+                 data-capability="General Surgery, Pediatrics" data-availability="ICU beds available, ER Wait Time: 15 min">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <img src="/placeholder.svg?height=48&width=48&text=H3" alt="Hospital" class="w-12 h-12 rounded-lg object-cover">
+                        <div>
+                            <h3 class="font-semibold">Community Health Center</h3>
+                            <p class="text-sm text-gray-500">18 min</p>
+                        </div>
+                    </div>
+                    <svg class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="hospital-details mt-4 pt-4 border-t border-blue-400 space-y-2 hidden">
+                    <div>
+                        <p class="font-medium">Location</p>
+                        <p class="text-sm text-blue-100">789 Pine St, Medford</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Capability</p>
+                        <p class="text-sm text-blue-100">General Surgery, Pediatrics</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">Availability</p>
+                        <p class="text-sm text-blue-100">ICU beds available, ER Wait Time: 15 min</p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="confirm-btn" disabled class="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 text-white py-3 rounded-xl font-medium mt-6 transition-colors">
+                Confirm
+            </button>
         </div>
     </div>
 
-    <script>
-        let selectedHospitalId = null;
-
-        // Toggle hospital dropdown
-        function toggleHospital(element) {
-            const hospitalItem = element.closest('.hospital-item');
-            const wasExpanded = hospitalItem.classList.contains('expanded');
-            
-            // Close all other hospitals
-            document.querySelectorAll('.hospital-item').forEach(item => {
-                item.classList.remove('expanded');
-            });
-            
-            // Toggle current hospital
-            if (!wasExpanded) {
-                hospitalItem.classList.add('expanded');
-            }
-        }
-
-        // Select hospital
-        function selectHospital(hospitalId) {
-            // Remove previous selection
-            document.querySelectorAll('.hospital-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            document.querySelectorAll('.map-hospital-marker').forEach(marker => {
-                marker.classList.remove('active');
-            });
-            
-            // Add new selection
-            const selectedItem = document.querySelector(`[data-hospital-id="${hospitalId}"]`);
-            selectedItem.classList.add('selected');
-            
-            const selectedMarker = document.querySelector(`[data-hospital="${hospitalId}"]`);
-            selectedMarker.classList.add('active');
-            
-            selectedHospitalId = hospitalId;
-            
-            // Enable next button
-            const nextButton = document.getElementById('nextButton');
-            nextButton.disabled = false;
-            nextButton.textContent = 'Next';
-            
-            // Store selected hospital data
-            const hospitalNames = ['City General Hospital', 'County Medical Center', 'Regional Trauma Center'];
-            sessionStorage.setItem('selectedHospital', hospitalNames[hospitalId]);
-        }
-
-        // Map marker click
-        document.querySelectorAll('.map-hospital-marker').forEach(marker => {
-            marker.addEventListener('click', function() {
-                const hospitalId = parseInt(this.dataset.hospital);
-                const hospitalItem = document.querySelector(`[data-hospital-id="${hospitalId}"]`);
-                
-                // Expand the hospital dropdown
-                document.querySelectorAll('.hospital-item').forEach(item => {
-                    item.classList.remove('expanded');
-                });
-                hospitalItem.classList.add('expanded');
-                
-                // Scroll to hospital
-                hospitalItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            });
-        });
-
-        // Proceed to status page
-        function proceedToStatus() {
-            if (selectedHospitalId !== null) {
-                window.location.href = 'patient-status.html';
-            }
-        }
-    </script>
+    <script src="hospital-selection.js"></script>
 </body>
 </html>
