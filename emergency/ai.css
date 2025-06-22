@@ -10,7 +10,7 @@ body {
 
 .ai-container {
   width: 390px;
-  height: 844px;
+  height: 100vh;
   background-color: #ffffff;
   padding: 20px;
   box-sizing: border-box;
