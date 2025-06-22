@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map - MediRoute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="plain-map-screen">
+            <div class="map-header">
+                <button class="back-btn" onclick="goToSOS()">
+                    <img src="public/icons/arrow-left.png" alt="Back">
+                </button>
+                <h2>Current Location</h2>
+                <button class="settings-btn-map" onclick="goToSettings()">
+                    <img src="public/icons/settings-icon.png" alt="Settings" class="settings-icon">
+                </button>
+            </div>
+            
+            <div class="plain-map-container">
+                <img src="public/images/plain-map.jpeg" alt="Seoul area map" class="plain-map-image">
+                
+                <!-- Current location indicator -->
+                <div class="current-location-pin">
+                    <img src="public/icons/location-pin.png" alt="Your location" class="location-pin-current">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

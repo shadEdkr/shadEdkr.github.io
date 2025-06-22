@@ -1,0 +1,282 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f2f5;
+    font-family: 'Poppins', sans-serif;
+}
+
+.details-container {
+    width: 390px;
+    height: 844px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.select-wrapper {
+    position: relative;
+    margin-bottom: 15px;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.select-wrapper:hover {
+    background-color: #e0e0e0;
+}
+
+.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    border-radius: 12px;
+    padding: 18px 20px;
+    width: 100%;
+    font-size: 16px;
+    color: #141414;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.custom-select:invalid {
+  color: #757575;
+}
+
+.select-wrapper::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background-image: url('Pictures/chevron-selector-vertical.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.dropdown {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #333;
+}
+
+.dropdown:hover {
+    background-color: #e0e0e0;
+}
+
+.dropdown span {
+    font-size: 16px;
+    color: #333;
+}
+
+.arrow {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("Pictures/chevron-selector-vertical.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.consciousness-section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.consciousness-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.consciousness-btn {
+    background-color: #f0f0f0;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.consciousness-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.consciousness-btn.active {
+    background-color: #369EFF;
+    border-color: transparent;
+    color: white;
+}
+
+.btn-next {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    background-color: #369EFF;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-next:hover:not(:disabled) {
+    background-color: #1a8cff;
+}
+
+.btn-next:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    width: 390px;
+    height: 90%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    animation: slide-up 0.3s ease-out;
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-modal {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.clear-selection {
+    font-size: 16px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    background-color: #f0f0f0;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.search-bar::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background-image: url('Pictures/search-lg.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.symptoms-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.symptoms-list label {
+    display: block;
+    padding: 15px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.symptoms-list label:last-child {
+    border-bottom: none;
+}
+
+.symptoms-list input[type="checkbox"] {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}

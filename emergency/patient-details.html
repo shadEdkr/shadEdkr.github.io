@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details</title>
+    <link rel="stylesheet" href="patient-details.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="details-container">
+        <h1 class="title">Patient Details</h1>
+        
+        <div class="select-wrapper">
+            <select id="age-range" class="custom-select" required>
+                <option value="" disabled selected hidden>Age Range</option>
+                <option value="0-10">0-10</option>
+                <option value="11-20">11-20</option>
+                <option value="21-30">21-30</option>
+                <option value="31-40">31-40</option>
+                <option value="41-50">41-50</option>
+                <option value="51-60">51-60</option>
+                <option value="61-70">61-70</option>
+                <option value="71-80">71-80</option>
+                <option value="81+">81+</option>
+            </select>
+        </div>
+        
+        <div class="select-wrapper">
+            <select id="gender" class="custom-select" required>
+                <option value="" disabled selected hidden>Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        
+        <div id="symptoms-trigger" class="dropdown">
+            <span>Primary Symptom(s)</span>
+            <span class="arrow"></span>
+        </div>
+        
+        <div class="consciousness-section">
+            <h2 class="section-title">Level of Consciousness</h2>
+            <div class="consciousness-buttons">
+                <button class="consciousness-btn">1</button>
+                <button class="consciousness-btn">2</button>
+                <button class="consciousness-btn">3</button>
+                <button class="consciousness-btn">4</button>
+                <button class="consciousness-btn">5</button>
+            </div>
+        </div>
+        
+        <div class="select-wrapper">
+            <select id="pupils" class="custom-select" required>
+                <option value="" disabled selected hidden>Pupils</option>
+                <option value="Normal">Normal</option>
+                <option value="Dilated">Dilated</option>
+                <option value="Constricted">Constricted</option>
+            </select>
+        </div>
+        
+        <div class="select-wrapper">
+            <select id="skin-condition" class="custom-select" required>
+                <option value="" disabled selected hidden>Skin Condition</option>
+                <option value="Normal">Normal</option>
+                <option value="Pale">Pale</option>
+                <option value="Cyanotic">Cyanotic</option>
+                <option value="Flushed">Flushed</option>
+                <option value="Jaundiced">Jaundiced</option>
+            </select>
+        </div>
+        
+        <button class="btn-next" disabled>Next</button>
+    </div>
+
+    <div id="symptoms-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="Pictures/x.svg" alt="Close" class="close-modal">
+                <h2 class="modal-title">Primary Symptom(s)</h2>
+                <span class="clear-selection">Clear</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="symptom-search" placeholder="Search">
+            </div>
+            <div class="symptoms-list">
+                <label><input type="checkbox" name="symptom" value="Airway Obstruction"> Airway Obstruction</label>
+                <label><input type="checkbox" name="symptom" value="Allergic Reaction"> Allergic Reaction</label>
+                <label><input type="checkbox" name="symptom" value="Altered Level of Consciousness"> Altered Level of Consciousness</label>
+                <label><input type="checkbox" name="symptom" value="Behavioral/Violent"> Behavioral/Violent</label>
+                <label><input type="checkbox" name="symptom" value="Bleeding/Hemorrhage"> Bleeding/Hemorrhage</label>
+                <label><input type="checkbox" name="symptom" value="Burns"> Burns</label>
+                <label><input type="checkbox" name="symptom" value="Cardiac Arrest"> Cardiac Arrest</label>
+                <label><input type="checkbox" name="symptom" value="Cardiac (MI, Angina, CHF)"> Cardiac (MI, Angina, CHF)</label>
+                <label><input type="checkbox" name="symptom" value="CVA/TIA"> CVA/TIA (Stroke/Transient Ischemic Attack)</label>
+                <label><input type="checkbox" name="symptom" value="Diabetic"> Diabetic (Hypo/Hyperglycemia)</label>
+                <label><input type="checkbox" name="symptom" value="Dizziness/Vertigo"> Dizziness/Vertigo</label>
+                <label><input type="checkbox" name="symptom" value="Dyspnea"> Dyspnea (Shortness of Breath)</label>
+                <label><input type="checkbox" name="symptom" value="Electrocution"> Electrocution</label>
+                <label><input type="checkbox" name="symptom" value="Environmental Exposure"> Environmental Exposure</label>
+                <label><input type="checkbox" name="symptom" value="Eye Problem"> Eye Problem</label>
+                <label><input type="checkbox" name="symptom" value="Fall"> Fall</label>
+                <label><input type="checkbox" name="symptom" value="GI Problem"> G.I. Problem (GI Bleed, Vomiting, Diarrhea, Pain)</label>
+                <label><input type="checkbox" name="symptom" value="GU Problem"> G.U. Problem (Genitourinary)</label>
+                <label><input type="checkbox" name="symptom" value="Headache"> Headache</label>
+                <label><input type="checkbox" name="symptom" value="Major Trauma"> Major Trauma</label>
+                <label><input type="checkbox" name="symptom" value="Medical Device Problem"> Medical Device Problem</label>
+                <label><input type="checkbox" name="symptom" value="MVC/MVA"> MVC/MVA (Motor Vehicle Crash/Accident)</label>
+                <label><input type="checkbox" name="symptom" value="OB/GYN"> OB/GYN (Pregnancy, Labor, Delivery, etc.)</label>
+                <label><input type="checkbox" name="symptom" value="OD/Poisoning/Drug Abuse"> OD/Poisoning/Drug Abuse</label>
+                <label><input type="checkbox" name="symptom" value="Pain (Non-specified)"> Pain (Non-specified)</label>
+                <label><input type="checkbox" name="symptom" value="Respiratory Arrest"> Respiratory Arrest</label>
+                <label><input type="checkbox" name="symptom" value="Seizure"> Seizure</label>
+                <label><input type="checkbox" name="symptom" value="Syncope/Near Syncope"> Syncope/Near Syncope</label>
+                <label><input type="checkbox" name="symptom" value="Unconscious/Unresponsive"> Unconscious/Unresponsive</label>
+                <label><input type="checkbox" name="symptom" value="Other"> Other (with space to specify)</label>
+                <label><input type="checkbox" name="symptom" value="Obvious Death"> Obvious Death</label>
+            </div>
+        </div>
+    </div>
+    <script src="patient-details.js"></script>
+</body>
+</html> 

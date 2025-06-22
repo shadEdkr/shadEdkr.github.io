@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Information - Severance Hospital</title>
+    <link rel="stylesheet" href="severance-transport-information.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="hospital-selection.html" class="back-arrow">
+                <img src="Pictures/arrow-left.svg" alt="Back">
+            </a>
+            <h1 class="title">Transport Information</h1>
+        </div>
+        
+        <div class="map-container"></div>
+        
+        <h2 class="section-title">Destination</h2>
+        <div class="destination-container">
+            <div class="info-item">
+                <div class="icon-container">
+                    <img src="Pictures/marker-pin-01.svg" alt="Destination" class="icon">
+                </div>
+                <div>
+                    <span class="info-title">Destination</span>
+                    <span class="info-value">Severance Hospital</span>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="icon-container">
+                    <img src="Pictures/clock.svg" alt="ETA" class="icon">
+                </div>
+                <div>
+                    <span class="info-title">ETA</span>
+                    <span class="info-value">15 min</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Patient Overview</h2>
+        <div class="overview-grid">
+            <div>
+                <span class="info-title">Gender/Age</span>
+                <span class="info-value" id="overview-gender-age"></span>
+            </div>
+            <div>
+                <span class="info-title">Consciousness</span>
+                <span class="info-value" id="overview-consciousness"></span>
+            </div>
+            <div>
+                <span class="info-title">Pupils</span>
+                <span class="info-value" id="overview-pupils"></span>
+            </div>
+            <div>
+                <span class="info-title">Skin Condition</span>
+                <span class="info-value" id="overview-skin"></span>
+            </div>
+        </div>
+
+        <h2 class="section-title">Vital Signs</h2>
+        <div class="vitals-list">
+            <div class="info-item">
+                <div class="icon-container">
+                    <img src="Pictures/heart.svg" alt="Heart Rate" class="icon">
+                </div>
+                <div>
+                    <span class="info-title">Heart Rate</span>
+                    <span class="info-value" id="vitals-hr"></span>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="icon-container">
+                    <img src="Pictures/droplets-02.svg" alt="Blood Pressure" class="icon">
+                </div>
+                <div>
+                    <span class="info-title">Blood Pressure</span>
+                    <span class="info-value" id="vitals-bp"></span>
+                </div>
+            </div>
+             <div class="info-item">
+                <div class="icon-container">
+                    <img src="Pictures/waves.svg" alt="Oxygen Saturation" class="icon">
+                </div>
+                <div>
+                    <span class="info-title">Oxygen Saturation</span>
+                    <span class="info-value" id="vitals-o2"></span>
+                </div>
+            </div>
+             <div class="info-item">
+                <div class="icon-container">
+                    <img src="Pictures/medical-cross.svg" alt="Symptoms" class="icon">
+                </div>
+                <div>
+                    <span class="info-title">Symptoms</span>
+                    <span class="info-value" id="vitals-symptoms"></span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Treatment Given</h2>
+        <ul class="treatment-list" id="treatment-list">
+        </ul>
+
+        <div class="footer">
+            <a href="#" class="btn-navigate">Navigate to Severance Hospital</a>
+            <span class="btn-home" id="back-to-home-trigger">Back to Home</span>
+        </div>
+    </div>
+
+    <div id="confirmation-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h2 class="modal-title">Are you sure?</h2>
+            <p>Have you completed the necessary treatment?</p>
+            <div class="modal-buttons">
+                <button class="btn-cancel">Cancel</button>
+                <a href="patient-details.html" class="btn-confirm">Confirm</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="severance-transport-information.js"></script>
+</body>
+</html>

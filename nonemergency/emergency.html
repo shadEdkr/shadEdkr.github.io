@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Calling - MediRoute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="emergency-screen">
+            <h1 class="emergency-title-white">Emergency Calling...</h1>
+            <p class="emergency-location">104 Princeton St</p>
+            
+            <div class="sos-animation">
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+                <div class="sos-center">
+                    <img src="public/icons/signal-icon.png" alt="Signal" class="sos-icon">
+                </div>
+            </div>
+            
+            <button class="safe-button" onclick="cancelEmergency()">I'm safe</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

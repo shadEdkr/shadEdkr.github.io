@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Information - MediRoute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-btn" onclick="goBack()">
+                <img src="public/icons/arrow-left.png" alt="Back">
+            </button>
+            <h2>Profile Information</h2>
+        </div>
+        
+        <div class="profile-form">
+            <form id="profileForm">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Enter your full name (e.g., James Parker)" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="date" id="dob" placeholder="Date of Birth" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" id="ssn" placeholder="Social Security Number (e.g., 020329-9845343)" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="tel" id="emergency" placeholder="Emergency Contact (e.g., (201)-956-3658)" required>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

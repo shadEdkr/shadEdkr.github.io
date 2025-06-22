@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details - Part 2</title>
+    <link rel="stylesheet" href="patient-details-2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="patient-details.html" class="back-arrow">
+                <img src="Pictures/arrow-left.svg" alt="Back">
+            </a>
+            <h1 class="title">Patient Details</h1>
+        </div>
+        
+        <div class="form-section">
+            <div class="input-group">
+                <label for="heart-rate" class="label">Heart Rate (bpm)</label>
+                <input type="number" id="heart-rate" class="input-field" placeholder="Enter heart rate">
+            </div>
+            
+            <div class="input-group">
+                <label for="blood-pressure" class="label">Blood Pressure (mmHg)</label>
+                <input type="text" id="blood-pressure" class="input-field" placeholder="e.g., 120/80">
+            </div>
+            
+            <div class="input-group">
+                <label for="oxygen-saturation" class="label">Oxygen Saturation (%)</label>
+                <input type="number" id="oxygen-saturation" class="input-field" placeholder="Enter oxygen saturation">
+            </div>
+            
+            <div class="input-group">
+                <label for="comments" class="label">Treatment/Comments</label>
+                <textarea id="comments" class="textarea-field" placeholder="Enter treatment given or additional comments..."></textarea>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <button class="btn-submit" disabled>Continue to AI Analysis</button>
+        </div>
+    </div>
+    
+    <script src="patient-details-2.js"></script>
+</body>
+</html>

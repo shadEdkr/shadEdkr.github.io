@@ -1,0 +1,95 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #ffffff;
+  font-family: "Poppins", sans-serif;
+}
+
+.loading-container {
+  width: 390px;
+  height: 844px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.status-text {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.main-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  line-height: 1.3;
+  color: #333;
+}
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  position: relative;
+  opacity: 0.5;
+  transition: opacity 0.5s ease;
+}
+
+.item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 36px;
+  width: 2px;
+  height: 24px;
+  background-color: #e0e0e0;
+}
+
+.item.completed {
+  opacity: 1;
+}
+
+.checkbox {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+  background-color: white;
+  transition: all 0.5s ease;
+  position: relative;
+}
+
+.item.completed .checkbox {
+  background-color: #369eff;
+  border-color: #369eff;
+}
+
+.item.completed .checkbox::after {
+  content: "✓";
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.checklist .item:not(.completed) .checkbox {
+  color: transparent;
+}

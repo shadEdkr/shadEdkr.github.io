@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Help - MediRoute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sos-screen">
+            <div class="location-header">
+                <div class="location-info" id="locationInfo">
+                    <img src="public/icons/location-pin.png" alt="Location" class="location-icon">
+                    <span>104 Princeton St</span>
+                </div>
+                <button class="settings-btn" id="settingsBtn">
+                    <img src="public/icons/settings-icon.png" alt="Settings" class="settings-icon">
+                </button>
+            </div>
+            
+            <div class="emergency-section map-hidden" id="emergencySection">
+                <h2 class="emergency-title">Emergency help needed?</h2>
+                <p class="emergency-subtitle">Press or hold the button to help</p>
+                
+                <button class="sos-button" id="sosButton">
+                    SOS
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

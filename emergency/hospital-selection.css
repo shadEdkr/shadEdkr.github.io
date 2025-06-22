@@ -1,0 +1,174 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f0f2f5;
+  font-family: "Poppins", sans-serif;
+}
+
+.selection-container {
+  width: 390px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  min-height: calc(844px - 40px);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+}
+
+.back-arrow {
+  font-size: 24px;
+  text-decoration: none;
+  color: #333;
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
+
+.back-arrow img {
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 auto;
+}
+
+.map-container {
+  width: 358px;
+  height: 200px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: url("hospital-selection-map.jpg") lightgray 50% / cover no-repeat;
+  margin-bottom: 20px;
+  align-self: center;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.hospital-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.hospital-item {
+  margin-bottom: 15px;
+  border-radius: 12px;
+  padding: 12px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hospital-item.selected {
+  background-color: #369eff;
+  color: white;
+}
+
+.hospital-item.selected .hospital-time {
+  color: white;
+}
+
+.hospital-summary {
+  display: flex;
+  align-items: center;
+}
+
+.hospital-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.hospital-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.hospital-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.hospital-time {
+  font-size: 14px;
+  color: #666;
+}
+
+.arrow {
+  width: 24px;
+  height: 24px;
+  background-color: #888;
+  -webkit-mask-image: url("Pictures/chevron-down.svg");
+  mask-image: url("Pictures/chevron-down.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: all 0.3s ease;
+}
+
+.hospital-item.selected .arrow {
+  transform: rotate(180deg);
+  background-color: white;
+}
+
+.hospital-details {
+  display: none;
+  padding-top: 15px;
+  margin-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.hospital-item.selected .hospital-details {
+  display: block;
+  border-top-color: #5faeff;
+}
+
+.hospital-details p {
+  margin: 0 0 10px;
+}
+
+.btn-confirm {
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background-color: #369eff;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn-confirm:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}

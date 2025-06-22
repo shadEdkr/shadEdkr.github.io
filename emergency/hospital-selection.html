@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Selection</title>
+    <link rel="stylesheet" href="hospital-selection.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="selection-container">
+        <div class="header">
+            <a href="patient-details-2.html" class="back-arrow">
+                <img src="Pictures/arrow-left.svg" alt="Back">
+            </a>
+            <h1 class="title">Hospital Selection</h1>
+        </div>
+        
+        <div class="map-container"></div>
+        
+        <h2 class="section-title">Recommended Hospitals</h2>
+        
+        <ul class="hospital-list">
+            <li class="hospital-item"
+                data-name="The Dream Hospital"
+                data-time="9 min"
+                data-location="404, Seolleung-ro, Gangnam-gu, Seoul"
+                data-capability="MRI, Rehabilitation, Cosmetic Surgery"
+                data-availability="ICU beds available, ER Wait Time: 5 min">
+                <div class="hospital-summary">
+                    <img src="hospital3.jpg" alt="The Dream Hospital" class="hospital-img">
+                    <div class="hospital-info">
+                        <span class="hospital-name">The Dream Hospital</span>
+                        <span class="hospital-time">9 min</span>
+                    </div>
+                    <span class="arrow"></span>
+                </div>
+                <div class="hospital-details">
+                    <p><strong>Location</strong><br>404, Seolleung-ro, Gangnam-gu, Seoul</p>
+                    <p><strong>Capability</strong><br>MRI, Rehabilitation, Cosmetic Surgery</p>
+                    <p><strong>Availability</strong><br>ICU beds available<br>ER Wait Time: 5 min</p>
+                </div>
+            </li>
+            <li class="hospital-item" 
+                data-name="Seoul National University Hospital" 
+                data-time="18 min"
+                data-location="101 Daehak-ro, Jongno-gu, Seoul"
+                data-capability="MRI/CT on-site, Neonatal ICU, Trauma Center"
+                data-availability="ICU beds available, ER Wait Time: 10 min">
+                <div class="hospital-summary">
+                    <img src="hospital1.jpg" alt="Seoul National University Hospital" class="hospital-img">
+                    <div class="hospital-info">
+                        <span class="hospital-name">Seoul National University Hospital</span>
+                        <span class="hospital-time">18 min</span>
+                    </div>
+                    <span class="arrow"></span>
+                </div>
+                <div class="hospital-details">
+                    <p><strong>Location</strong><br>101 Daehak-ro, Jongno-gu, Seoul</p>
+                    <p><strong>Capability</strong><br>MRI/CT on-site, Neonatal ICU, Trauma Center</p>
+                    <p><strong>Availability</strong><br>ICU beds available<br>ER Wait Time: 10 min</p>
+                </div>
+            </li>
+            <li class="hospital-item"
+                data-name="Severance Hospital"
+                data-time="25 min"
+                data-location="50-1 Yonsei-ro, Seodaemun-gu, Seoul"
+                data-capability="Cardiac Surgery, Burn Unit, Emergency Medicine"
+                data-availability="No ICU beds available, ER Wait Time: 30 min">
+                <div class="hospital-summary">
+                    <img src="hospital2.jpg" alt="Severance Hospital" class="hospital-img">
+                    <div class="hospital-info">
+                        <span class="hospital-name">Severance Hospital</span>
+                        <span class="hospital-time">25 min</span>
+                    </div>
+                    <span class="arrow"></span>
+                </div>
+                <div class="hospital-details">
+                    <p><strong>Location</strong><br>50-1 Yonsei-ro, Seodaemun-gu, Seoul</p>
+                    <p><strong>Capability</strong><br>Cardiac Surgery, Burn Unit, Emergency Medicine</p>
+                    <p><strong>Availability</strong><br>No ICU beds available<br>ER Wait Time: 30 min</p>
+                </div>
+            </li>
+        </ul>
+        <button class="btn-confirm" disabled>Confirm</button>
+    </div>
+    <script src="hospital-selection.js"></script>
+</body>
+</html>

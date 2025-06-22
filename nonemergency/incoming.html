@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incoming Emergency - MediRoute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="incoming-screen">
+            <div class="incoming-header">
+                <button class="back-btn" onclick="goToSOS()">
+                    <img src="public/icons/arrow-left.png" alt="Back">
+                </button>
+                <h2 class="incoming-title">Incoming Emergency</h2>
+            </div>
+            
+            <div class="route-map">
+                <img src="public/images/route-map.png" alt="Route to hospital" class="route-map-image">
+                
+                <!-- Ambulance indicator -->
+                <div class="ambulance-indicator">
+                    <div class="ambulance-icon">🚑</div>
+                    <div class="ambulance-status">En route</div>
+                </div>
+                
+                <!-- Route info overlay -->
+                <div class="route-info-overlay">
+                    <div class="route-distance">2.3 km</div>
+                    <div class="route-time">5 min</div>
+                </div>
+            </div>
+            
+            <div class="arrival-info">
+                <div class="arrival-time">Expected arrival: 3:10 PM</div>
+                <div class="arrival-status">Assistance is on the way</div>
+                
+                <div class="hospital-info">
+                    <h3>Destination: Gangnam Severance Hospital</h3>
+                    <p>강남세브란스병원</p>
+                </div>
+                
+                <div class="emergency-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Distance:</span>
+                        <span class="detail-value">2.3 km</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">ETA:</span>
+                        <span class="detail-value text-green">3:10 PM</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Unit:</span>
+                        <span class="detail-value">AMB-001</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

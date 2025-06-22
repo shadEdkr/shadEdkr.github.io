@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - MediRoute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="settings-screen">
+            <div class="header">
+                <button class="back-btn" onclick="goToSOS()">
+                    <img src="public/icons/arrow-left.png" alt="Back">
+                </button>
+                <h2>Settings</h2>
+            </div>
+            
+            <div class="settings-content">
+                <div class="settings-section">
+                    <h3>
+                        Profile Information
+                        <span class="edit-icon" onclick="editProfile()">
+                            <img src="public/icons/edit-icon.png" alt="Edit">
+                        </span>
+                    </h3>
+                    
+                    <div class="profile-info" id="profileDisplay">
+                        <div class="profile-item">
+                            <span class="profile-label">Name:</span>
+                            <span class="profile-value" id="displayName">James Parker</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="profile-label">Date of Birth:</span>
+                            <span class="profile-value" id="displayDOB">03/29/2002</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="profile-label">SSN:</span>
+                            <span class="profile-value" id="displaySSN">020329-9845343</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="profile-label">Emergency Contact:</span>
+                            <span class="profile-value" id="displayEmergency">(201)-956-3658</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>Notification Settings</h3>
+                    
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Drop/Impact Detection</h4>
+                            <p>Get notified when a sudden fall/shock is detected</p>
+                        </div>
+                        <div class="toggle-switch active" onclick="toggleNotification(this)">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Apple Watch Heartbeat</h4>
+                            <p>Monitor irregular heart rates on Apple Watch</p>
+                        </div>
+                        <div class="toggle-switch" onclick="toggleNotification(this)">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Shake to Alert</h4>
+                            <p>Shake your phone to send a quick signal</p>
+                        </div>
+                        <div class="toggle-switch" onclick="toggleNotification(this)">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Siri Activation</h4>
+                            <p>Say "Hey Siri" to start emergency protocol</p>
+                        </div>
+                        <div class="toggle-switch" onclick="toggleNotification(this)">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Triple-Press Power Button</h4>
+                            <p>Press the power button 3 times to trigger an alert</p>
+                        </div>
+                        <div class="toggle-switch" onclick="toggleNotification(this)">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
